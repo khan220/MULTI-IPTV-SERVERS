@@ -13,6 +13,7 @@ document.addEventListener('keydown', e => {
 });
 </script>
 
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,10 +65,9 @@ body {
             <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Kids">Kids</button>
             <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Documentary">Documentary</button>
             <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="NEWS">NEWS</button>
-            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Sport">Sport</button> 
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Aribic">Aribic</button>
             <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Religion">Religion</button>
             <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Other">Other</button>
-
 
 
         </div>
@@ -133,7 +133,7 @@ const channels = [
             { name:"Abzy Dhakad",url:"https://d2lk5u59tns74c.cloudfront.net/out/v1/4fe6ab07a13543d6bdb2ec63b3e2df44/index.m3u8", cat:"Movies"},
             { name:"Abzy Movie",url:"https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/db8d4eca72d64748a00d0631debf542d/index.m3u8", cat:"Movies"},
             { name:"Bollywood Classic",url:"https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-classic/manifest.m3u8", cat:"Movies" },
-            { name:"B4u Kadak",url:"https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8",cat:"Movies"},
+            { name:"B4u Kadak",url:"https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8",cat:"Movies" },
             { name:"B4u Kadak (st1)",url:"https://cdnb4u.wiseplayout.com/B4U_Kadak/master.m3u8",cat:"Movies" },
             { name:"B4U Music",url:"https://cdnb4u.wiseplayout.com/B4U_Music/master.m3u8",cat:"Music" },
             { name:"mama",url:"http://stv.mediacdn.ru/live/cdn/mama/playlist.m3u8",cat:"Kids" },
@@ -145,7 +145,58 @@ const channels = [
             { name:"STAR JALSHA",url:"https://server.zillarbarta.com/ZBCINEMA/index.m3u8",cat:"Bollywood" },
             { name:"B4U_Movies",url:"https://cdnb4u.wiseplayout.com/B4U_Movies/master.m3u8",cat:"Movies" },
             { name:"B4u Kadak (st2)",url:"https://cdn-2.pishow.tv/live/227/master.m3u8",cat:"Movies" },
-            
+            { name:"3abn Kids TV",url:"https://3abn.bozztv.com/3abn2/Kids_live/smil:Kids_live.smil/playlist.m3u8",cat:"Kids" },
+            { name:"3abn",url:"https://d3b73b34o7cvkq.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-gz2sgqzp076kf/adn.m3u8",cat:"Kids" },
+           { name:"anime vision",url:"https://d1ujfw1zyymzyd.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-a6fukwkbxmex8/live/fast-channel-animevision-64527ec0/fast-channel-animevision-64527ec0.m3u8",cat:"Kids" },
+{ name:"anime vision",url:"https://d1ujfw1zyymzyd.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-a6fukwkbxmex8/live/fast-channel-animevision-64527ec0/fast-channel-animevision-64527ec0.m3u8",cat:"Kids" },
+{ name:"anime vision classics",url:"https://d82pyvmcw2kdc.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-swfivzrzwamaq/live/fast-channel-animevisionclassics-efc8dc6d/fast-channel-animevisionclassics-efc8dc6d.m3u8",cat:"Kids" },
+{ name:"BBC FOUR",url:"https://viamotionhsi.netplus.ch/live/eds/bbc4cbeebies/browser-HLS8/bbc4cbeebies.m3u8",cat:"Documentary" },
+{ name:"Extrema Kids",url:"https://627bb251f23c7.streamlock.net:444/ExtremaKids/ExtremaKids/playlist.m3u8",cat:"Kids" },
+{ name:"GEEKDOT",url:"https://stream.ichibantv.com:3764/hybrid/play.m3u8",cat:"Kids" },
+{ name:"FOR KIDS TV",url:"https://foxkidstv.be:3369/stream/play.m3u8",cat:"Kids" },
+{ name:"Kuriakos Kids",url:"https://w2.manasat.com/kkids/smil:kkids.smil/playlist.m3u8",cat:"Kids" },
+{ name:"Magic Kids",url:"https://magicstream.ddns.net/magicstream/stream.m3u8",cat:"Kids" },
+{ name:"XILAM ",url:"https://xilam-animation-1-fr.samsung.wurl.tv/playlist.m3u8",cat:"Kids" },
+{ name:"Canal Motor",url:"https://digicom.hls.iptvdc.com/canalmotor/index.m3u8",cat:"Sports" },
+{ name:"Mlewed tv",url:"https://linear-11.frequency.stream/dist/glewedtv/11/hls/master/playlist.m3u8",cat:"Other" },
+{ name:"Garage tv",url:"https://stream1.sersat.com/hls/garagetv.m3u8",cat:"Sports" },
+{ name:"Alarabiya Business",url:"https://live.alarabiya.net/alarabiapublish/aswaaq.smil/playlist.m3u8",cat:"NEWS" },
+{ name:"Ameritrade",url:"https://tdameritrade-vizio.amagi.tv/playlist.m3u8",cat:"Other" },
+{ name:"Ashar News",url:"https://bcovlive-a.akamaihd.net/0b75ef0a49e24704a4ca023d3a82c2df/ap-south-1/6203311941001/playlist.m3u8",cat:"NEWS" },
+{ name:"Apart tv",url:"https://2-fss-2.streamhoster.com/pl_124/206820-4338160-1/playlist.m3u8",cat:"Other" },
+{ name:"Ashar1 News",url:"https://bcovlive-a.akamaihd.net/ed81ac1118414d4fa893d3a83ccec9be/eu-central-1/6203311941001/playlist.m3u8",cat:"NEWS" },
+{ name:"ausbiz news",url:"https://d9quh89lh7dtw.cloudfront.net/public-output/index.m3u8",cat:"NEWS" },
+{ name:"BFM",url:"https://live-cdn-stream-euw1.bfmb.bct.nextradiotv.com/master.m3u8",cat:"NEWS" },
+{ name:"Bloomberg Mon",url:"https://cdn4.skygo.mn/live/disk1/BloombergMon/HLSv3-FTA/BloombergMon.m3u8",cat:"NEWS" },
+{ name:"Business 24",url:"https://cdn-globecast.akamaized.net/live/eds/business24_tv/hls_video/index.m3u8",cat:"NEWS" },
+{ name:"Cafe Trade",url:"https://cafetradehls.wns.live/hls/stream.m3u8",cat:"NEWS" },
+{ name:"solh SPORT",url:"https://solhtvhls.wns.live/hls/stream.m3u8",cat:"Sports" },
+{ name:"CANAK Z",url:"https://d1hz1p2gea2zy4.cloudfront.net/live/rmgtv/RMG-TRENDSZFR-LIVE/index.m3u8",cat:"NEWS" },
+{ name:"CNBC Arbia",url:"https://cnbc-live.akamaized.net/cnbc/master.m3u8",cat:"NEWS" },
+{ name:"CNBC",url:"https://live.fptplay53.net/fnxsd1/cnbc_hls.smil/chunklist.m3u8",cat:"NEWS" },
+{ name:"CNBC1",url:"https://viamotionhsi.netplus.ch/live/eds/cnbc/browser-HLS8/cnbc.m3u8",cat:"NEWS" },
+{ name:"CNBC TV18",url:"https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/cnbc-tv18/master.m3u8",cat:"NEWS" },
+{ name:"TEXIT",url:"https://amg01529-defiancetv-defiancemedia-glewed-tre8x.amagi.tv/playlist.m3u8",cat:"NEWS" },
+{ name:"JOB TV",url:"https://jobtvserver.eu/hls/stream.m3u8",cat:"NEWS" },
+{ name:"CANAL Z",url:"https://d1hz1p2gea2zy4.cloudfront.net/live/rmgtv/RMG-TRENDSZNL-LIVE/index.m3u8",cat:"NEWS" },
+{ name:"Tevex",url:"https://v4.tustreaming.cl/tevexinter/index.m3u8",cat:"Documentary" },
+{ name:"Yahoo",url:"https://d1ewctnvcwvvvu.cloudfront.net/playlist.m3u8",cat:"NEWS" },
+{ name:"ZEE BUSINESS",url:"https://dwby15d04agvq.cloudfront.net/index_1.m3u8",cat:"NEWS" },
+{ name:"AW TV",url:"https://acesso.ecast.site:3070/live/awtvlive.m3u8",cat:"Kids" },
+{ name:"Bollywood Clasic",url:"https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-classic/manifest.m3u8",cat:"Movies" },
+{ name:"Cine Vault",url:"https://gsn-cinevault-westerns-2-us.roku.wurl.tv/playlist.m3u8",cat:"Movies" },
+{ name:"Dubai Zaman",url:"https://dmiffthftl.cdn.mangomolo.com/dubaizaman/smil:dubaizaman.stream.smil/chunklist.m3u8",cat:"Aribic" },
+{ name:"Retro Crush",url:"https://cineverse.g-mana.live/media/ac7cff3c-5bc3-4745-ac4d-56aadb586d00/profile/1/profileManifest.m3u8",cat:"Kids" },
+{ name:"Retro X tv",url:"https://acceso.radiosportstv.online:3259/live/retroxtvlive.m3u8",cat:"Other" },
+{ name:"Samuel Goldwyn",url:"https://samuelgoldwyn-classics-1-us.roku.wurl.tv/playlist.m3u8",cat:"Other" },
+{ name:"TVN 3",url:"https://mdstrm.com/live-stream-playlist/5653641561b4eba30a7e4929.m3u8",cat:"Other" },
+{ name:"Gusa Tv",url:"https://rpn.bozztv.com/gusa/gusa-tvsclassicmovies/index.m3u8",cat:"Other" },
+{ name:"Gusa Tv2",url:"https://rpn.bozztv.com/gusa/gusa-tvshollywoohistory/index.m3u8",cat:"Other" },
+{ name:"Gusa Tv3",url:"https://rpn.bozztv.com/gusa/gusa-tvsmainst/index.m3u8",cat:"Other" },
+{ name:"Gusa Pet",url:"https://rpn.bozztv.com/gusa/gusa-petparadenetwork/index.m3u8",cat:"Other" },
+{ name:"TVS",url:"https://cdn.streamhispanatv.net:3531/live/tvsretrogtlive.m3u8",cat:"Other" },
+{ name:"ZB CINEMA",url:"https://server.zillarbarta.com/ZBCINEMA/index.m3u8",cat:"Other" },
+
 
             { name:"B4U_Movies (st1)",url:"https://cdn-2.pishow.tv/live/419/master.m3u8",cat:"Movies" },
             { name:"B4U_Movies (st2)",url:"https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/1080p/index.m3u8",cat:"Movies" },
