@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pakistani Web TV</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --primary: #23E615;
+  --primary-dark: #1AAB0F;
+  --bg-light: #D3FEDE;
+  --text-dark: #333;
+  --btn-bg: #B3FE73;
+  --btn-hover: #96D45F;
+  --shadow: rgba(0,0,0,0.15);
+  --success: #F0110A;
+  --error: #e74c3c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; 
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  display: flex; 
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+header {
+  background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.header-content {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+.logo i {
+  font-size: 28px;
+}
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--success);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Video Player Sticky Style */
+.player-section {
+  position: sticky;
+  top: 80px;
+  z-index: 900;
+  background: #000;
+  box-shadow: 0 8px 20px var(--shadow);
+  width: 100%;
+}
+
+#playerContainer {
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+}
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 10;
+  display: none;
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Control and Server Section */
+.controls-section {
+  position: sticky;
+  top: calc(80px + (100vw * 9 / 16));
+  z-index: 800;
+  background: white;
+  padding: 15px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 0 auto 15px;
+  max-width: 960px;
+}
+.control-btn {
+  background: var(--btn-bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px var(--shadow);
+}
+.control-btn:hover {
+  background: var(--btn-hover);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.server-section {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.server-btn {
+  background: var(--btn-bg);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-dark);
+  cursor: pointer;
+  margin: 2.5px;
+  flex-shrink: 0;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 8px var(--shadow);
+  min-width: 160px;
+  text-align: left;
+}
+.server-btn:hover { 
+  background-color: var(--btn-hover); 
+  color: #fff; 
+  transform: translateY(-2px);
+}
+.server-btn.active {
+  background-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 6px 14px var(--primary-dark);
+}
+.server-btn .server-quality {
+  font-size: 11px;
+  display: block;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+.server-btn.active::after {
+  content: "✓";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 900;
+  font-size: 18px;
+  color: #fff;
+}
+
+.info-section {
+  max-width: 960px;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px var(--shadow);
+  padding: 24px;
+  color: var(--text-dark);
+}
+.match-banner {
+  max-width: 240px;
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+.description {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.meta-info {
+  font-size: 14px;
+  background: #fdf1de;
+  border-left: 5px solid var(--primary);
+  padding: 14px 20px;
+  border-radius: 6px;
+  color: #7a5a12;
+  margin-bottom: 20px;
+}
+.share-section h3 {
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+  color: var(--primary);
+}
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+.share-buttons a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  background: var(--btn-bg);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  font-size: 18px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.share-buttons a:hover { 
+  background: var(--primary); 
+  color: #fff; 
+  transform: translateY(-2px);
+}
+.share-buttons a.whatsapp:hover { background: #25d366; }
+
+footer {
+  text-align: center;
+  padding: 0px;
+  color: #777;
+  font-size: 14px;
+  margin-top: auto;
+}
+footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content { flex-direction: column; gap: 10px; }
+  .server-btn { min-width: 140px; padding: 10px 15px; font-size: 13px; }
+  .player-controls { flex-wrap: wrap; }
+  .control-btn { padding: 8px 15px; font-size: 13px; }
+  .info-section { padding: 15px; }
+  .player-section { position: relative; top: 0; }
+  .controls-section { position: relative; top: 0; }
+}
+@media (max-height: 600px) {
+  .player-section { position: relative; top: 0; }
+  .controls-section { position: relative; top: 0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="logo">
+      <i class="fas fa-tv"></i>
+      <span>Pakistani Web TV</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span>Live</span>
+    </div>
+  </div>
+</header>
+
+<div class="player-section">
+  <div id="playerContainer">
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner"></div>
+      <p>Loading stream...</p>
+    </div>
+  </div>
+</div>
+
+<div class="controls-section">
+  <div class="player-controls">
+    <button class="control-btn" id="muteBtn"><i class="fas fa-volume-mute"></i><span>Unmute</span></button>
+    <button class="control-btn" id="fullscreenBtn"><i class="fas fa-expand"></i><span>Fullscreen</span></button>
+    <button class="control-btn" id="refreshBtn"><i class="fas fa-redo"></i><span>Refresh</span></button>
+  </div>
+
+<button class="server-btn active" data-url="http://66.102.120.18:8000/play/a03m/index.m3u8">SAUDI CH For Quran HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03n/index.m3u8">SAUDI CH For Sunnah HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a012/index.m3u8">&Xplor HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a022/index.m3u8">&flix HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01t/index.m3u8">&pictures HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01u/index.m3u8">&tv HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04v/index.m3u8">24 News HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a044/index.m3u8">24B HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a039/index.m3u8">365 NEWS</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a050/index.m3u8">8XM HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06m/index.m3u8">92 Entertainment</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04y/index.m3u8">92 News HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a032/index.m3u8">A SportsHD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04q/index.m3u8">A1 TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05b/index.m3u8">AAJ ENTERTANMENT</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05a/index.m3u8">AAJ NEWS</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05j/index.m3u8">AAN TV HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a051/index.m3u8">ABBTAKK HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03d/index.m3u8">AIK NEWS</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04z/index.m3u8">APNA CHANNEL HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03c/index.m3u8">APlus Pakistan</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a030/index.m3u8">ARYDigitalAsia HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a036/index.m3u8">ARYMusik</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a02z/index.m3u8">ARYNewsAsia</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a011/index.m3u8">ARYQTV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a031/index.m3u8">ARYZindagi</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03t/index.m3u8">ATV ENT HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06i/index.m3u8">AXN</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03j/index.m3u8">Al Jazeera English HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a001/index.m3u8">Animal Planet HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01w/index.m3u8">B4U Movies</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a074/index.m3u8">BBC News</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a038/index.m3u8">BOL News Urdu</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05z/index.m3u8">CITY-21</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05x/index.m3u8">CITY-42 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03h/index.m3u8">CNN International</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06z/index.m3u8">COLORS CINIPLEX HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a02y/index.m3u8">Capital TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00t/index.m3u8">Cartoon Network</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a017/index.m3u8">Cartoon Network HD+</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01a/index.m3u8">Colors Cineplex Bollywood</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00a/index.m3u8">Colors HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a014/index.m3u8">Colors Infinity HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03i/index.m3u8">DW English HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03v/index.m3u8">Discover Pakistan</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06r/index.m3u8">Discover Pakistan</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01k/index.m3u8">Discovery HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00k/index.m3u8">Discovery Kids</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01l/index.m3u8">Discovery Science</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a016/index.m3u8">Discovery Turbo</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a013/index.m3u8">Disney Channel HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a078/index.m3u8">Disney International HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a004/index.m3u8">Disney Junior</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a070/index.m3u8">Disny</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04u/index.m3u8">Dunya News HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a054/index.m3u8">EXP ENTERTAINMENT</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a053/index.m3u8">EXPRESS NEWS</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01g/index.m3u8">Eurosport HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05f/index.m3u8">FAST SPORTS HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04c/index.m3u8">FILMAX</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04d/index.m3u8">FILMAZIA</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04n/index.m3u8">FILMAZIA PUNJABI</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04b/index.m3u8">FIX&FOXI</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a049/index.m3u8">GEM COMEDY</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a045/index.m3u8">GEM TV HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a062/index.m3u8">GEO HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a064/index.m3u8">GEO KAHANI HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05w/index.m3u8">GEO NEWS</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a063/index.m3u8">GEO SUPER HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06p/index.m3u8">GNNHD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05m/index.m3u8">GTV NEWS HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05l/index.m3u8">GTV NEWS HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05o/index.m3u8">Geo Tez</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06c/index.m3u8">HUM HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05e/index.m3u8">HUM NEWS HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05i/index.m3u8">HUM SITARAY</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04p/index.m3u8">Hidayat TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01q/index.m3u8">History TV18 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a02x/index.m3u8">INPLUS Pakistan</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01h/index.m3u8">Investigation Discovery</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04j/index.m3u8">Isaac TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a052/index.m3u8">JALWA HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03o/index.m3u8">KSA SPORT1 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03p/index.m3u8">KSA SPORT2 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a058/index.m3u8">Khyber News HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a02l/index.m3u8">Kidzone Pakistan</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04a/index.m3u8">LTN FAMILY</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04x/index.m3u8">Lahore News HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05h/index.m3u8">Lahore Rang HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03b/index.m3u8">LotusTV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a059/index.m3u8">MASALA TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a048/index.m3u8">MIFA + HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a047/index.m3u8">MIFA + HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a046/index.m3u8">MIFA MUSIC HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04o/index.m3u8">MINIMAX 2</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a07m/index.m3u8">MTCL 1HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a07j/index.m3u8">MTCL 2HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a07k/index.m3u8">MTCL 3HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a07l/index.m3u8">MTCL 4HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a07i/index.m3u8">MTCL 5HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a07h/index.m3u8">MTCL 6HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a07g/index.m3u8">MTCL 8HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a07f/index.m3u8">MTCL7HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a02j/index.m3u8">MUN TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a034/index.m3u8">Metro 1</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01f/index.m3u8">NATIONAL GEOGRAPHIC HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05g/index.m3u8">NEO NEWS HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a057/index.m3u8">NEWS ONE</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03k/index.m3u8">NHK WORLD-JPN</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04m/index.m3u8">NOOR TV PK</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01d/index.m3u8">Nat Geo Wild HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00w/index.m3u8">Nick</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00m/index.m3u8">Nick Jr</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a041/index.m3u8">ONYX HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04r/index.m3u8">PTV HOME HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03s/index.m3u8">PTV NATIONAL</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04s/index.m3u8">PTV NEWS HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04t/index.m3u8">PTV WORLD HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04w/index.m3u8">PTV-SPORTS-HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04g/index.m3u8">Paigham Pashto</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03e/index.m3u8">Paigham Urdu</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04k/index.m3u8">Paigham Urdu</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05q/index.m3u8">Peace TV English HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05p/index.m3u8">Peace TV Urdu HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a02k/index.m3u8">Planet Fun HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00l/index.m3u8">Pogo</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03u/index.m3u8">Public News</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a04h/index.m3u8">QURAN TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a043/index.m3u8">RIVER HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05y/index.m3u8">ROHI TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a042/index.m3u8">RUBIX HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01j/index.m3u8">Romedy Now</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06o/index.m3u8">SAMAA</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a005/index.m3u8">SET HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01r/index.m3u8">SONY BBC EARTH HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00u/index.m3u8">SONY MAX</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00h/index.m3u8">SONY MAX 2</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a071/index.m3u8">SONY MAX HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01z/index.m3u8">SONY PIX HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00e/index.m3u8">SONY SPORTS TEN 1 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01y/index.m3u8">SONY SPORTS TEN 2 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00z/index.m3u8">SONY SPORTS TEN 3 Hindi HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a010/index.m3u8">SONY SPORTS TEN 5 Hindi HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00s/index.m3u8">SONY YAY!</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00f/index.m3u8">STAR GOLD HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a021/index.m3u8">STAR Movies HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a020/index.m3u8">STAR Movies Select HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a008/index.m3u8">STAR Plus HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06x/index.m3u8">STAR SPORTS S1 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06y/index.m3u8">STAR SPORTS S2 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a072/index.m3u8">STAR Sports 1 Hindi HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00v/index.m3u8">STAR Sports2 Hindi HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05n/index.m3u8">SUNO NEWS HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a035/index.m3u8">Sab TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03y/index.m3u8">See TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a05r/index.m3u8">Set Entertainment</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03x/index.m3u8">Sindh News</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03w/index.m3u8">Sindh TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00p/index.m3u8">Sonic</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00g/index.m3u8">Star Gold 2</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a077/index.m3u8">Star Gold 2 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00r/index.m3u8">Star Gold Romance</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01s/index.m3u8">Star Gold Select HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00c/index.m3u8">Star Gold Thrills</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03z/index.m3u8">Star News Asia</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a009/index.m3u8">Star Sports 1 HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00i/index.m3u8">Star Sports 1 Hindi</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00d/index.m3u8">TEN SPORTS</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01c/index.m3u8">TLC HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a03l/index.m3u8">TRT World HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a055/index.m3u8">TV ONE</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a075/index.m3u8">Travelxp HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a056/index.m3u8">WASEB TV</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a01v/index.m3u8">Zee Anmol Cinema</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00n/index.m3u8">Zee Bollywood</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a076/index.m3u8">Zee Cafe HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06w/index.m3u8">Zee Cinema HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a006/index.m3u8">Zee Classic</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a00y/index.m3u8">Zee TV HD</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a015/index.m3u8">Zoom</button>
+<button class="server-btn" data-url="http://66.102.120.18:8000/play/a06n/index.m3u8">iFilm English</button>
+  </div>
+</div>
+
+<div class="share-section">
+  <h3>Subscribe To Our Premium Services, Please Contact Us</h3>
+  <div class="share-buttons">
+    <a href="#" class="whatsapp" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 pkcast1 | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const playerContainer = document.getElementById('playerContainer');
+  const serverButtons = document.querySelectorAll('.server-btn');
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  const muteBtn = document.getElementById('muteBtn');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const refreshBtn = document.getElementById('refreshBtn');
+  let player;
+  let isMuted = true;
+
+  function showLoading() { loadingOverlay.style.display = 'flex'; }
+  function hideLoading() { loadingOverlay.style.display = 'none'; }
+
+  function loadStream(url) {
+    if (!url) return;
+    showLoading();
+    if (player) player.destroy();
+
+    try {
+      player = new Clappr.Player({
+        source: url,
+        parentId: '#playerContainer',
+        autoPlay: true,
+        height: '100%',
+        width: '100%',
+        mute: isMuted,
+        playback: { playInline: true, preload: 'auto' },
+        events: {
+          onReady: () => { hideLoading(); updateMuteButton(); scrollToPlayer(); },
+          onError: () => { hideLoading(); alert('Stream load failed. Try another server.'); }
+        }
+      });
+    } catch(err) {
+      console.error('Player error', err);
+      hideLoading();
+      alert('Player could not initialize.');
+    }
+  }
+
+  function updateMuteButton() {
+    if (isMuted) muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i><span>Unmute</span>';
+    else muteBtn.innerHTML = '<i class="fas fa-volume-up"></i><span>Mute</span>';
+  }
+
+  function scrollToPlayer() {
+    playerContainer.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  serverButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('active')) return;
+      serverButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadStream(btn.dataset.url);
+    });
+  });
+
+  muteBtn.addEventListener('click', () => {
+    if (player) { isMuted = !isMuted; player.mute(isMuted); updateMuteButton(); }
+  });
+
+  fullscreenBtn.addEventListener('click', () => { if(player) player.toggleFullscreen(); });
+
+  refreshBtn.addEventListener('click', () => {
+    const activeBtn = document.querySelector('.server-btn.active');
+    if (activeBtn && activeBtn.dataset.url) loadStream(activeBtn.dataset.url);
+  });
+
+  // WhatsApp share
+  const shareBtn = document.querySelector('.share-buttons a.whatsapp');
+  if(shareBtn){
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent(document.title);
+    shareBtn.href = `https://wa.me/9203335560502`;
+    shareBtn.addEventListener('click', e => { e.preventDefault(); window.open(shareBtn.href,'share','width=600,height=400'); });
+  }
+
+  // Load default active stream safely
+  const activeBtn = document.querySelector('.server-btn.active');
+  if(activeBtn && activeBtn.dataset.url) loadStream(activeBtn.dataset.url);
+});
+</script>
+
+</body>
+</html>
