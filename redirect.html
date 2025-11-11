@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Download and Play</title>
+</head>
+<body>
+<script>
+// اپنی فائل کے لنکس یہاں لکھیں
+const downloadUrl = "https://pastes.io/download/iohtml"; // ڈاؤنلوڈ لنک
+const playUrl = "https://pastes.io/view/iohtml";         // پلے یا ویو لنک
+
+// ڈاؤنلوڈ شروع کریں
+const a = document.createElement('a');
+a.href = downloadUrl;
+a.download = '';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+
+// 2 سیکنڈ بعد ویو پیج کھولیں
+setTimeout(() => {
+  window.location.href = playUrl;
+}, 2000);
+</script>
+
+<h3>براہ کرم انتظار کریں... فائل ڈاؤنلوڈ ہو رہی ہے اور جلدی ہی چلنے لگے گی۔</h3>
+</body>
+</html>
