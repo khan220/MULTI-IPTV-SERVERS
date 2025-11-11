@@ -1,0 +1,23 @@
+<a class="channel" href="#" onclick="autoDownloadAndPlay(event, 'https://example.com/your-stream.m3u8')">
+  <img src="https://i.postimg.cc/jqghqRgh/bl.png" alt="LIVE TV">
+  <div class="channel-name"> MIX IPTV 1 </div>
+</a>
+
+<script>
+function autoDownloadAndPlay(event, fileUrl) {
+  event.preventDefault();
+
+  // 1️⃣ فائل کو ڈاؤنلوڈ کریں
+  const link = document.createElement('a');
+  link.href = fileUrl;
+  link.download = '';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  // 2️⃣ 2 سیکنڈ بعد نئی ٹیب میں چلائیں
+  setTimeout(() => {
+    window.open(fileUrl, '_blank');
+  }, 2000);
+}
+</script>
