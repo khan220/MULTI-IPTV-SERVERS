@@ -1,62 +1,139 @@
-<!-- 🔐 PASSWORD PROTECTED TV BOX (Blue Border + Image inside) -->
-<div class="protected-box" style="
-    width:300px;
-    text-align:center;
-    background:rgba(0,0,0,0.5);
-    border-radius:15px;
-    padding:10px;
-    border:4px solid #3b82f6; /* Blue Border */
-    position:relative;
-    overflow:hidden;
-">
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV Channels</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('https://i.postimg.cc/JnBZPPdS/Untit-RRled.png') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+    }
+    h1 {
+        text-align: center;
+        padding: 20px;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        padding: 20px;
+    }
+    .channel, .protected-box {
+        position: relative;
+        width: 300px;
+        text-align: center;
+        border-radius: 15px;
+        background: rgba(0,0,0,0.5);
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        border: 4px solid transparent;
+    }
+    .channel:hover, .protected-box:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        border-color: #ffcc00;
+    }
+    .channel img, .protected-box img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s;
+    }
+    .channel:hover img, .protected-box:hover img {
+        transform: scale(1.1);
+    }
+    .channel-name {
+        padding: 15px 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
 
-    <!-- Info / مجوالہ خانہ -->
-    <div style="
+    /* 🔹 New Arrival label for the first box */
+    .container > :first-child::before {
+        content: "New Arrival";
         position: absolute;
-        top:5px;
-        left:50%;
+        top: -20px;
+        left: 50%;
         transform: translateX(-50%);
-        background: rgba(255,255,255,0.2);
-        color:white;
-        padding:3px 8px;
-        font-size:13px;
-        border-radius:5px;
-        font-weight:bold;
-        pointer-events:none;
-        z-index:10;
-    ">
-        یہ باکس پاسورڈ کے ذریعے محفوظ ہے
+        background: #ffcc00;
+        color: black;
+        padding: 5px 12px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 5px;
+        z-index: 10;
+    }
+</style>
+</head>
+<body>
+
+<h1> SKY BLUE IPTV SERVICES </h1>
+
+<div class="container">
+
+
+
+    <!-- 🔐 Password Protected Box (First Box Example) -->
+    <div class="protected-box">
+        <div class="pw-area" style="padding:10px;">
+            <input type="password" placeholder="Enter Password" 
+                   style="width:95%; padding:8px; border-radius:10px; margin-bottom:10px;">
+            <button onclick="unlockBox(this)"
+                    style="padding:8px 15px; border-radius:10px; background:#ffcc00;">
+                Unlock
+            </button>
+        </div>
+        <div class="content-area" style="display:none; padding:10px;">
+            <a class="channel" href="MIX IPTV 2.html" target="_blank">
+                <img src="https://i.postimg.cc/jqghqRgh/bl.png" alt="TEST LOCKED CHANNEL">
+                <div class="channel-name"> TEST LOCKED CHANNEL </div>
+            </a>
+        </div>
     </div>
 
-    <!-- Image inside box -->
-    <div style="margin-top:20px; overflow:hidden; border-radius:10px;">
-        <img src="https://i.postimg.cc/jqghqRgh/bl.png" 
-             alt="LOCKED CHANNEL" 
-             style="width:100%; height:200px; object-fit:cover; margin-top:-30px; border-radius:10px;">
-    </div>
+    <!-- Normal Channels -->
+    <a class="channel" href="MIX IPTV 2.html" target="_blank">
+        <img src="https://i.postimg.cc/jqghqRgh/bl.png" alt="MIX IPTV 2">
+        <div class="channel-name"> MIX IPTV 2 </div>
+    </a>
 
-    <!-- Password Input -->
-    <div class="pw-area" style="margin-top:10px;">
-        <input type="password" placeholder="Enter Password" 
-               style="width:95%; padding:8px; border-radius:10px; margin-bottom:10px;">
-        <button onclick="unlockBox(this)"
-                style="padding:8px 15px; border-radius:10px; background:#3b82f6; color:white;">
-            Unlock
-        </button>
-    </div>
+    <a class="channel" href="https://www.mediafire.com/file/w86q1uk69pqfc2l/MIX+TV+1.html/file" target="_blank">
+        <img src="https://i.postimg.cc/MHHZbhmB/blh.png" alt="MIX IPTV 1">
+        <div class="channel-name"> MIX IPTV 1 </div>
+    </a>
 
-    <!-- Hidden Content -->
-    <div class="content-area" style="display:none; margin-top:10px;">
-        <a class="channel" href="MIX IPTV 2.html" target="_blank">
-            <img src="https://i.postimg.cc/jqghqRgh/bl.png" alt="TEST LOCKED CHANNEL" 
-                 style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
-            <div class="channel-name"> TEST LOCKED CHANNEL </div>
-        </a>
-    </div>
+    <a class="channel" href="Live tv 1.html" target="_blank">
+        <img src="https://i.postimg.cc/jqghqRgh/bl.png" alt="LIVE TV">
+        <div class="channel-name"> LIVE TV </div>
+    </a>
+
+    <a class="channel" href="LIVE TV 2.html" target="_blank">
+        <img src="https://i.postimg.cc/jqghqRgh/bl.png" alt="LIVE TV 2">
+        <div class="channel-name"> LIVE TV 2 </div>
+    </a>
+
+    <a class="channel" href="https://www.mediafire.com/file/qgrxobm2q8r99jz/indian+tv.html/file" target="_blank">
+        <img src="https://i.postimg.cc/MHHZbhmB/blh.png" alt="INDIAN TV">
+        <div class="channel-name"> INDIAN TV</div>
+    </a>
+
+    <a class="channel" href="LIVE TV3.html" target="_blank">
+        <img src="https://i.postimg.cc/jqghqRgh/bl.png" alt="LIVE TV 3">
+        <div class="channel-name">LIVE TV 3 </div>
+    </a>
 
 </div>
 
-<!-- 🔐 Password Script (Place once in page) -->
+<!-- 🔐 Password Script -->
 <script>
 let globalPassword = null;
 
@@ -78,9 +155,12 @@ function unlockBox(btn) {
     if (input.value === globalPassword) {
         box.querySelector(".pw-area").style.display = "none";
         content.style.display = "block";
-        box.style.borderColor = "#3b82f6"; // keep blue border
+        box.style.borderColor = "#ffcc00";
     } else {
         alert("❌ Incorrect Password");
     }
 }
 </script>
+
+</body>
+</html>
