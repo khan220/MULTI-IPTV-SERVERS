@@ -130,7 +130,7 @@
 <script>
 let globalPassword = null;
 
-fetch("https://raw.githubusercontent.com/khan220/MULTI-IPTV-SERVERS/main/password1.txt")
+fetch("https://raw.githubusercontent.com/khan220/MULTI-IPTV-SERVERS/refs/heads/main/password1.txt")
     .then(res => res.text())
     .then(txt => globalPassword = txt.trim())
     .catch(err => console.log("Password Load Error:", err));
