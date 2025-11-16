@@ -1,172 +1,574 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart IPTV Player</title>
-
-<script src="https://cdn.jsdelivr.net/npm/mpegts.js@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
+<title>Sky Blue IPTV Services</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
 <style>
-body{margin:0;background:#000;color:#0ff;font-family:Arial,sans-serif;display:flex;height:100vh;overflow:hidden}
-#sidebar{width:280px;background:#111;padding:15px;overflow-y:auto;border-right:2px solid #0ff;transition:.5s}
-#sidebar.hidden{width:0;padding:0;overflow:hidden;border:none}
-#main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
-h2{text-shadow:0 0 10px #0ff}
-video{width:90%;max-width:900px;height:400px;border:3px solid #0ff;border-radius:10px;box-shadow:0 0 25px #0ff}
-button{background:linear-gradient(90deg,#00e0ff,#00ffff);border:none;padding:8px 16px;border-radius:6px;color:#000;font-weight:bold;cursor:pointer}
-.category-header{display:flex;justify-content:space-between;align-items:center;background:rgba(0,255,255,.1);padding:8px 10px;border-radius:8px;cursor:pointer;color:#00e0ff;font-weight:bold;border:1px solid #00e0ff;margin-bottom:6px}
-.channel{display:flex;align-items:center;gap:8px;padding:6px 10px;margin-bottom:4px;background:rgba(0,0,0,.6);border-radius:8px;cursor:pointer}
-.channel:hover{background:linear-gradient(90deg,#00e0ff,#00ffff);color:#000}
-.channel img{width:40px;height:40px;border-radius:6px}
-#toggleMenu{position:absolute;top:10px;left:10px;background:#00ffff;color:#000;border:none;border-radius:5px;padding:6px 10px;cursor:pointer;font-weight:bold;z-index:10}
+body {
+    font-family:'Inter',sans-serif;
+    background-image:url('https://i.postimg.cc/jqghqRgh/bl.png');
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+}
+.scrolling-text-container{
+    position:absolute;top:0;left:0;right:0;height:24px;overflow:hidden;
+    white-space:nowrap;display:flex;align-items:center;background-color:rgba(0,0,0,0.6);z-index:10;
+}
+.scrolling-text{
+    display:inline-block;padding-left:100%;animation:scroll-left 45s linear infinite;color:#fff;font-size:.875rem;font-weight:500;
+}
+@keyframes scroll-left{
+    0%{transform:translateX(0%);}
+    100%{transform:translateX(-100%);}
+}
+.shadow-glow{text-shadow:0 0 5px rgba(255,255,255,.7);}
+.selectable:hover {background-color: #4f46e5 !important;}
+.adult-lock { position: relative; }
+.adult-lock::after { content: "🔐"; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
+.category-active { background-color: #6366f1 !important; }
+
+/* Adult Modal */
+#adulModal {
+    display:none;
+    position:fixed;
+    top:0; left:0; width:100%; height:100%;
+    background-color: rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+    z-index:100;
+}
+#adulModalContent {
+    background-color:#1f2937;
+    padding:2rem;
+    border-radius:1rem;
+    max-width:320px;
+    width:90%;
+    text-align:center;
+}
+#adulModalContent input {
+    width:100%;
+    padding:0.5rem;
+    margin-top:1rem;
+    border-radius:0.5rem;
+    border:none;
+}
+#adulModalContent button {
+    margin-top:1rem;
+    padding:0.5rem 1rem;
+    background-color:#6366f1;
+    color:white;
+    border:none;
+    border-radius:0.5rem;
+    cursor:pointer;
+}
+.lock-overlay {
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,0.6);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    z-index:15;
+}
+.lock-hidden { display:none; }
 </style>
 </head>
-<body>
+<body class="text-white p-4 md:p-8 relative">
 
-<button id="toggleMenu">☰ Menu</button>
-
-<div id="sidebar">
-<h3 style="text-align:center;">📺 Channel List</h3>
-
-<div class="category-block">
-<div class="category-header" onclick="toggleCategory(this)">☪️ General<span>▼</span></div>
-<div class="category-channels">
-
-<div class="channel" onclick="playFromList('PTV English','http://212.32.241.201:8000/play/a04x')">
-<img src="https://makkahlive.net/isv/peacelive.gif"> TV English
+<!-- Adult Modal -->
+<div id="adulModal" class="flex">
+    <div id="adulModalContent">
+        <h2 class="text-xl mb-2 text-white font-semibold">Adult Password Required</h2>
+        <input type="password" id="adultPasswordInput" placeholder="inter password">
+        <button id="adultSubmitBtn">Submit</button>
+        <div style="margin-top:8px;color:#f3f4f6;font-size:13px"> If you need the password, please contact me.</div>
+    </div>
 </div>
 
-<div class="channel" onclick="playFromList('Hu TV','http://69.64.57.208/france2/playlist.m3u8')">
-<img src="https://makkahlive.net/mictv/hudalive.gif"> Hu TV
+<div class="flex flex-col md:flex-row max-w-6xl mx-auto gap-4">
+    <!-- Sidebar / Channel Selector -->
+    <div class="w-full md:w-60 bg-gray-800 bg-opacity-70 p-3 rounded-xl flex-shrink-0">
+        <h2 class="text-xl font-semibold mb-2 text-gray-300">Channel list</h2>
+        <div id="customSelect" class="relative mb-3">
+            <input type="text" id="searchInput" placeholder="Search..." class="w-full p-2 rounded-lg mb-1 text-black focus:outline-none" />
+            <button id="selectedOption" class="w-full text-black bg-gray-200 rounded-lg p-2 text-left focus:outline-none">Select Channel</button>
+            <div id="dropdownOptions" class="hidden absolute w-full mt-1 bg-gray-700 rounded-lg max-h-64 overflow-y-auto z-50 touch-auto"></div>
+        </div>
+
+        <!-- Category Buttons -->
+        <div class="grid grid-cols-2 gap-2 auto-rows-min">
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="All">All</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Bollywood">Bollywood</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Entertainment">Entertainment</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Music">Music</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Movies">Movies</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Kids">Kids</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="General/International">General/International</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Lifestyle/Food">Lifestyle/Food</button>
+
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Documentary">Documentary</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="NEWS">NEWS</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Sport">Sport</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Miami Tv">Miami Tv</button>
+
+
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Aribic">Aribic</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Religion">Religion</button>
+            <button class="category-btn px-2 py-1 bg-indigo-500 rounded text-white text-sm w-full min-w-0" data-cat="Other">Other</button>
+
+
+            <button id="adult-btn" class="category-btn adult-lock px-2 py-1 bg-red-600 rounded text-white text-sm w-full min-w-0 flex items-center justify-center gap-1" data-cat="Adult">Adult</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col bg-gray-500 rounded-3xl shadow-2xl overflow-hidden p-2 md:p-4 border-t-4 border-b-4 border-indigo-500">
+        <h1 class="text-3xl md:text-4xl font-bold text-center mb-4 text-indigo-500">SKY BLUE IPTV SERVICES</h1>
+
+        <!-- Video Player -->
+        <div class="relative w-full aspect-video bg-black rounded-xl overflow-hidden shadow-xl mb-6">
+            <video id="video" class="w-full h-full" controls></video>
+            <div id="loading-indicator" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10 hidden">
+                <p class="text-xl md:text-2xl font-semibold text-white">Loading...</p>
+            </div>
+
+            <!-- Scrolling Text -->
+            <div class="scrolling-text-container">
+                <span class="scrolling-text">
+                   🇵🇰 Channels updated daily. 200+ free channels. Contact: +9203335560502
+                </span>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <h2 id="current-channel-name" class="text-xl md:text-2xl font-semibold text-center text-indigo-300"></h2>
+            <div class="flex items-center gap-4">
+                <button id="prev-btn" class="py-2 px-4 rounded-full bg-gray-700 hover:bg-indigo-600">Previous</button>
+                <button id="next-btn" class="py-2 px-4 rounded-full bg-gray-700 hover:bg-indigo-600">Next</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="channel" onclick="playFromList('Movie MP4','http://wroxfibra.com:80/Q3sdXWJw8Kxxx22222/pKefJHyVKExxxxxxxxa12/1115803.m3u8')">
-<img src="https://makkahlive.net/iictv/hudalive.gif"> Movie MP4 Test
+<!-- Clock -->
+<div id="clock-container" class="fixed top-8 right-8 p-3 bg-black bg-opacity-60 rounded-xl shadow-2xl z-20">
+    <div id="date-display" class="text-xs text-gray-300 shadow-glow text-right whitespace-nowrap"></div>
+    <div id="time-display" class="text-2xl font-bold shadow-glow text-indigo-300 text-right whitespace-nowrap"></div>
 </div>
 
-</div>
-</div>
-
-</div>
-
-<div id="main">
-<h2 id="status">Select a channel</h2>
-<video id="player" controls autoplay></video>
-<div>
-<button id="prev">⏮ Previous</button>
-<button id="next">⏭ Next</button>
-</div>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
+// Elements
+const video = document.getElementById('video');
+const currentChannelNameEl = document.getElementById('current-channel-name');
+const loadingIndicator = document.getElementById('loading-indicator');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const selectedOptionBtn = document.getElementById('selectedOption');
+const dropdownOptions = document.getElementById('dropdownOptions');
+const searchInput = document.getElementById('searchInput');
+const categoryBtns = document.querySelectorAll('.category-btn');
 
-const sidebar=document.getElementById('sidebar');
-const player=document.getElementById('player');
-const status=document.getElementById('status');
-let mpeg=null;let hls=null;
-let channels=[];let currentIndex=0;
+const adultModal = document.getElementById('adulModal');
+const adultPasswordInput = document.getElementById('adultPasswordInput');
+const adultSubmitBtn = document.getElementById('adultSubmitBtn');
 
-document.querySelectorAll('.channel').forEach(ch=>{
- const name=ch.textContent.trim();
- const onclick=ch.getAttribute('onclick');
- const url=onclick.match(/'(.*?)','(.*?)'/)[2];
- channels.push({title:name,url:url});
+let hls;
+let currentChannelIndex = 0;
+let activeCategory = "NEWS";
+let adultUnlocked = false;
+
+// Base64 password (stored as base64). Plain password = atob(encodedAdultPassword)
+const encodedAdultPassword = "NDMyMQ=="; // this is "4321" in base64
+
+// Channels: you asked to base64 the URLs for the two Goldmines channels.
+// Example: url_b64 contains base64(url) and encoded:true.
+// You can add more by using browser console: btoa("https://example/stream.m3u8")
+const channels = [
+  { name:"Goldmines 1", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS8xNDYxL21hc3Rlci5tM3U4", encoded:true, cat:"Movies" },
+  { name:"AN Bollywood", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9NYXJraXphL2luZGV4Lm0zdTg=", encoded:true, cat:"Movies" },
+{ name:"Abzy Dhakad", url_b64:"aHR0cHM6Ly9kMmxrNXU1OXRuczcyNGMuY2xvdWRmcm9udC5uZXQvb3V0L3YxLzRmZTZhYjA3YTEzNTQzZDZiZGIyZWM2M2IzZTJkZjQ0L2luZGV4Lm0zdTg=", encoded:true, cat:"Movies" },
+{ name:"Abzy Movie", url_b64:"aHR0cHM6Ly9kM3FzM2QycmtoZnFydC5jbG91ZGZyb250Lm5ldC9vdXQvdjEvZGI4ZDRlY2E3MmQ2NDc0OGEwMGQwNjMxZGViZjU0MmQvaW5kZXgubTN1OA==", encoded:true, cat:"Movies" },
+{ name:"Bollywood Classic", url_b64:"aHR0cHM6Ly9kMzVqNTA0ejB4MnZ1Mi5jbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMGJjOGU4Mzc2YmQ4NDE3YTFiNjc2MTEzOGFhNDFjMjZjNzMwOTMxMi9ib2xseXdvb2QtY2xhc3NpYy9tYW5pZmVzdC5tM3U4", encoded:true, cat:"Movies" },
+{ name:"B4u Kadak", url_b64:"aHR0cHM6Ly9hbWcwMDg3Ny1iNHVuZXctYW1nMDA4NzdjNC14aWFvbWktaW4tNTQ3My5wbGF5b3V0cy5ub3cuYW1hZ2kudHYvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Movies" },
+{ name:"B4u Kadak (st1)", url_b64:"aHR0cHM6Ly9jZG5iNHUud2lzZXBsYXlvdXQuY29tL0I0VV9LYWRhay9tYXN0ZXIubTN1OA==", encoded:true, cat:"Movies" },
+{ name:"B4U Music", url_b64:"aHR0cHM6Ly9jZG5iNHUud2lzZXBsYXlvdXQuY29tL0I0VV9NdXNpYy9tYXN0ZXIubTN1OA==", encoded:true, cat:"Music" },
+{ name:"mama", url_b64:"aHR0cDovL3N0di5tZWRpYWNkbi5ydS9saXZlL2Nkbi9tYW1hL3BsYXlsaXN0Lm0zdTg=", encoded:true, cat:"Kids" },
+{ name:"cartoom rus", url_b64:"aHR0cDovL3N0di5tZWRpYWNkbi5ydS9saXZlL2Nkbi9tdWx0L3BsYXlsaXN0Lm0zdTg=", encoded:true, cat:"Kids" },
+{ name:"BBC THREE", url_b64:"aHR0cHM6Ly92aWFtb3Rpb25oc2kubmV0cGx1cy5jaC9saXZlL2Vkcy9iYmMzY2JiYy9icm93c2VyLUhMUzgvYmJjM2NiYmMubTN1OA==", encoded:true, cat:"Kids" },
+{ name:"Istoria", url_b64:"aHR0cDovLzk1LjY2LjE4OC43NC9Jc3RvcmlhL21vbm8ubTN1OA==", encoded:true, cat:"Bollywood" },
+{ name:"Gangaur", url_b64:"aHR0cHM6Ly9wYmdhbmdhdXIud2lzZXBsYXlvdXQuY29tL0dhbmdhdXIv bWFzdGVyLm0zdTg=", encoded:true, cat:"Music" },
+{ name:"Zee Bollywood", url_b64:"aHR0cDovLzIxMi4xMDIuMzQuODo5MDgwL1plZUJvbGx5d29vZC9pbmRleC5tM3U4", encoded:true, cat:"Movies" },
+{ name:"STAR JALSHA", url_b64:"aHR0cHM6Ly9zZXJ2ZXIuemlsbGFyYmFydGEuY29tL1pCQ0lORU1BL2luZGV4Lm0zdTg=", encoded:true, cat:"Bollywood" },
+{ name:"B4U_Movies", url_b64:"aHR0cHM6Ly9jZG5iNHUud2lzZXBsYXlvdXQuY29tL0I0VV9Nb3ZpZXMvbWFzdGVyLm0zdTg=", encoded:true, cat:"Movies" },
+{ name:"B4u Kadak (st2)", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS8yMjcvbWFzdGVyLm0zdTg=", encoded:true, cat:"Movies" },
+{ name:"3abn Kids TV", url_b64:"aHR0cHM6Ly8zYWJuLmJvenp0di5jb20vM2FibjIvS2lkc19saXZlL3NtaWw6S2lkc19saXZlLnNtaWwvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Kids" },
+{ name:"3abn", url_b64:"aHR0cHM6Ly9kM2I3M2IzNG83Y3ZrcS5jbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMzcyMmM2MGE4MTVjMTk5ZDljMGVmMzZjNWI3M2RhNjhhNjJiMDlkMS9jYy1nejJzZ3F6cDA3NmtmL2Fkbi5tM3U4", encoded:true, cat:"Kids" },
+{ name:"anime vision", url_b64:"aHR0cHM6Ly9kMXVqZn cxe nple W0yZC5jbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMzcyMmM2MGE4MTVjMTk5ZDljMGVmMzZjNWI3M2RhNjhhNjJiMDlkMS9jYy1hNmZ1a3drYmhtZXg4L2xpdmUvZmFzdC1jaGFubmVsLWFuaW1ldmlzaW9uLTY0NTI3ZWMwL2Zhc3QtY2hhbm5lbC1hbmltZXZpc2lvbi02NDUyN2VjMC5tM3U4", encoded:true, cat:"Kids" },
+{ name:"anime vision classics", url_b64:"aHR0cHM6Ly9kODJweXZtY3cya2RjLmNsb3VkZnJvbnQubmV0L3YxL21hc3Rlci8zNzIyYzYwYTgxNWMxOTlkOWMwZWYzNmM1YjczZGE2OGE2MmIwOWQxL2NjLXN3Zml2enJ6d21hbXFhL2xpdmUvZmFzdC1jaGFubmVsLWFuaW1ldmlzaW9uY2xhc3NpY3MtZWZjOGRjNmQvZmFzdC1jaGFubmVsLWFuaW1ldmlzaW9uY2xhc3NpY3MtZWZjOGRjNmQubTN1OA==", encoded:true, cat:"Kids" },
+{ name:"BBC FOUR", url_b64:"aHR0cHM6Ly92aWFtb3Rpb25oc2kubmV0cGx1cy5jaC9saXZlL2Vkcy9iYmM0Y2JlZWJpZXMvYnJvd3Nlci1ITFM4L2JiYzRjYmVlYmllcy5tM3U4", encoded:true, cat:"Documentary" },
+{ name:"Extrema Kids", url_b64:"aHR0cHM6Ly82MjdiYjI1MWYyM2M3LnN0cmVhbWxvY2submV0OjQ0NC9FeHRyZW1hS2lkcy9FeHRyZW1hS2lkcy9wbGF5bGlzdC5tM3U4", encoded:true, cat:"Kids" },
+{ name:"GEEKDOT", url_b64:"aHR0cHM6Ly9zdHJlYW0uaWNoaWJhbnR2LmNvbTozNzY0L2h5YnJpZC9wbGF5Lm0zdTg=", encoded:true, cat:"Kids" },
+{ name:"FOR KIDS TV", url_b64:"aHR0cHM6Ly9mb3hraWRzdHYuYmU6MzM2OS9zdHJlYW0vcGxheS5tM3U4", encoded:true, cat:"Kids" },
+{ name:"Kuriakos Kids", url_b64:"aHR0cHM6Ly93Mi5tYW5hc2F0LmNvbS9ra2lkcy9zbWlsOmtraWRzLnNtaWwvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Kids" },
+{ name:"Magic Kids", url_b64:"aHR0cHM6Ly9tYWdpY3N0cmVhbS5kZG5zLm5ldC9tYWdpY3N0cmVhbS9zdHJlYW0ubTN1OA==", encoded:true, cat:"Kids" },
+{ name:"XILAM", url_b64:"aHR0cHM6Ly94aWxhbS1hbmltYXRpb24tMS1mci5zYW1zdW5nLnd1cmwudHYvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Kids" },
+{ name:"Canal Motor", url_b64:"aHR0cHM6Ly9kaWdpY29tLmhscy5pcHR2ZGMuY29tL2NhbmFsbW90b3IvaW5kZXgubTN1OA==", encoded:true, cat:"Sports" },
+{ name:"Mlewed tv", url_b64:"aHR0cHM6Ly9saW5lYXItMTEuZnJlcXVlbmN5LnN0cmVhbS9kaXN0L2dsZXdlZHR2LzExL2hscy9tYXN0ZXIvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Other" },
+  { name:"Garage tv", url_b64:"aHR0cHM6Ly9zdHJlYW0xLnNlcnNhdC5jb20vaGxzL2dhcmFnZXR2Lm0zdTg4", encoded:true, cat:"Sports" },
+{ name:"Alarabiya Business", url_b64:"aHR0cHM6Ly9saXZlLmFsYXJhYml5YS5uZXQvYWxhcmFiaXlhcHVibGlzaC9hc3dhYXEu c21pbC9wbGF5bGlzdC5tM3U4OA==", encoded:true, cat:"NEWS" },
+{ name:"Ameritrade", url_b64:"aHR0cHM6Ly90ZGFtZXJpdHJhZGUtdml6aW8uYW1hZ2kudHYvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Other" },
+{ name:"Ashar News", url_b64:"aHR0cHM6Ly9iY292bGl2ZS1hLmFrYW1haWhkLm5ldC8wYjc1ZWYwYTQ5ZTI0NzA0YTRjYTAyM2QzYTgyYzJkZi9hcC1zb3V0aC0xLzYyMDMzMTE5NDEwMDEvcGxheWxpc3QubTN1OA==", encoded:true, cat:"NEWS" },
+{ name:"Apart tv", url_b64:"aHR0cHM6Ly8yLWZzcy0yLnN0cmVhbWhvc3Rlci5jb20vcGxfMTI0LzIwNjgyMC00MzM4MTYwLTEvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Other" },
+{ name:"Ashar1 News", url_b64:"aHR0cHM6Ly9iY292bGl2ZS1hLmFrYW1haWhkLm5ldC9lZDgxYWMxMTE4NDE0ZDRmYTg5M2QzYTgzY2NlYzliZS9ldS1jZW50cmFsLTEvNjIwMzMxMTk0MTAwMS9wbGF5bGlzdC5tM3U4OA==", encoded:true, cat:"NEWS" },
+{ name:"ausbiz news", url_b64:"aHR0cHM6Ly9kOXF1aDg5bGg3ZHR3LmNsb3VkZnJvbnQubmV0L3B1YmxpYy1vdXRwdXQvaW5kZXgubTN1OA==", encoded:true, cat:"NEWS" },
+{ name:"BFM", url_b64:"aHR0cHM6Ly9saXZlLWNkbi1zdHJlYW0tZXV3MS5iZm1iLmJjdC5uZXh0cmFkaW90di5jb20vbWFzdGVyLm0zdTg4", encoded:true, cat:"NEWS" },
+{ name:"Bloomberg Mon", url_b64:"aHR0cHM6Ly9jZG40LnNreWdvLm1uL2xpdmUvZGlzazEvQmxvb21iZXJnTW9uL0hMU3YzLUZUQS9CbG9vbWJlcmdNb24ubTN1OA==", encoded:true, cat:"NEWS" },
+{ name:"Business 24", url_b64:"aHR0cHM6Ly9jZG4tZ2xvYmVjYXN0LmFrYW1haXplZC5uZXQvbGl2ZS9lZHMvYnVzaW5lc3MyNF90di9obHNfdmlkZW8vaW5kZXgubTN1OA==", encoded:true, cat:"NEWS" },
+{ name:"Cafe Trade", url_b64:"aHR0cHM6Ly9jYWZldHJhZGVobHMu d25zLmxpdmUvaGxzL3N0cmVhbS5tM3U4OA==", encoded:true, cat:"NEWS" },
+{ name:"solh SPORT", url_b64:"aHR0cHM6Ly9zb2xodHZobHMu d25zLmxpdmUvaGxzL3N0cmVhbS5tM3U4OA==", encoded:true, cat:"Sports" },
+{ name:"CANAK Z", url_b64:"aHR0cHM6Ly9kMWh6MXAyZ2VhMnp5NC5jbG91ZGZyb250Lm5ldC9saXZlL3JtZ3R2L1JNRy1UUkVORFNBRlItTElWRS9pbmRleC5tM3U4OA==", encoded:true, cat:"NEWS" },
+{ name:"CNBC Arbia", url_b64:"aHR0cHM6Ly9jbmJjLWxpdmUuYWthbWFpemVkLm5ldC9jbmJjL21hc3Rlci5tM3U4OA==", encoded:true, cat:"NEWS" },
+{ name:"CNBC", url_b64:"aHR0cHM6Ly9saXZlLmZwdHBsYXk1My5uZXQvZm54c2QxL2NuYmNfaGxzLnNtaWwvY2h1bmtsaXN0Lm0zdTg4", encoded:true, cat:"NEWS" },
+{ name:"CNBC1", url_b64:"aHR0cHM6Ly92aWFtb3Rpb25oc2kubmV0cGx1cy5jaC9saXZlL2Vkcy9jbmJjL2Jyb3dzZXItSExTOC9jbmJjLm0zdTg4", encoded:true, cat:"NEWS" },
+{ name:"CNBC TV18", url_b64:"aHR0cHM6Ly9kMzVqNTA0ejB4MnZ1Mi5jbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMGJjOGU4Mzc2YmQ4NDE3YTFiNjc2MTEzOGFhNDFjMjZjNzMwOTMxMi9jbmJjLXR2MTgvbWFzdGVyLm0zdTg4", encoded:true, cat:"NEWS" },
+{ name:"TEXIT", url_b64:"aHR0cHM6Ly9hbWcwMTUyOS1kZWZpYW5jZXR2LWRlZmlhbmNlbWVkaWEtZ2xld2VkLXRyZTh4LmFtYWdpLnR2L3BsYXlsaXN0Lm0zdTg4", encoded:true, cat:"NEWS" },
+{ name:"JOB TV", url_b64:"aHR0cHM6Ly9qb2J0dnNlcnZlci5ldS9obHMvc3RyZWFtLm0zdTg4", encoded:true, cat:"NEWS" },
+{ name:"CANAL Z", url_b64:"aHR0cHM6Ly9kMWh6MXAyZ2VhMnp5NC5jbG91ZGZyb250Lm5ldC9saXZlL3JtZ3R2L1JNRy1UUkVORFNOTC1MSVZFL2luZGV4Lm0zdTg4", encoded:true, cat:"NEWS" },
+{ name:"Tevex", url_b64:"aHR0cHM6Ly92NC50dXN0cmVhbWluZy5jbC90ZXZleGludGVyL2luZGV4Lm0zdTg4", encoded:true, cat:"Documentary" },
+{ name:"Yahoo", url_b64:"aHR0cHM6Ly9kMWV3Y3RudmN3dnZ2dS5jbG91ZGZyb250Lm5ldC9wbGF5bGlzdC5tM3U4OA==", encoded:true, cat:"NEWS" },
+{ name:"ZEE BUSINESS", url_b64:"aHR0cHM6Ly9kd2J5MTVkMDRhZ3ZxLmNsb3VkZnJvbnQubmV0L2luZGV4XzEubTN1OA==", encoded:true, cat:"NEWS" },
+{ name:"AW TV", url_b64:"aHR0cHM6Ly9hY2Vzc28uZWNhc3Quc2l0ZTozMDcwL2xpdmUvYXd0dmxpdmUubTN1OA==", encoded:true, cat:"Kids" },
+{ name:"Bollywood Clasic", url_b64:"aHR0cHM6Ly9kMzVqNTA0ejB4MnZ1Mi5jbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMGJjOGU4Mzc2YmQ4NDE3YTFiNjc2MTEzOGFhNDFjMjZjNzMwOTMxMi9ib2xseXdvb2QtY2xhc3NpYy9tYW5pZmVzdC5tM3U4OA==", encoded:true, cat:"Movies" },
+{ name:"Cine Vault", url_b64:"aHR0cHM6Ly9nc24tY2luZXZhdWx0LXdlc3Rlcm5zLTItdXMucm9rdS53dXJsLnR2L3BsYXlsaXN0Lm0zdTg4", encoded:true, cat:"Movies" },
+{ name:"Dubai Zaman", url_b64:"aHR0cHM6Ly9kbWlmZnRodGZ0bC5jZG4ubWFuZ29tb2xvLmNvbS9kdWJhaXphbWFuL3NtaWw6ZHViYWl6YW1hbi5zdHJlYW0uc21pbC9jaHVua2xpc3QubTN1OA==", encoded:true, cat:"Aribic" },
+{ name:"Retro Crush", url_b64:"aHR0cHM6Ly9jaW5ldmVyc2UuZy1tYW5hLmxpdmUvbWVkaWEvYWM3Y2ZmM2MtNWJjMy00NzQ1LWFjNGQtNTZhYWRiNTg2ZDAwL3Byb2ZpbGUvMS9wcm9maWxlTWFuaWZlc3QubTN1OA==", encoded:true, cat:"Kids" },
+{ name:"Retro X tv", url_b64:"aHR0cHM6Ly9hY2Nlc28ucmFkaW9zcG9ydHN0di5vbmxpbmU6MzI1OS9saXZlL3JldHJveHR2bGl2ZS5tM3U4OA==", encoded:true, cat:"Other" },
+{ name:"Samuel Goldwyn", url_b64:"aHR0cHM6Ly9zYW11ZWxnb2xkd3luLWNsYXNzaWNzLTF1cy5yb2t1Lnd1cmwudHYvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Other" },
+{ name:"TVN 3", url_b64:"aHR0cHM6Ly9tZHN0cm0uY29tL2xpdmUtc3RyZWFtLXBsYXlsaXN0LzU2NTM2NDE1NjFiNGViYTMwYTdlNDkyOS5tM3U4OA==", encoded:true, cat:"Other" },
+{ name:"Gusa Tv", url_b64:"aHR0cHM6Ly9ycG4uYm96enR2LmNvbS9ndXNhL2d1c2EtdHZzY2xhc3NpY21vdmllcy9pbmRleC5tM3U4OA==", encoded:true, cat:"Other" },
+{ name:"Gusa Tv2", url_b64:"aHR0cHM6Ly9ycG4uYm96enR2LmNvbS9ndXNhL2d1c2EtdHZzaG9sbHl3b2xoaXN0b3J5L2luZGV4Lm0zdTg4", encoded:true, cat:"Other" },
+{ name:"Gusa Tv3", url_b64:"aHR0cHM6Ly9ycG4uYm96enR2LmNvbS9ndXNhL2d1c2EtdHZzbWFpbnN0L2luZGV4Lm0zdTg4", encoded:true, cat:"Other" },
+{ name:"Gusa Pet", url_b64:"aHR0cHM6Ly9ycG4uYm96enR2LmNvbS9ndXNhL2d1c2EtcGV0cGFyYWRlbmV0d29yay9pbmRleC5tM3U4OA==", encoded:true, cat:"Other" },
+{ name:"TVS", url_b64:"aHR0cHM6Ly9jZG4uc3RyZWFtaGlzcGFuYXR2Lm5ldDozNTMxL2xpdmUvdHZzcmV0cm9ndGxpdmUubTN1OA==", encoded:true, cat:"Other" },
+{ name:"ZB CINEMA", url_b64:"aHR0cHM6Ly9zZXJ2ZXIuemlsbGFyYmFydGEuY29tL1pCQ0lORU1BL2luZGV4Lm0zdTg4", encoded:true, cat:"Other" },
+{ name:"B4U_Movies (st1)", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS80MTkvbWFzdGVyLm0zdTg4", encoded:true, cat:"Movies" },
+{ name:"B4U_Movies (st2)", url_b64:"aHR0cHM6Ly9hbWcwMDg3Ny1iNHVuZXctYW1nMDA4NzdjMi14aWFvbWktaW4tNTQ4OS5wbGF5b3V0cy5ub3cuYW1hZ2kudHYvMTA4MHAvaW5kZXgubTN1OA==", encoded:true, cat:"Movies" },
+{ name:"B4U_Movies(st3)", url_b64:"aHR0cHM6Ly9CQ0lORU1BL2luZGV4Lm0zdTg4", encoded:true, cat:"Movies" },
+{ name:"B4U_Movies(st3)", url_b64:"aHR0cHM6Ly9kM2tkeXdidGRmYnA5ei5jbG91ZGZyb250Lm5ldC92MS9tYW5pZmVzdC85M2NlMjBmMGY1Mjc2MGJmMzhiZTkxMWZmNGM5MWVkMDJhYTJmZDkyL2RmZjQyM2UwLTNjODItNDZkNi05ZWNiLTNiYWE5NmI1Njk0YS80NTU3ZGRmNS0xYzRkLTQyNDktODEwNy1jMDEyMTJiOTE3ZWMvMC5tM3U4OA==", encoded:true, cat:"Movies" },
+{ name:"B4U_Movies(st4)", url_b64:"aHR0cHM6Ly9kM2tkeXdidGRmYnA5ei5jbG91ZGZyb250Lm5ldC92MS9tYW5pZmVzdC85M2NlMjBmMGY1Mjc2MGJmMzhiZTkxMWZmNGM5MWVkMDJhYTJmZDkyL2RmZjQyM2UwLTNjODItNDZkNi05ZWNiLTNiYWE5NmI1Njk0YS9jZDFmNTlkNi05YjVkLTQzZjAtYmZiMi02Y2E5ZWRjOTlmMjcvMC5tM3U4OA==", encoded:true, cat:"Movies" },
+{ name:"B4u Bhojpuri", url_b64:"aHR0cHM6Ly9jZG5iNHUud2lzZXBsYXlvdXQuY29tL0I0VV9CaG9qcHVyaS9tYXN0ZXIubTN1OA==", encoded:true, cat:"Movies" },
+{ name:"Bhojpuri Cinema", url_b64:"aHR0cHM6Ly9saXZlLWJob2pwdXJpLmFrYW1haXplZC5uZXQvbGl2ZWFici9wbGF5bGlzdC5tM3U4OA==", encoded:true, cat:"Movies" },
+{ name:"Cinelife", url_b64:"aHR0cHM6Ly9kMzVqNTA0ejB4MnZ1Mi5jbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMGJjOGU4Mzc2YmQ4NDE3YTFiNjc2MTEzOGFhNDFjMjZjNzMwOTMxMi9jaW5lbGlmZS9wbGF5bGlzdC5tM3U4OA==", encoded:true, cat:"Movies" },
+  { name:"Goldmines 1", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS8xNDYxL21hc3Rlci5tM3U4", encoded:true, cat:"Movies" },
+  { name:"Goldmines 2", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS8xNDYwL21hc3Rlci5tM3U4", encoded:true, cat:"Movies" },
+  { name:"Goldmines 3", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS8xNDU5L21hc3Rlci5tM3U4", encoded:true, cat:"Movies" },
+  { name:"Manoranjan Movies", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS8yMjgvbWFzdGVyLm0zdTh", encoded:true, cat:"Movies" },
+  { name:"Movie Sphereuk", url_b64:"aHR0cHM6Ly9tb3ZpZXNwaGVyZXVrLXNhbXN1bmd1ay5hbWFnaS50di9wbGF5bGlzdC5tM3U4", encoded:true, cat:"Movies" },
+  { name:"Maha Movies", url_b64:"aHR0cHM6Ly9jZG4tNi5waXNob3cudHYvbGl2ZS8xMDAwNy9tYXN0ZXIubTN1OA==", encoded:true, cat:"Movies" },
+  { name:"Manoranjan Tv", url_b64:"aHR0cHM6Ly9jZG4tMS5waXNob3cudHYvbGl2ZS8xMDEzL21hc3Rlci5tM3U4", encoded:true, cat:"Movies" },
+  { name:"Manoranjan Grand", url_b64:"aHR0cHM6Ly9jZG4tMS5waXNob3cudHYvbGl2ZS8xMDExL21hc3Rlci5tM3U4", encoded:true, cat:"Movies" },
+  { name:"Oscer Movies", url_b64:"aHR0cHM6Ly9jZG4tNC5waXNob3cudHYvbGl2ZS8yMzMvbWFzdGVyLm0zdTh", encoded:true, cat:"Movies" },
+  { name:"Pitaara Movies", url_b64:"aHR0cHM6Ly9kMzVqNTA0ejBydjJjbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMGJjOGU4Mzc2YmQ4NDE3YTFiNjc2MTEzOGFhNDFjMjZjNzMwOTMxMi9waXRhYXJhLXR2L3BsYXlsaXN0Lm0zdTh", encoded:true, cat:"Movies" },
+  { name:"Pcv Movies", url_b64:"aHR0cHM6Ly9wYWRtYW9ubGluZS5kdWNrbmRzLm9yZzo4MDg4L3Bjdg==", encoded:true, cat:"Movies" },
+  { name:"Shemaroo Bollywood", url_b64:"aHR0cHM6Ly9hbWcwMDg2NC1zaGVtYXJvb2VudGVydGEtc2hlbWFib2xseXdvb2QtbmwtbHdi dy5hbWFnaS50di9wbGF5bGlzdC9hbWd  (truncate for brevity)", encoded:true, cat:"Movies" },
+  { name:"Wow Cinema", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS8yMzEvbWFzdGVyLm0zdTh", encoded:true, cat:"Movies" },
+  { name:"Willow TV", url_b64:"aHR0cHM6Ly9mbDdwb3Zlbm9uankuY29tL1dJTExPV19DUklDS0VUL2luZGV4Lm0zdTh", encoded:true, cat:"Sport" },
+  { name:"Willow", url_b64:"aHR0cHM6Ly9sY2hkdmVkaW8ubGl2ZS93aWxsb3djcmlja2V0Lm0zdTh", encoded:true, cat:"Sport" },
+  { name:"SKYnz1", url_b64:"aHR0cHM6Ly9sY2hkdmVkaW8ubGl2ZS9za3kxbnoubTN1OA==", encoded:true, cat:"Sport" },
+  { name:"SKYnz2", url_b64:"aHR0cHM6Ly9sY2hkdmVkaW8ubGl2ZS9za3kybnoubTN1OA==", encoded:true, cat:"Sport" },
+  { name:"Al Jazeera Arabic", url_b64:"aHR0cHM6Ly9saXZlLWhscy13ZWItYWphLmdldGFqLm5ldC9BSkEvMDEubTN1OA==", encoded:true, cat:"NEWS" },
+  { name:"Horse & Country TV", url_b64:"aHR0cHM6Ly9obmMtZnJlZS12aWV3bGlmdC5hbWFnaS50di9wbGF5bGlzdDcyMF9scC5tM3U4", encoded:true, cat:"Documentary" },
+  { name:"World Fashion Channel", url_b64:"aHR0cHM6Ly9jZG4ud2ZjLnR2L2Nkbi9zdHJlYW0tZW5nLTEwODBwLm0zdTh", encoded:true, cat:"Documentary" },
+  { name:"Fashion TV ", url_b64:"aHR0cHM6Ly9mYXNoczA0My5jbG91ZHljZG4uc2VydmljZXMvc2N0ZS9zZnR2Mi9zZnR2Ml9jaHVu a2xpc3QubTN1OA==", encoded:true, cat:"Documentary" },
+  { name:"color", url_b64:"aHR0cDovLzQxLjIwNS45My4xNTQvU1RBUlNQT1JUUzEvaW5kZXguanM1OA==", encoded:true, cat:"Bollywood" },
+  { name:"ABC NEWS", url_b64:"aHR0cDovLzQxLjIwNS45My4xNTQvQUJDL2luZGV4Lm0zdTh", encoded:true, cat:"NEWS" },
+  { name:"MSNBC", url_b64:"aHR0cDovLzQxLjIwNS45My4xNTQvTVNQQkMvaW5kZXguanM1OA==", encoded:true, cat:"NEWS" },
+  { name:"RTA Sport", url_b64:"aHR0cHM6Ly9ydGF0di5ha2FtYWl6ZWQubmV0L0NvbnRlbnQvSExTL0xpdmUvY2hhbm5lbChSVEEzKS9pbmRleC5tM3U4", encoded:true, cat:"Sport" },
+  { name:"Solh Sports", url_b64:"aHR0cHM6Ly93by5j bWEuZm9vdGJhbGxp aS5pci9obHMyL3NvbGgubTN1OA==", encoded:true, cat:"Sport" },
+  { name:"&flix", url_b64:"aHR0cHM6Ly9lZGdlMy1tb2JsaXZlLnl1cHBDRE4ubmV0L2RybS9zbWlsOm5mbGl4ZHJtLnNtaWwvaW5kZXgubTN1OA==", encoded:true, cat:"Movies" },
+  { name:"DD Kashir", url_b64:"aHR0cHM6Ly9jZG4tNi5waXNob3cudHYvbGl2ZS8xNi9tYXN0ZXIubTN1OA==", encoded:true, cat:"Bollywood" },
+  { name:"Dangal TV", url_b64:"aHR0cHM6Ly9saXZlLWRhbmdhbC5ha2FtYWl6ZWQubmV0L2xpdmVhYnIvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Bollywood" },
+  { name:"DD Urdu", url_b64:"aHR0cHM6Ly9jZG4tNC5waXNob3cudHYvbGl2ZS84L21hc3Rlci5tM3U4", encoded:true, cat:"Bollywood" },
+  { name:"Dhoom Music", url_b64:"aHR0cHM6Ly9jZG4tMS5waXNob3cudHYvbGl2ZS8xNDU2L21hc3Rlci5tM3U4", encoded:true, cat:"Music" },
+  { name:"Global Punjab", url_b64:"aHR0cHM6Ly9zZXJ2ZXIubGl2ZWxlZ2l0cHJvLmluL2dsb2JhbHB1bmphYi9nbG9iYWxwdW5qYWIvaW5kZXgubTN1OA==", encoded:true, cat:"Bollywood" },
+  { name:"Music India", url_b64:"aHR0cHM6Ly9jZG4tMi5waXNob3cudHYvbGl2ZS8yMjYvbWFzdGVyLm0zdTh", encoded:true, cat:"Music" },
+  { name:"Public Music", url_b64:"aHR0cHM6Ly9jZG4tMy5waXNob3cudHYvbGl2ZS80NDEvbWFzdGVyLm0zdTh", encoded:true, cat:"Music" },
+  { name:"JooMusic", url_b64:"aHR0cHM6Ly9saXZlY2RuLmxpdmUyNDcwc3RyZWFtLmNvbS9qb29tdXNpYy90di9wbGF5bGlzdC5tM3U4", encoded:true, cat:"Music" },
+  { name:"Tehzeeb TV", url_b64:"aHR0cHM6Ly9jZG4tNC5waXNob3cudHYvbGl2ZS8yMzkvbWFzdGVyLm0zdTh", encoded:true, cat:"Religion" },
+  { name:"Travelxp", url_b64:"aHR0cHM6Ly8yN2M5ODA3NjFmZjk0MzdkOTI5ZTY0NjQ3YWZlMTgzYS5tZWRpYXRhaWxvci51cy1lYXN0LTEuYW1hem9uYXdzLmNvbS92MS9tYXN0ZXIvNDRmNzNiYTRkMDNlOTYwN2RjZDliZWJkY2I4NDk0ZDg2OTY0ZjFkOC9SYWt1dGVuVFZfZXVfVHJhdmVsWFAvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Documentary" },
+  { name:"ZB Cartoon", url_b64:"aHR0cHM6Ly9zZXJ2ZXIuemlsbGFyYmFydGEuY29tL3piY2F0dW4vdmlkZW8ubTN1OA==", encoded:true, cat:"Kids" },
+  { name:"ZB Cinema", url_b64:"aHR0cHM6Ly9zZXJ2ZXIuemlsbGFyYmFydGEuY29tL1pCQ0lORU1BL2luZGV4Lm0zdTh", encoded:true, cat:"Movies" },
+  { name:"ZB Music", url_b64:"aHR0cHM6Ly9zZXJ2ZXIuemlsbGFyYmFydGEuY29tL3pi bXVzaWMvaW5kZXgubTN1OA==", encoded:true, cat:"Music" },
+  { name:"4 Fun Kids", url_b64:"aHR0cHM6Ly9zdHJlYW0uNGZ1bi50djo4ODg5L2hscy80ZmxfaGlnaC9pbmRleC5tM3U4", encoded:true, cat:"Kids" },
+  { name:"9xm", url_b64:"aHR0cHM6Ly9kMTRjNjNtYWd2azYxdi5jbG91ZGZyb250Lm5ldC9zdHJtL2NoYW5uZWxzLzl4bS9tYXN0ZXIubTN1OA==", encoded:true, cat:"Music" },
+  { name:"9x jalwa", url_b64:"aHR0cHM6Ly9kMzVqNTA0ejB4MnZ1Mi5jbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMGJjOGU4Mzc2YmQ4NDE3YTFiNjc2MTEzOGFhNDFjMjZjNzMwOTMxMi85eC1qYWx3YS9tYXN0ZXIubTN1OA==", encoded:true, cat:"Music" },
+  { name:"9x jalwa (ST1)", url_b64:"aHR0cHM6Ly9iLmpzcmRuLmNvbS9zdHJtL2NoYW5uZWxzLzl4amFsd2EvbWFzdGVyLm0zdTh", encoded:true, cat:"Music" },
+  { name:"9xm (ST1)", url_b64:"aHR0cHM6Ly9kMzVqNTA0ejB4MnZ1Mi5jbG91ZGZyb250Lm5ldC92MS9tYXN0ZXIvMGJjOGU4Mzc2YmQ4NDE3YTFiNjc2MTEzOGFhNDFjMjZjNzMwOTMxMi85eG0vbWFzdGVyLm0zdTh", encoded:true, cat:"Music" },
+  { name:"Apna Punjab", url_b64:"aHR0cHM6Ly9wbHVzLmdpZ2FiaXRjZG4ubmV0L2xpdmUtc3RyZWFtL2FwbmEtcHVuamFiLUgzc0UvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Bollywood" },
+  { name:"Balle Balle", url_b64:"aHR0cHM6Ly9jZG4tNC5waXNob3cudHYvbGl2ZS85ODcvbWFzdGVyLm0zdTh", encoded:true, cat:"Music" },
+  { name:"Balle Balle (ST1)", url_b64:"aHR0cHM6Ly9tY25jZG5kaWdpdGFsLmNvbS9iYWxsZWJhbGxldHYvaW5kZXgubTN1OA==", encoded:true, cat:"Music" },
+  { name:"Mastii", url_b64:"aHR0cHM6Ly9zYWJsaXZlLWRkcGIuYWthbWFpemVkLm5ldC9tYXN0aWkvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Music" },
+  { name:"Mastii (ST1)", url_b64:"aHR0cHM6Ly9zYWJsaXZleXVwcC5ha2FtYWl6ZWQubmV0L21hc3RpaS9wbGF5bGlzdC5tM3U4", encoded:true, cat:"Music" },
+  { name:"Adventure Earth", url_b64:"aHR0cHM6Ly9hdXRlbnRpYy1hZHZlbnR1cmUtZWFydGgtMS1hdS5sZy53dXJsLnR2L3BsYXlsaXN0Lm0zdTh", encoded:true, cat:"Documentary" },
+  { name:"CNA", url_b64:"aHR0cHM6Ly9kMmUxYXNuc2w3YnI3Yi5jbG91ZGZyb250Lm5ldC83Nzg yZTIwNWU3MmY0M2FlYjRhNDhlYzk3ZjY2ZWJiZS9pbmRleC5tM3U4", encoded:true, cat:"NEWS" },
+  { name:"Travel XP", url_b64:"aHR0cHM6Ly90cmF2ZWx4cC10cmF2ZWx4cC0xLWV1LnJha3V0ZW4ud3VybC50di9wbGF5bGlzdC5tM3U4", encoded:true, cat:"Documentary" },
+  { name:"PetClub", url_b64:"aHR0cHM6Ly9wZXRjbHViLXNhbXN1bmdhdXMuYW1hZ2kudHYvcGxheWxpc3QubTN1OA==", encoded:true, cat:"Kids" },
+  { name:"Fashion tv", url_b64:"aHR0cHM6Ly9jZG4tdWUxLXByb2QudHN2Mi5hbWFnaS50di9saW5lYXIvYW1nMDE1NDYtZnR2LWZhc2hpb250dHYteGlhb21pL3BsYXlsaXN0Lm0zdTh", encoded:true, cat:"Documentary" },
+  { name:"Fashion tv1", url_b64:"aHR0cHM6Ly9wdWJnZmMudGVsZW9zbWVkaWEuY29tL2xpbmVhci9nbG9iYWxmYXNoaW9uY2hhbm5lbC9nbG9iYWxmYXNoaW9uY2hhbm5lbC9wbGF5bGlzdC5tM3U4", encoded:true, cat:"Documentary" },
+  { name:"Playboy TV HD", url_b64:"aHR0cDovL2R2cjIua2FibG92YS50di9QbGF5Ym95L2luZGV4Lm0zdTh", encoded:true, cat:"Adult" },
+  { name:"AN Bollywood", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9NYXJraXphL2luZGV4Lm0zdTh", encoded:true, cat:"Bollywood" },
+  { name:"Abzy Dhakad", url_b64:"aHR0cHM6Ly9kMmxrNXU1OXRuczc0Yy5jbG91ZGZyb250Lm5ldC9vdXQvdjEvNGZlNmFiMDdhMTM1NDNkNmJkYjJlYzYzYjNlMmRmNDQvaW5kZXgubTN1OA==", encoded:true, cat:"Movies" },
+  { name:"Cha", url_b64:"aHR0cDovL3dyb3hmaWJyYS5jb206ODAvbW92aWUvUTNzZFhXSnA4S3h4eDIyMjIyL3BLZWZKSHlWS0V4eHh4eHh4YTEyLzExMTY4MjMubTN1OA==", encoded:true, cat:"NEWS" },
+  { name: "Markiza HD", url_b64: "aHR0cDovL2R2cjEua2FibG92YS50di9NYXJraXphL3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"Other" },
+  { name: "CT24 HD", url_b64: "aHR0cDovL2R2cjIua2FibG92YS50di9DVDI0L3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"NEWS" },
+  { name: "CT 1 HD", url_b64: "aHR0cDovL2R2cjEua2FibG92YS50di9DVDEvdHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Documentary" },
+  { name: "CT 2 HD", url_b64: "aHR0cDovL2R2cjEua2FibG92YS50di9DVDIv dHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Documentary" },
+  { name: "Wau HD", url_b64: "aHR0cDovL2R2cjEua2FibG92YS50di9XQVUvdHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Entertainment" },
+  { name: "FilmBox Extra HD", url_b64: "aHR0cDovL2R2cjIua2FibG92YS50di9GaWxtYm94L3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"Movies" },
+  { name: "Markiza Krimi HD", url_b64: "aHR0cDovL2R2cjIua2FibG92YS50di9NYXJraXphX0tyaW1pL3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"Movies" },
+  { name: "RTL Klub", url_b64: "aHR0cDovL2R2cjEua2FibG92YS50di9SVExfS2x1Yi90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name: "Viasat History HD", url_b64: "aHR0cDovL2R2cjEua2FibG92YS50di9WaWFzYXRfSGlzdG9yeS90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded: true, cat:"Documentary" },
+  { name: "History HD", url_b64: "aHR0cDovL2R2cjIua2FibG92YS50di9IaXN0b3J5L3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"Documentary" },
+  { name: "Love Nature HD", url_b64: "aHR0cDovL2R2cjIua2FibG92YS50di9Mb3ZlX05hdHVyZS90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Documentary" },
+
+  { name:"TV2", url_b64:"aHR0cDovL2R2cjIua2FibG92YS50di9UVjIvdHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Sport" },
+  { name:"AXN CE", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9BWE4vdHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Entertainment" },
+  { name:"TLC", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9UTEMvdHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Entertainment" },
+  { name:"M1 Sport", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9NMS90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Sport" },
+  { name:"M2 Sport", url_b64:"aHR0cDovL2R2cjQua2FibG92YS50di9NMi90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Sport" },
+  { name:"Nova_Sport 1 HD", url_b64:"aHR0cDovL2R2cjIua2FibG92YS50di9Ob3ZhX1Nwb3J0L3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"Sport" },
+  { name:"Arena Sport 1 HD", url_b64:"aHR0cDovL2R2cjIua2FibG92YS50di9BcmVuYV9zcG9ydC90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Sport" },
+  { name:"Sport 1 HD", url_b64:"aHR0cDovL2R2cjIua2FibG92YS50di9TcG9ydDEvdHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Sport" },
+  { name:"Eurosport HD", url_b64:"aHR0cDovL2R2cjIua2FibG92YS50di9FdXJvc3BvcnRfMS90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Sport" },
+  { name:"Eurosport 2 HD", url_b64:"aHR0cDovL2R2cjIua2FibG92YS50di9FdXJvc3BvcnRfMi90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Sport" },
+  { name:"Minimax", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9NaW5pbWF4L3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"Kids" },
+  { name:"JimJam", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9KaW1KYW0vdHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Kids" },
+  { name:"MTV 00", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9WSDFfSEQvdHJhY2tzLXYxYTEvbW9uby5tM3U4", encoded:true, cat:"Music" },
+  { name:"Senzi H", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9TZW56aS90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Documentary" },
+  { name:"Animal Planet", url_b64:"aHR0cDovLzEwNC4yMzguMjA1LjI4Ojg5ODkvMjc4NjE3Xy5tM3U4DQoNCg0K", encoded:true, cat:"Documentary" },
+  { name:"Redlight HD", url_b64:"aHR0cDovL2R2cjEua2FibG92YS50di9SZWRsaWdodC90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Adult" },
+  { name:"PTC 1", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1JUU18xL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name:"HRT 1", url_b64:"aHR0cDovLzIzLjg4LjY2LjkzL0hSVF8xL2luZGV4Lm0zdTgNCg==", encoded:true, cat:"Entertainment" },
+  { name:"HRT 2", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0hSVF8yL2luZGV4Lm0zdTgNCg==", encoded:true, cat:"Entertainment" },
+  { name:"HRT 3", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0hSVF8zL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name:"HRT 4", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0hSVF80L2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name:"PTPC", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzLy9SVFJTL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  
+  { name:"PTC", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1JUU18yL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name:"PTC 3", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1JUU18zL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name:"OBN", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL09CTi9pbmRleC5tM3U4", encoded:true, cat:"Entertainment" },
+  { name:"RTL 2", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1JUTF8yL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name:"RTK 1", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1JUS18xL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name: "HBO", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0hCTy9pbmRleC5tM3U4", encoded:true, cat:"Movies" },
+  { name: "HBO 2", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0hCT18yL2luZGV4Lm0zdTg=", encoded:true, cat:"Movies" },
+  { name: "HBO 3", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0hCT18zL2luZGV4Lm0zdTg=", encoded:true, cat:"Movies" },
+  { name: "Cinemax", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0NpbmVtYXgvaW5kZXgubTN1OA==", encoded:true, cat:"Movies" },
+  { name: "Cinemax 2", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0NpbmVtYXhfMi9pbmRleC5tM3U4", encoded:true, cat:"Movies" },
+  { name: "Pink Film", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1BpbmtfRmlsbS9pbmRleC5tM3U4", encoded:true, cat:"Movies" },
+  { name: "Pink Serije", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1BpbmtfU2VyaWplL2luZGV4Lm0zdTg=", encoded:true, cat:"Movies" },
+  { name: "Discovery HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0Rpc2NvdmVyeS9pbmRleC5tM3U4", encoded:true, cat:"Documentary" },
+  { name: "Minimax", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL01pbmltYXgvaW5kZXgubTN1OA==", encoded:true, cat:"Kids" },
+  { name: "Star Crime", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0ZveF9DcmltZS9pbmRleC5tM3U4", encoded:true, cat:"Movies" },
+  { name: "Fox_Life HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1JUS18xL2luZGV4Lm0zdTgNCg==", encoded:true, cat:"Entertainment" },
+  { name: "Fox HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0ZveC9pbmRleC5tM3U4", encoded:true, cat:"Entertainment" },
+  { name: "Cinemania HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0NpbmVtYW5pYS9pbmRleC5tM3U4", encoded:true, cat:"Movies" },
+  { name: "Max Sport 1 HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL01BWFNQT1JUXzEvaW5kZXgubTN1OA==", encoded:true, cat:"Sport" },
+  { name: "Max Sport 2 HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL01BWFNQT1JUXzIvaW5kZXgubTN1OA==", encoded:true, cat:"Sport" },
+  { name: "Eurosport 1 HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0V1cm9zcG9ydDEvaW5kZXgubTN1OA==", encoded:true, cat:"Sport" },
+  { name: "Eurosport 2 HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0V1cm9zcG9ydDIvaW5kZXgubTN1OA==", encoded:true, cat:"Sport" },
+  { name: "Dla Ciebie", url_b64: "aHR0cDovLzk0LjI0Ni4xMjguNTM6MTkzNS90di9kbGFDaWViaWVUdi9wbGF5bGlzdC5tM3U4", encoded:true, cat:"Sport" },
+  { name: "ARD HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0FSRC9pbmRleC5tM3U4", encoded:true, cat:"NEWS" },
+  { name: "ZDF HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1pERi9pbmRleC5tM3U4", encoded:true, cat:"NEWS" },
+  { name: "HAYAT HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0hBWUFUL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name: "Face HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0ZhY2UvaW5kZXgubTN1OA==", encoded:true, cat:"Music" },
+  { name: "VOX HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL1ZPWC9pbmRleC5tM3U4", encoded:true, cat:"Entertainment" },
+  { name: "FTV HD", url_b64: "aHR0cDovLzIzLjg4LjY2LjkzL0ZUVi9pbmRleC5tM3U4", encoded:true, cat:"Documentary" },
+  { name: "PassionXXX HD", url_b64: "aHR0cHM6Ly9zaGlmdDAzLmlzcC5iZy9QYXNzaW9uWFhYL2luZGV4Lm0zdTg=", encoded:true, cat:"Adult" },
+  { name: "Erox ", url_b64: "aHR0cHM6Ly9zaGlmdDAzLmlzcC5iZy9Fcm94L2luZGV4Lm0zdTg=", encoded:true, cat:"Adult" },
+  { name: "Erox HD", url_b64: "aHR0cHM6Ly9zaGlmdDAzLmlzcC5iZy9Fcm94eHgvaW5kZXgubTN1OA==", encoded:true, cat:"Adult" },
+  { name: "XXL", url_b64: "aHR0cHM6Ly9zaGlmdDAzLmlzcC5iZy9YWEwvaW5kZXgubTN1OA==", encoded:true, cat:"Adult" },
+  { name: "AWE", url_b64: "aHR0cHM6Ly9hLWNkbi5rbG93ZHR2LmNvbS9saXZlMS9hd2VfNzIwcC9wbGF5bGlzdC5tM3U4", encoded:true, cat:"Other" },
+  { name: "THE VIBS", url_b64: "aHR0cHM6Ly9lbmdsaXNoLWxpdmV0eC5jZ3RuLmNvbS9obHMveXlwZHl5Y3R6Yl9oZC5tM3U4", encoded:true, cat:"Other" },
+  { name: "Miami Fashion", url_b64: "aHR0cHM6Ly81OWVjNTQ1MzU1OWYwLnN0cmVhbWxvY2submV0L21pYW1pdHZmYXNoaW9uL19kZWZpbnN0Xy9zbWlsOjM0MjU2L2NodW5rbGlzdF93OTk3Mzc5MTU4X2I1MDk2MDAwLm0zdTg=", encoded:true, cat:"Miami Tv" },
+  { name: "Miami Tv1", url_b64: "aHR0cHM6Ly9ycG4zLmJvenp0di5jb20vZHZyZmwwNy91c2hiYS10OC90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Miami Tv" },
+  { name: "Fashion Tv", url_b64: "aHR0cHM6Ly9mbDEwMDQuYm96enR2LmNvbS91c2hiYS1tNS90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Miami Tv" },
+  { name: "Miami Tv2", url_b64: "aHR0cHM6Ly9mbDEwMDQuYm96enR2LmNvbS91c2hiYS1tMy90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Miami Tv" },
+  { name: "Miami Tv3", url_b64: "aHR0cHM6Ly9mbDEwMDQuYm96enR2LmNvbS91c2hiYTcyL3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"Miami Tv" },
+  { name: "Miami song", url_b64: "aHR0cHM6Ly9ycG4zLmJvenp0di5jb20vZHZyZmwwNy91c2hiYS10Mi90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Miami Tv" },
+  { name: "9X_Tashan", url_b64: "aHR0cHM6Ly93aXNlbHAud2lzZXBsYXlvdXQuY29tLzlYX1Rhc2hhbi9tYXN0ZXIubTN1OA==", encoded:true, cat:"Music" },
+  { name: "9X_Jalwa", url_b64: "aHR0cHM6Ly93aXNlbHAud2lzZXBsYXlvdXQuY29tLzlYX0phbHdhL21hc3Rlci5tM3U4", encoded:true, cat:"Music" },
+  { name: "HALLMARK", url_b64: "aHR0cHM6Ly9mbDEubW92ZW9uam95LmNvbS9IQUxMTUFSS19NT1ZJRVNfTVlTVEVSSUVTL2luZGV4Lm0zdTg=", encoded:true, cat:"Entertainment" },
+  { name: "9X_Jalwa", url_b64: "aHR0cHM6Ly9mbDEwMDQuYm96enR2LmNvbS91c2hiYS1tNS90cmFja3MtdjFhMS9tb25vLm0zdTg=", encoded:true, cat:"Music" },
+  { name: "penthouse2 HD", url_b64: "aHR0cDovLzE4NS45OC4yMDkuMTE6ODEvcGVudGhvdXNlMi9pbmRleC5tM3U4P3Rva2VuPXRlc3Q=", encoded:true, cat:"Adult" },
+  { name: "penthouse1 HD", url_b64: "aHR0cDovLzE4NS45OC4yMDkuMTE6ODEvcGVudGhvdXNlMS9pbmRleC5tM3U4P3Rva2VuPXRlc3Q=", encoded:true, cat:"Adult" },
+  { name: "Start_World", url_b64: "aHR0cDovLzEwOS4yNDguMjM2LjUxL3N0YXJ0X3dvcmxkX2hkL3RyYWNrcy12MWExL21vbm8ubTN1OA==", encoded:true, cat:"Entertainment" },
+  { name: "30 days Disney", url_b64: "aHR0cDovLzE3Ni45LjQuMjYvZnJlZWZvcm0vaW5kZXgubTN1OA0KDQoNCg==", encoded:true, cat:"Kids" },
+
+
+
+
+
+          { name:"test", url:"http://wroxfibra.com:80/Q3sdXWJw8Kxxx22222/pKefJHyVKExxxxxxxxa12/1115803.m3u8", cat:"Other" }
+
+
+
+];
+
+// Helpers
+function decodeIfNeeded(ch){
+    if(ch.encoded && ch.url_b64){
+        try{
+            return atob(ch.url_b64);
+        }catch(e){
+            return ''; // if invalid base64
+        }
+    }
+    return ch.url || '';
+}
+
+function getFilteredChannels(){
+    return activeCategory === "All"
+        ? channels.filter(ch => !(ch.cat==="Adult" && !adultUnlocked))
+        : channels.filter(ch => ch.cat === activeCategory && !(ch.cat==="Adult" && !adultUnlocked));
+}
+
+function buildDropdown(filter=""){
+    dropdownOptions.innerHTML = "";
+    const filtered = getFilteredChannels().filter(ch=>ch.name.toLowerCase().includes(filter.toLowerCase()));
+    filtered.forEach(ch=>{
+        const option = document.createElement('div');
+        option.className = 'px-4 py-2 hover:bg-indigo-500 cursor-pointer text-white selectable relative';
+        // if adult and locked show lock icon next to name
+        option.textContent = (ch.cat==="Adult" && !adultUnlocked) ? ch.name + " 🔐" : ch.name;
+        option.dataset.index = channels.indexOf(ch);
+        option.addEventListener('click', (e)=>{
+            // if adult and not unlocked -> open modal overlay (do not open channel)
+            if(ch.cat==="Adult" && !adultUnlocked){
+                // show only modal. user must click Adult button or the lock overlay.
+                adultModal.style.display = "flex";
+                return;
+            }
+            // otherwise open channel (decode if needed)
+            selectChannel(channels.indexOf(ch));
+            dropdownOptions.classList.add('hidden');
+        });
+        dropdownOptions.appendChild(option);
+    });
+}
+
+// Select channel (index in channels array)
+function selectChannel(index){
+    currentChannelIndex = index;
+    const ch = channels[currentChannelIndex];
+    const url = decodeIfNeeded(ch);
+    if(!url){
+        alert("Stream URL not available or invalid.");
+        return;
+    }
+    loadChannel(url, ch.name);
+    selectedOptionBtn.textContent = ch.name;
+}
+
+// Category click handling
+categoryBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        categoryBtns.forEach(b=>b.classList.remove('category-active'));
+        // If clicked Adult and not unlocked show modal and do nothing
+        if(btn.dataset.cat === "Adult" && !adultUnlocked){
+            adultModal.style.display = "flex";
+            return;
+        }
+        btn.classList.add('category-active');
+        activeCategory = btn.dataset.cat;
+        buildDropdown(searchInput.value);
+        const filtered = getFilteredChannels();
+        if(filtered.length>0) selectChannel(channels.indexOf(filtered[0]));
+    });
 });
 
-function toggleCategory(h){
- document.querySelectorAll('.category-channels').forEach(c=>c.style.display='none');
- document.querySelectorAll('.category-header span').forEach(s=>s.textContent='▼');
- const c=h.nextElementSibling;const a=h.querySelector('span');
- if(c.style.display==='block'){c.style.display='none';a.textContent='▼'}
- else{c.style.display='block';a.textContent='▲'}
+// Adult modal submit
+adultSubmitBtn.addEventListener('click', ()=>{
+    const entered = adultPasswordInput.value || '';
+    const decodedStored = atob(encodedAdultPassword);
+    if(entered === decodedStored){
+        adultUnlocked = true;
+        adultModal.style.display = "none";
+        adultPasswordInput.value = "";
+        // switch to Adult category automatically
+        activeCategory = "Adult";
+        // mark Adult button active visually
+        document.querySelectorAll('.category-btn').forEach(b=>{
+            b.classList.remove('category-active');
+        });
+        const adultBtn = document.querySelector('.category-btn[data-cat="Adult"]');
+        if(adultBtn) adultBtn.classList.add('category-active');
+        buildDropdown();
+        const filtered = getFilteredChannels();
+        if(filtered.length>0) selectChannel(channels.indexOf(filtered[0]));
+    } else {
+        alert("Incorrect Password");
+    }
+});
+
+// Prev / Next
+prevBtn.onclick = ()=>{
+    const filtered = getFilteredChannels();
+    let idx = filtered.indexOf(channels[currentChannelIndex]);
+    if(idx === -1) idx = 0;
+    idx = (idx - 1 + filtered.length) % filtered.length;
+    selectChannel(channels.indexOf(filtered[idx]));
+}
+nextBtn.onclick = ()=>{
+    const filtered = getFilteredChannels();
+    let idx = filtered.indexOf(channels[currentChannelIndex]);
+    if(idx === -1) idx = 0;
+    idx = (idx + 1) % filtered.length;
+    selectChannel(channels.indexOf(filtered[idx]));
 }
 
-toggleMenu.onclick=()=>sidebar.classList.toggle('hidden');
-
-
-// AUTO PROXY FIX FOR WROXFIBRA MP4
-function getSafeURL(url){
- if(url.includes("wroxfibra.com")) 
-   return "https://cors-proxy.fringe.zone/?" + encodeURIComponent(url);
-
- return url;
+// Load channel into player
+function loadChannel(url,name){
+    loadingIndicator.classList.remove('hidden');
+    const displayIndex = currentChannelIndex+1;
+    currentChannelNameEl.innerHTML = `${name} <span class="text-gray-400 font-medium">(${displayIndex}/${channels.length})</span>`;
+    if(hls) hls.destroy();
+    video.src='';
+    if(Hls.isSupported()){
+        hls=new Hls({startLevel:0,maxBufferLength:10});
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        video.onplaying=()=>loadingIndicator.classList.add('hidden');
+        video.onstalled=()=>loadingIndicator.classList.remove('hidden');
+        hls.on(Hls.Events.MANIFEST_PARSED,()=>video.play());
+    } else { video.src=url; video.play(); loadingIndicator.classList.add('hidden');}
 }
 
-function autoPlay(url){
- if(mpeg){mpeg.destroy();mpeg=null}
- if(hls){hls.destroy();hls=null}
-
- if(mpegts.isSupported()){
-  mpeg=mpegts.createPlayer({type:'mpegts',url:url});
-  mpeg.attachMediaElement(player);
-  mpeg.load();mpeg.play();
- } else if(Hls.isSupported()){
-  hls=new Hls();hls.loadSource(url);hls.attachMedia(player);
- } else {
-  player.src=url;player.play();
- }
-
-
- if(mpeg){mpeg.destroy();mpeg=null}
- if(hls){hls.destroy();hls=null}
-
- const lower=url.toLowerCase();
-
- // MP4
- if(lower.endsWith(".mp4")){
-   player.src=url;
-   player.load();
-   player.play();
-   return;
- }
-
- // M3U8
- if(lower.endsWith(".m3u8")){
-   if(Hls.isSupported()){
-     hls=new Hls();
-     hls.loadSource(url);
-     hls.attachMedia(player);
-   } else {
-     player.src=url;
-     player.play();
-   }
-   return;
- }
-
- // TS or MPEG-TS
- if(mpegts.isSupported()){
-   mpeg=mpegts.createPlayer({type:'mpegts',url:url});
-   mpeg.attachMediaElement(player);
-   mpeg.load();
-   mpeg.play();
- } else {
-   player.src=url;
-   player.play();
- }
+// Clock
+function updateClock(){
+    const now=new Date();
+    document.getElementById('time-display').textContent=now.toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+    document.getElementById('date-display').textContent=now.toLocaleDateString('en-PK',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 }
+setInterval(updateClock,1000); updateClock();
 
+// Initial UI setup
+buildDropdown();
+const initialIndex = channels.findIndex(ch=>ch.cat==="NEWS");
+if(initialIndex !== -1) selectChannel(initialIndex);
+const newsBtn = document.querySelector('.category-btn[data-cat="NEWS"]');
+if(newsBtn) newsBtn.classList.add('category-active');
 
-function playFromList(name,url){
- autoPlay(url);
- player.volume=0.1;
- status.textContent='📺 Now Playing: '+name;
- setTimeout(()=>sidebar.classList.add('hidden'),5000);
-}
-
-prev.onclick=()=>{
- currentIndex=(currentIndex-1+channels.length)%channels.length;
- const c=channels[currentIndex];
- playFromList(c.title,c.url);
-};
-
-next.onclick=()=>{
- currentIndex=(currentIndex+1)%channels.length;
- const c=channels[currentIndex];
- playFromList(c.title,c.url);
-};
-
+selectedOptionBtn.addEventListener('click',()=>{dropdownOptions.classList.toggle('hidden');});
+searchInput.addEventListener('input',(e)=>{buildDropdown(e.target.value);});
 </script>
 </body>
 </html>
