@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONLINE LIVESTREAM TESTER</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/11332/11332960.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.16.2/controls.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.16.2/shaka-player.compiled.js" integrity="sha512-O24Rop7jnc9rvpRw5Ph6lPl9WD0qwl9rA0T/Trp/Eisz9nB2Bouln4t2dWfuT1Vb1mYtJ0JWKZZXsge2ne7pYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dashjs@latest/dist/dash.all.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212 url('https://i.imgur.com/061wesW.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #f0f0f0;
+      overflow: flex;
+      box-sizing: border-box;
+      max-width: 100%;
+      padding: 20px;
+    }
+    h2 {
+      color: #00eaff;
+      text-align: center;
+    }
+    .clock {
+      position: absolute;
+      top: 7px;
+      right: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 15px;
+      font-weight: bold;
+      color: #00eaff;
+      background: #000;
+      padding: 5px 5px;
+      border-radius: 10px;
+      border: 2px solid #00eaff;
+      box-shadow: 0 0 10px #00eaff;
+      text-align: center;
+      min-width: 100px;
+      z-index: 1001;
+    }
+    .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 15px;
+      z-index: 1000;
+    }
+    .menu {
+      background-color: #0253af;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+    #menuToggle {
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #menuToggle:hover {
+      background-color: #00eaff;
+      color: #040d08;
+    }
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background-color: #153f6f;
+      border: 1px solid var(--card-border);
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      min-width: 300px;
+      z-index: 1000;
+    }
+    .menu-content a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .menu-content a:hover {
+      background-color: #00eaff;
+      color: #040d08;
+    }
+    .language-selector {
+      background-color: #0253af;
+      border-radius: 10px;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+    }
+    .language-selector select {
+      background-color: transparent;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      outline: none;
+    }
+    .language-selector select option {
+      background-color: #153f6f;
+    }
+    footer {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: #6a6a6a;
+      text-align: center;
+      z-index: 100;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    }
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 100%;
+      margin: auto;
+      padding-bottom: 45px;
+    }
+    @media (min-width: 767px) {
+      .main {
+        flex-direction: row;
+      }
+    }
+    .player-container {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      aspect-ratio: 16 / 9;
+    }
+    video, iframe {
+       width: 100%;
+       height: 100%;
+       object-fit: contain;
+      border: 2px solid #00eaff;
+      border-radius: 10px;
+      background: black;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .controls-container {
+      flex: 0.3;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+    .controls-container input,
+    .controls-container button,
+    .controls-container select {
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .controls-container input {
+     padding-right: 35px;
+    }
+    button {
+      background-color: #00eaff;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #00c2d3;
+    }
+    #status{
+      background: #1e1e1e;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    #info {
+     background: #1e1e1e;
+      padding: 10px;
+      margin-bottom: 2px;
+      border-radius: 6px;
+      font-size: 14px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .clear-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #ccc;
+      font-weight: bold;
+      font-size: 14px;
+      user-select: none;
+      display: none;
+      background: #f1f1f1;
+      padding: 7px;
+      border-radius: 5px;
+    }
+    .clear-btn:hover {
+      color: #ff4c4c;
+      background: #f1f1f1;
+    }
+    @media screen and (max-width: 600px) {
+ .main {
+        flex-direction: column;
+        padding-bottom: 20px; /* already in your code, good! */
+  }
+  .controls-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 100%;
+    }
+    footer {
+    position: relative;
+    width: 100%;
+    text-align: center;
+  }
+}
+    @media screen and (max-width: 400px) {
+      .top-bar {
+        padding: 5px;
+      }
+      #menuToggle {
+        padding: 0.3rem 0.8rem;
+        font-size: 14px;
+      }
+      .language-selector select {
+        font-size: 12px;
+        padding: 3px 8px;
+      }
+    }
+    h3 {
+      color: White;
+      position: absolute;
+      font-family: Lucida Handwriting;
+      right: 140px;
+      margin-top: -5px;
+      font-size: 12px;
+    }
+    .clear-buttons {
+      display: flex;
+      gap: 5px;
+    }
+    .clear-buttons button {
+      flex: 1;
+      padding: 5px;
+    }
+    main {
+      flex: 1;
+    }
+    .drm-info {
+      margin-top: 0px;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: rgba(0, 234, 255, 0.1);
+      border-left: 3px solid #00eaff;
+    }
+    .stream-info {
+      margin-top: 5px;
+      padding: 8px;
+      border-radius: 5px;
+      background-color: rgba(0, 234, 255, 0.05);
+      border-left: 3px solid #00eaff;
+    }
+    .stream-info-header {
+      font-weight: bold;
+      color: #00eaff;
+      margin-bottom: 5px;
+    }
+    .stream-info-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 3px 0;
+    }
+    .stream-info-label {
+      color: #aaa;
+    }
+    .stream-info-value {
+      color: #fff;
+      font-weight: bold;
+    }
+    .quality-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .quality-auto {
+      background-color: #4CAF50;
+    }
+    .quality-manual {
+      background-color: #FFC107;
+    }
+    .network-status {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+    .network-bar {
+      height: 5px;
+      flex-grow: 1;
+      background-color: #333;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 5px;
+    }
+    .network-fill {
+      height: 100%;
+      background-color: #00eaff;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="menu">
+    <button id="menuToggle">☰ Menu</button>
+    <div id="menuContent" class="menu-content">
+      <a href="https://bagbunny.serv00.net/xtremechecker.php" target="_blank">🌐 Visit my Xtream Codes Checker</a>
+      <a href="https://kingjulien.serv00.net/myonlineradio.html#" target="_blank">🌐 Visit My ONLINE RADIO</a>
+      <a href="https://m3uiptvchecker.liveblog365.com" target="_blank">🌐 Visit My M3U Playlist Checker</a>
+    </div>
+  </div>
+  <div class="language-selector">
+    <select id="languageSelect" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="es">Español</option>
+    </select>
+  </div>
+</div>
+
+<h3 id="localTimeLabel">Local Time ⏰ </h3>
+<div class="clock" id="clock"></div>
+
+<main>
+  <h2 id="mainTitle">ONLINE WEB LIVESTREAM TESTER (Test your Link Here)</h2>
+  <div class="main">
+    <div class="player-container">
+      <video id="video" controls></video>
+      <iframe id="embed-frame" style="display:none;" allowfullscreen frameborder="0"></iframe>
+    </div>
+    <div class="controls-container">
+      <select id="channelSelect" onchange="selectChannel()">
+        <option value="" id="selectChannelOption">-- Select a Channel --</option>
+        <option value="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8">Sample Channel 1 (HLS)</option>
+        <option value="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8">Sample Channel 2 (HLS)</option>
+       <option value="https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_onesports_hd/default/index.mpd", drm: { kid: "53c3bf2eba574f639aa21f2d4409ff11", key: "3de28411cf08a64ea935b9578f6d0edd"},>One Sports HD (HLS)</option>
+
+        <option value="https://live3.shoq.com.pk/live/eds/Kids_Zone_Plus/DASH/Kids_Zone_Plus.mpd">Sample YouTube</option>
+        <option value="https://www.youtube.com/watch?v=wogW35yzqyM&t=54s&pp=ygUMaGltYWxhIG1vdmll">HIMALA FULL MOVIE</option>
+        <option value="https://www.youtube.com/watch?v=jmDjvr5j5Fk&pp=ygURcGlub3kgZnVsbCBtb3ZpZXM%3D">ANG SYOTA KONG BALIKBAYAN</option>
+        <option value="https://www.youtube.com/watch?v=_QT8swOXSAA&pp=ygURcGlub3kgZnVsbCBtb3ZpZXM%3D">TYPE KITA... WALANG KOKONTRA</option>
+        <option value="https://www.youtube.com/watch?v=saQA1E9FoKk&pp=ygURcGlub3kgZnVsbCBtb3ZpZXM%3D">PUTO FULL MOVIE</option>
+        <option value="https://www.youtube.com/watch?v=IzBtDtLBJHQ&pp=ygURcGlub3kgZnVsbGVtb3ZpZXM%3D">HOME ALONG DA RILES</option>
+      </select>
+      <div style="position: relative;">
+        <input type="text" id="m3u8Url" placeholder="Enter stream URL (.m3u8 / .mpd / .mp4 / .mkv / .avi / .flv / YouTube / Twitch)" oninput="toggleClearButton('m3u8Url')" />
+        <span class="clear-btn" id="clearM3u8Url" onclick="clearInput('m3u8Url')">✖</span>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="keyId" placeholder="Enter Key ID (for MPD ClearKey)" oninput="toggleClearButton('keyId')" />
+        <span class="clear-btn" id="clearKeyId" onclick="clearInput('keyId')">✖</span>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="key" placeholder="Enter Key (for MPD ClearKey)" oninput="toggleClearButton('key')" />
+        <span class="clear-btn" id="clearKey" onclick="clearInput('key')">✖</span>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="widevineLicenseUrl" placeholder="Enter Widevine License URL (optional)" oninput="toggleClearButton('widevineLicenseUrl')" />
+        <span class="clear-btn" id="clearWidevineLicenseUrl" onclick="clearInput('widevineLicenseUrl')">✖</span>
+      </div>
+      <button id="checkPlayBtn" onclick="checkAndPlay()">Check & Play</button>
+      <div class="clear-buttons">
+        <button id="clearAllBtn" onclick="clearAllInputs()">🧹Clear All</button>
+        <button id="clearKeysBtn" onclick="clearKeysOnly()">🔑Clear All Keys</button>
+      </div>
+      <div id="status"></div>
+      <div id="info"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="mt-1 py-1 text-center border-top" id="pageFooter">
+  <small id="footerText">Made by darkAngel | This site has no IPTV PLAYLIST. © 2025</small>
+</footer>
+
+<script>
+// Language translations
+const translations = {
+  en: {
+    localTimeLabel: "Local Time ⏰",
+    mainTitle: "ONLINE WEB LIVESTREAM TESTER (Test your Link Here)",
+    selectChannelOption: "-- Select a Channel --",
+    streamUrlPlaceholder: "Enter stream URL (.m3u8 / .mpd / .mp4 / .mkv / .avi / .flv / YouTube / Twitch)",
+    keyIdPlaceholder: "Enter Key ID (for MPD ClearKey)",
+    keyPlaceholder: "Enter Key (for MPD ClearKey)",
+    widevinePlaceholder: "Enter Widevine License URL (optional)",
+    checkPlayBtn: "Check & Play",
+    clearAllBtn: "🧹Clear All",
+    clearKeysBtn: "🔑Clear All Keys",
+    footerText: "Made by darkAngel | This site has no IPTV PLAYLIST. © 2025",
+    checkingUrl: "🔄 Checking URL...",
+    urlMustStartWith: "❌ Stream URL must start with http:// or https://",
+    embeddedPlatform: "✅ Embedded platform detected. Loading...",
+    dashDetected: "✅ DASH (MPD) stream detected. Loading...",
+    hlsDetected: "✅ HLS stream detected. Loading...",
+    directDetected: "✅ Direct video stream detected. Playing...",
+    unknownType: "ℹ️ Unknown type ({0}). Trying direct...",
+    playbackError: "❌ Playback error: {0}",
+    invalidYouTube: "❌ Invalid YouTube URL format.",
+    noVideoId: "❌ Could not extract YouTube video ID.",
+    invalidTwitch: "❌ Invalid Twitch URL format.",
+    unsupportedPlatform: "❌ Unsupported embed platform.",
+    playingDirect: "▶️ Playing direct stream (MP4/WEBM/OGG or fallback).",
+    retryingProxy: "🔁 Retrying direct stream with CORS proxy...",
+    failedDirect: "❌ Failed to load direct video stream.",
+    hlsError: "❌ HLS error: {0}",
+    retryingHlsProxy: "🔁 Retrying with CORS proxy...",
+    inspectingMpd: "🔍 Inspecting MPD manifest...",
+    widevineProvided: "🔑 Widevine license URL provided. Attempting to play with Widevine DRM...",
+    widevineSupported: "✅ Widevine DRM supported by this browser",
+    widevineNotSupported: "❌ Widevine DRM not supported by this browser",
+    clearkeyProvided: "🔒 Playing MPD stream with CLEARKEY DRM License...",
+    drmDetected: "🔒 DRM License Detected, Waiting for Clearkey or widevine url license",
+    noDrmDetected: "✅ No DRM detected in manifest. Playing unsecure MPD streams...",
+    mpdError: "❌ Failed to play MPD: {0}",
+    buffering: "🔄 Buffering...",
+    playing: "✅ Playing",
+    playerError: "❌ Player error: {0}",
+    directVideoInfo: "📹 Direct Video Stream Information",
+    resolution: "Resolution",
+    duration: "Duration",
+    streamType: "Stream Type",
+    directVideo: "Direct Video",
+    hlsStreamInfo: "📺 HLS Stream Information",
+    qualityLevels: "Quality Levels",
+    codec: "Codec",
+    bitrate: "Bitrate",
+    adaptiveBitrate: "Adaptive Bitrate",
+    auto: "Auto",
+    nativeHls: "Native HLS",
+    dashStreamInfo: "📺 DASH Stream Information",
+    videoCodec: "Video Codec",
+    audioCodec: "Audio Codec",
+    frameRate: "Frame Rate",
+    fps: "fps",
+    network: "Network",
+    buffer: "Buffer",
+    droppedFrames: "Dropped Frames",
+    platform: "Platform",
+    embedded: "Embedded",
+    url: "URL",
+    calculating: "Calculating...",
+    unknown: "Unknown",
+    menuXtream: "🌐 Visit my Xtream Codes Checker",
+    menuRadio: "🌐 Visit My ONLINE RADIO",
+    menuM3u: "🌐 Visit My M3U Playlist Checker"
+  },
+  zh: {
+    localTimeLabel: "本地时间 ⏰",
+    mainTitle: "在线网络直播测试器（在此测试您的链接）",
+    selectChannelOption: "-- 选择频道 --",
+    streamUrlPlaceholder: "输入直播流URL (.m3u8 / .mpd / .mp4 / .mkv / .avi / .flv / YouTube / Twitch)",
+    keyIdPlaceholder: "输入密钥ID（用于MPD ClearKey）",
+    keyPlaceholder: "输入密钥（用于MPD ClearKey）",
+    widevinePlaceholder: "输入Widevine许可证URL（可选）",
+    checkPlayBtn: "检查并播放",
+    clearAllBtn: "🧹清除全部",
+    clearKeysBtn: "🔑清除所有密钥",
+    footerText: "由darkAngel制作 | 本网站没有IPTV播放列表。© 2025",
+    checkingUrl: "🔄 正在检查URL...",
+    urlMustStartWith: "❌ 直播流URL必须以http://或https://开头",
+    embeddedPlatform: "✅ 检测到嵌入式平台。正在加载...",
+    dashDetected: "✅ 检测到DASH (MPD)直播流。正在加载...",
+    hlsDetected: "✅ 检测到HLS直播流。正在加载...",
+    directDetected: "✅ 检测到直接视频流。正在播放...",
+    unknownType: "ℹ️ 未知类型({0})。尝试直接播放...",
+    playbackError: "❌ 播放错误: {0}",
+    invalidYouTube: "❌ 无效的YouTube URL格式。",
+    noVideoId: "❌ 无法提取YouTube视频ID。",
+    invalidTwitch: "❌ 无效的Twitch URL格式。",
+    unsupportedPlatform: "❌ 不支持的嵌入式平台。",
+    playingDirect: "▶️ 正在播放直接流（MP4/WEBM/OGG或回退）。",
+    retryingProxy: "🔁 正在使用CORS代理重试直接流播放...",
+    failedDirect: "❌ 无法加载直接视频流。",
+    hlsError: "❌ HLS错误: {0}",
+    retryingHlsProxy: "🔁 正在使用CORS代理重试...",
+    inspectingMpd: "🔍 正在检查MPD清单...",
+    widevineProvided: "🔑 已提供Widevine许可证URL。尝试使用Widevine DRM播放...",
+    widevineSupported: "✅ 此浏览器支持Widevine DRM",
+    widevineNotSupported: "❌ 此浏览器不支持Widevine DRM",
+    clearkeyProvided: "🔒 正在使用CLEARKEY DRM许可证播放MPD流...",
+    drmDetected: "🔒 检测到DRM许可证，等待Clearkey或widevine url许可证",
+    noDrmDetected: "✅ 清单中未检测到DRM。播放不安全的MPD流...",
+    mpdError: "❌ 无法播放MPD: {0}",
+    buffering: "🔄 正在缓冲...",
+    playing: "✅ 正在播放",
+    playerError: "❌ 播放器错误: {0}",
+    directVideoInfo: "📹 直接视频流信息",
+    resolution: "分辨率",
+    duration: "时长",
+    streamType: "流类型",
+    directVideo: "直接视频",
+    hlsStreamInfo: "📺 HLS直播流信息",
+    qualityLevels: "质量级别",
+    codec: "编解码器",
+    bitrate: "比特率",
+    adaptiveBitrate: "自适应比特率",
+    auto: "自动",
+    nativeHls: "原生HLS",
+    dashStreamInfo: "📺 DASH直播流信息",
+    videoCodec: "视频编解码器",
+    audioCodec: "音频编解码器",
+    frameRate: "帧率",
+    fps: "帧/秒",
+    network: "网络",
+    buffer: "缓冲",
+    droppedFrames: "丢帧",
+    platform: "平台",
+    embedded: "嵌入式",
+    url: "URL",
+    calculating: "计算中...",
+    unknown: "未知",
+    menuXtream: "🌐 访问我的Xtream代码检查器",
+    menuRadio: "🌐 访问我的在线电台",
+    menuM3u: "🌐 访问我的M3U播放列表检查器"
+  },
+  es: {
+    localTimeLabel: "Hora Local ⏰",
+    mainTitle: "PROBADOR DE TRANSMISIÓN EN VIVO EN LÍNEA (Prueba tu enlace aquí)",
+    selectChannelOption: "-- Seleccionar un Canal --",
+    streamUrlPlaceholder: "Ingresa URL de transmisión (.m3u8 / .mpd / .mp4 / .mkv / .avi / .flv / YouTube / Twitch)",
+    keyIdPlaceholder: "Ingresa ID de Clave (para MPD ClearKey)",
+    keyPlaceholder: "Ingresa Clave (para MPD ClearKey)",
+    widevinePlaceholder: "Ingresa URL de Licencia Widevine (opcional)",
+    checkPlayBtn: "Verificar y Reproducir",
+    clearAllBtn: "🧹Limpiar Todo",
+    clearKeysBtn: "🔑Limpiar Todas las Claves",
+    footerText: "Hecho por darkAngel | Este sitio no tiene LISTA DE REPRODUCCIÓN IPTV. © 2025",
+    checkingUrl: "🔄 Verificando URL...",
+    urlMustStartWith: "❌ La URL de transmisión debe comenzar con http:// o https://",
+    embeddedPlatform: "✅ Plataforma integrada detectada. Cargando...",
+    dashDetected: "✅ Transmisión DASH (MPD) detectada. Cargando...",
+    hlsDetected: "✅ Transmisión HLS detectada. Cargando...",
+    directDetected: "✅ Transmisión de video directa detectada. Reproduciendo...",
+    unknownType: "ℹ️ Tipo desconocido ({0}). Intentando directo...",
+    playbackError: "❌ Error de reproducción: {0}",
+    invalidYouTube: "❌ Formato de URL de YouTube inválido.",
+    noVideoId: "❌ No se pudo extraer el ID del video de YouTube.",
+    invalidTwitch: "❌ Formato de URL de Twitch inválido.",
+    unsupportedPlatform: "❌ Plataforma integrada no soportada.",
+    playingDirect: "▶️ Reproduciendo transmisión directa (MP4/WEBM/OGG o alternativa).",
+    retryingProxy: "🔁 Reintentando reproducción directa con proxy CORS...",
+    failedDirect: "❌ Error al cargar transmisión de video directa.",
+    hlsError: "❌ Error HLS: {0}",
+    retryingHlsProxy: "🔁 Reintentando con proxy CORS...",
+    inspectingMpd: "🔍 Inspeccionando manifiesto MPD...",
+    widevineProvided: "🔑 URL de licencia Widevine proporcionada. Intentando reproducir con DRM Widevine...",
+    widevineSupported: "✅ DRM Widevine soportado por este navegador",
+    widevineNotSupported: "❌ DRM Widevine no soportado por este navegador",
+    clearkeyProvided: "🔒 Reproduciendo transmisión MPD con LICENCIA DRM CLEARKEY...",
+    drmDetected: "🔒 Licencia DRM Detectada, Esperando licencia Clearkey o url widevine",
+    noDrmDetected: "✅ No se detectó DRM en el manifiesto. Reproduciendo transmisiones MPD no seguras...",
+    mpdError: "❌ Error al reproducir MPD: {0}",
+    buffering: "🔄 Almacenando en búfer...",
+    playing: "✅ Reproduciendo",
+    playerError: "❌ Error del reproductor: {0}",
+    directVideoInfo: "📹 Información de Transmisión de Video Directa",
+    resolution: "Resolución",
+    duration: "Duración",
+    streamType: "Tipo de Transmisión",
+    directVideo: "Video Directo",
+    hlsStreamInfo: "📺 Información de Transmisión HLS",
+    qualityLevels: "Niveles de Calidad",
+    codec: "Códec",
+    bitrate: "Tasa de Bits",
+    adaptiveBitrate: "Tasa de Bits Adaptativa",
+    auto: "Automático",
+    nativeHls: "HLS Nativo",
+    dashStreamInfo: "📺 Información de Transmisión DASH",
+    videoCodec: "Códec de Video",
+    audioCodec: "Códec de Audio",
+    frameRate: "Tasa de Cuadros",
+    fps: "fps",
+    network: "Red",
+    buffer: "Búfer",
+    droppedFrames: "Cuadros Perdidos",
+    platform: "Plataforma",
+    embedded: "Integrado",
+    url: "URL",
+    calculating: "Calculando...",
+    unknown: "Desconocido",
+    menuXtream: "🌐 Visita mi Verificador de Códigos Xtream",
+    menuRadio: "🌐 Visita mi RADIO EN LÍNEA",
+    menuM3u: "🌐 Visita mi Verificador de Listas de Reproducción M3U"
+  }
+};
+
+// Current language
+let currentLanguage = 'en';
+
+// Initialize language from localStorage or browser language
+function initializeLanguage() {
+  const savedLanguage = localStorage.getItem('selectedLanguage');
+  if (savedLanguage && translations[savedLanguage]) {
+    currentLanguage = savedLanguage;
+  } else {
+    // Try to detect browser language
+    const browserLang = navigator.language.split('-')[0];
+    if (translations[browserLang]) {
+      currentLanguage = browserLang;
+    }
+  }
+  
+  // Set the dropdown value
+  document.getElementById('languageSelect').value = currentLanguage;
+  
+  // Apply translations
+  applyTranslations();
+}
+
+// Change language
+function changeLanguage() {
+  const selectedLanguage = document.getElementById('languageSelect').value;
+  if (translations[selectedLanguage]) {
+    currentLanguage = selectedLanguage;
+    localStorage.setItem('selectedLanguage', currentLanguage);
+    applyTranslations();
+  }
+}
+
+// Apply translations to the page
+function applyTranslations() {
+  const t = translations[currentLanguage];
+  
+  // Update static text elements
+  document.getElementById('localTimeLabel').textContent = t.localTimeLabel;
+  document.getElementById('mainTitle').textContent = t.mainTitle;
+  document.getElementById('selectChannelOption').textContent = t.selectChannelOption;
+  document.getElementById('m3u8Url').placeholder = t.streamUrlPlaceholder;
+  document.getElementById('keyId').placeholder = t.keyIdPlaceholder;
+  document.getElementById('key').placeholder = t.keyPlaceholder;
+  document.getElementById('widevineLicenseUrl').placeholder = t.widevinePlaceholder;
+  document.getElementById('checkPlayBtn').textContent = t.checkPlayBtn;
+  document.getElementById('clearAllBtn').textContent = t.clearAllBtn;
+  document.getElementById('clearKeysBtn').textContent = t.clearKeysBtn;
+  document.getElementById('footerText').textContent = t.footerText;
+  
+  // Update menu items
+  const menuItems = document.querySelectorAll('.menu-content a');
+  if (menuItems.length >= 3) {
+    menuItems[0].textContent = t.menuXtream;
+    menuItems[1].textContent = t.menuRadio;
+    menuItems[2].textContent = t.menuM3u;
+  }
+}
+
+// Get translation for a key
+function t(key) {
+  return translations[currentLanguage][key] || translations.en[key] || key;
+}
+
+// Format string with placeholders
+function formatString(str, ...args) {
+  return str.replace(/{(\d+)}/g, function(match, number) { 
+    return typeof args[number] !== 'undefined' ? args[number] : match;
+  });
+}
+
+// Get translated message with formatting
+function getMessage(key, ...args) {
+  const message = t(key);
+  return formatString(message, ...args);
+}
+</script>
+
+<script>
+setInterval(() => {
+  const now = new Date();
+  const clock = document.getElementById('clock');
+  if (clock) {
+    clock.textContent = now.toLocaleTimeString();
+  }
+}, 1000);
+</script>
+
+<script>
+// Global variables for stream information
+let streamInfoInterval = null;
+let currentStreamType = '';
+let lastNetworkInfo = {
+  bandwidth: 0,
+  bufferHealth: 0,
+  droppedFrames: 0
+};
+
+// Reset player UI elements
+function resetPlayerUI() {
+  const video = document.getElementById('video');
+  const iframe = document.getElementById('embed-frame');
+  const info = document.getElementById('info');
+  
+  // Clear stream info interval
+  if (streamInfoInterval) {
+    clearInterval(streamInfoInterval);
+    streamInfoInterval = null;
+  }
+  
+  // Pause and clear video source
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
+  
+  // Hide iframe
+  iframe.style.display = 'none';
+  iframe.src = '';
+  
+  // Clear ALL stream information
+  info.innerHTML = '';
+  
+  // Reset stream info
+  currentStreamType = '';
+  lastNetworkInfo = {
+    bandwidth: 0,
+    bufferHealth: 0,
+    droppedFrames: 0
+  };
+}
+
+// Destroy player instances
+async function destroyPlayers() {
+  // Destroy HLS instance if exists
+  if (window.hls) {
+    try {
+      window.hls.destroy();
+    } catch (e) {
+      console.warn("HLS destroy error:", e);
+    }
+    window.hls = null;
+  }
+  
+  // Destroy Shaka player if exists
+  if (window.player) {
+    try {
+      await window.player.destroy();
+    } catch (e) {
+      console.warn("Shaka destroy error:", e);
+    }
+    window.player = null;
+  }
+}
+
+// Combined reset function
+async function resetPlayer() {
+  resetPlayerUI();
+  await destroyPlayers();
+}
+
+function selectChannel() {
+  const select = document.getElementById('channelSelect');
+  document.getElementById('m3u8Url').value = select.value;
+  checkAndPlay();
+}
+
+async function checkAndPlay() {
+  let url = document.getElementById('m3u8Url').value.trim();
+  const video = document.getElementById('video');
+  const iframe = document.getElementById('embed-frame');
+  const info = document.getElementById('info');
+  const status = document.getElementById('status');
+  
+  await resetPlayer();
+  video.style.display = 'block';
+  info.textContent = '';
+  status.textContent = getMessage('checkingUrl');
+  
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    status.textContent = getMessage('urlMustStartWith');
+    return;
+  }
+  
+  const isHttpsPage = location.protocol === 'https:';
+  
+  // Apply proxy if needed
+  if (isHttpsPage && url.startsWith('http://')) {
+    url = `https://poohlover.serv00.net/stream-proxy.php?url=${encodeURIComponent(url)}`;
+    console.warn('[Proxy] Using proxy for HTTP:', url);
+  } else if (isHttpsPage && url.includes('.php')) {
+    url = `https://poohlover.serv00.net/hls-proxy.php?url=${encodeURIComponent(url)}`;
+    console.warn('[Proxy] Using proxy for .php stream:', url);
+  }
+  
+  let contentType = '';
+  let isHls = false;
+  
+  try {
+    // First try to detect content type
+    const headResp = await fetch(url, { method: 'HEAD' });
+    contentType = headResp.headers.get('Content-Type') || '';
+    
+    // Check if it's HLS by content type
+    if (contentType.includes('application/vnd.apple.mpegurl') || 
+        contentType.includes('application/x-mpegURL')) {
+      isHls = true;
+    }
+  } catch (e) {
+    console.warn('HEAD request failed, fallback detection only:', e);
+  }
+  
+  const urlObj = new URL(url);
+  const pathname = urlObj.pathname.toLowerCase();
+  
+  // Additional HLS detection methods
+  if (!isHls) {
+    // Check by URL patterns
+    if (pathname.endsWith('.m3u8') || 
+        pathname.includes('.m3u8?') ||
+        url.toLowerCase().includes('playlist.m3u8') ||
+        url.toLowerCase().includes('master.m3u8') ||
+        url.toLowerCase().includes('index.m3u8') ||
+        url.toLowerCase().includes('stream.m3u8') ||
+        pathname.endsWith('.php') ||
+        url.toLowerCase().includes('.php?')) {
+      isHls = true;
+    }
+  }
+  
+  // If still not detected, try to fetch a small portion to check for HLS signature
+  if (!isHls && !contentType.includes('video/') && !pathname.endsWith('.mpd')) {
+    try {
+      const response = await fetch(url, { method: 'GET', headers: { 'Range': 'bytes=0-1024' } });
+      const text = await response.text();
+      if (text.startsWith('#EXTM3U')) {
+        isHls = true;
+      }
+    } catch (e) {
+      console.warn('Could not fetch content for HLS detection:', e);
+    }
+  }
+  
+  try {
+    if (url.includes('youtube.com') || url.includes('youtu.be') || url.includes('twitch.tv')) {
+      playEmbed(url);
+      status.textContent = getMessage('embeddedPlatform');
+      return;
+    }
+    
+    if (pathname.endsWith('.mpd') || contentType.includes('application/dash+xml')) {
+      playMPD(url);
+      status.textContent = getMessage('dashDetected');
+    } else if (isHls) {
+      playM3U8(url);
+      status.textContent = getMessage('hlsDetected');
+    } else if (
+      contentType.includes('video/') ||
+      pathname.match(/\.(mp4|webm|ogg|mkv|avi|flv)$/i)
+    ) {
+      playDirect(url);
+      status.textContent = getMessage('directDetected');
+    } else {
+      // Last resort - try HLS if nothing else matches
+      playM3U8(url);
+      status.textContent = getMessage('unknownType', contentType || 'no type');
+    }
+  } catch (e) {
+    console.error(e);
+    status.textContent = getMessage('playbackError', e.message);
+  }
+}
+
+function playEmbed(url) {
+  const video = document.getElementById('video');
+  const iframe = document.getElementById('embed-frame');
+  const info = document.getElementById('info');
+  
+  video.pause();
+  video.style.display = 'none';
+  
+  let embedSrc = '';
+  let isYouTube = false;
+  
+  if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    let videoId = '';
+    if (url.includes('youtu.be')) {
+      videoId = url.split('/').pop();
+    } else {
+      try {
+        const urlObj = new URL(url);
+        videoId = urlObj.searchParams.get('v');
+      } catch (e) {
+        info.innerHTML = getMessage('invalidYouTube');
+        return;
+      }
+    }
+    
+    if (!videoId) {
+      info.innerHTML = getMessage('noVideoId');
+      return;
+    }
+    
+    isYouTube = true;
+    embedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&rel=0`;
+  } else if (url.includes('twitch.tv')) {
+    const channelMatch = url.match(/twitch\.tv\/([^/?&]+)/);
+    const channel = channelMatch ? channelMatch[1] : '';
+    const parent = location.hostname;
+    
+    if (!channel) {
+      info.innerHTML = getMessage('invalidTwitch');
+      return;
+    }
+    
+    embedSrc = `https://player.twitch.tv/?channel=${channel}&parent=${parent}&autoplay=true`;
+  } else {
+    info.innerHTML = getMessage('unsupportedPlatform');
+    return;
+  }
+  
+  iframe.src = embedSrc;
+  iframe.allow = "autoplay; fullscreen";
+  iframe.style.display = 'block';
+  
+  currentStreamType = isYouTube ? 'youtube' : 'twitch';
+  info.innerHTML = `<div class="stream-info">
+    <div class="stream-info-header">📺 ${isYouTube ? 'YouTube' : 'Twitch'} ${getMessage('streamInfo')}</div>
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('platform')}:</span>
+      <span class="stream-info-value">${isYouTube ? 'YouTube' : 'Twitch'}</span>
+    </div>
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('streamType')}:</span>
+      <span class="stream-info-value">${getMessage('embedded')}</span>
+    </div>
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('url')}:</span>
+      <span class="stream-info-value" style="font-size: 10px; word-break: break-all;">${url}</span>
+    </div>
+    <div id="network-info-container"></div>
+  </div>`;
+  
+  // Add network info to the container
+  const networkContainer = info.querySelector('#network-info-container');
+  if (networkContainer) {
+    addNetworkInfo(networkContainer);
+  }
+  
+  // Start updating stream info
+  startStreamInfoUpdate();
+}
+
+function playDirect(url, isRetry = false) {
+  const video = document.getElementById('video');
+  const info = document.getElementById('info');
+  
+  video.onerror = function () {
+    if (!isRetry && url.includes('.php')) {
+      const proxiedUrl = `https://cors-proxy.io/?${url}`;
+      console.warn('Retrying direct playback with proxy:', proxiedUrl);
+      info.innerHTML = getMessage('retryingProxy');
+      playDirect(proxiedUrl, true);
+    } else {
+      info.innerHTML = getMessage('failedDirect');
+    }
+  };
+  
+  video.src = url;
+  video.play().catch(e => console.warn('Autoplay blocked:', e));
+  
+  currentStreamType = 'direct';
+  
+  // Get basic video info
+  video.onloadedmetadata = function() {
+    displayDirectVideoInfo();
+    startStreamInfoUpdate();
+  };
+  
+  info.innerHTML = getMessage('playingDirect');
+}
+
+function displayDirectVideoInfo() {
+  const video = document.getElementById('video');
+  const info = document.getElementById('info');
+  
+  const duration = video.duration || 0;
+  const videoWidth = video.videoWidth || 0;
+  const videoHeight = video.videoHeight || 0;
+  
+  // Clear any existing stream info but preserve DRM messages
+  const drmMessages = info.querySelectorAll('.drm-info');
+  let drmContent = '';
+  drmMessages.forEach(msg => {
+    drmContent += msg.outerHTML;
+  });
+  
+  info.innerHTML = drmContent + `<div class="stream-info">
+    <div class="stream-info-header">${getMessage('directVideoInfo')}</div>
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('resolution')}:</span>
+      <span class="stream-info-value">${videoWidth}x${videoHeight}</span>
+    </div>
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('duration')}:</span>
+      <span class="stream-info-value">${formatTime(duration)}</span>
+    </div>
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('streamType')}:</span>
+      <span class="stream-info-value">${getMessage('directVideo')}</span>
+    </div>
+    <div id="network-info-container"></div>
+  </div>`;
+  
+  // Add network info to the container
+  const networkContainer = info.querySelector('#network-info-container');
+  if (networkContainer) {
+    addNetworkInfo(networkContainer);
+  }
+}
+
+function playM3U8(url, isRetry = false) {
+  const video = document.getElementById('video');
+  const info = document.getElementById('info');
+  
+  currentStreamType = 'hls';
+  
+  if (Hls.isSupported()) {
+    if (window.hls) {
+      window.hls.destroy();
+    }
+    
+    window.hls = new Hls({
+      debug: false,
+      enableWorker: true,
+      lowLatencyMode: true,
+      backBufferLength: 90
+    });
+    
+    window.hls.loadSource(url);
+    window.hls.attachMedia(video);
+    window.hls.currentLevel = -1; // Enable ABR (Auto Bitrate mode)
+    
+    window.hls.on(Hls.Events.MEDIA_ATTACHED, function() {
+      console.log('HLS media attached');
+    });
+    
+    window.hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+      console.log('HLS manifest parsed, levels found:', data.levels.length);
+      
+      const level = data.levels[0];
+      
+      // Clear any existing stream info but preserve DRM messages
+      const drmMessages = info.querySelectorAll('.drm-info');
+      let drmContent = '';
+      drmMessages.forEach(msg => {
+        drmContent += msg.outerHTML;
+      });
+      
+      info.innerHTML = drmContent + `
+        <div class="stream-info">
+          <div class="stream-info-header">${getMessage('hlsStreamInfo')}</div>
+          <div class="stream-info-row">
+            <span class="stream-info-label">${getMessage('qualityLevels')}:</span>
+            <span class="stream-info-value">${data.levels.length}</span>
+          </div>
+          <div class="stream-info-row">
+            <span class="stream-info-label">${getMessage('codec')}:</span>
+            <span class="stream-info-value">${level.codecs || 'N/A'}</span>
+          </div>
+          <div class="stream-info-row">
+            <span class="stream-info-label">${getMessage('resolution')}:</span>
+            <span class="stream-info-value">${level.width || 'N/A'}x${level.height || 'N/A'}</span>
+          </div>
+          <div class="stream-info-row">
+            <span class="stream-info-label">${getMessage('bitrate')}:</span>
+            <span class="stream-info-value">${(level.bitrate / 1000).toFixed(1)} kbps</span>
+          </div>
+          <div class="stream-info-row">
+            <span class="stream-info-label">${getMessage('adaptiveBitrate')}:</span>
+            <span class="stream-info-value"><span class="quality-indicator quality-auto"></span>${getMessage('auto')}</span>
+          </div>
+          <div id="network-info-container"></div>
+        </div>
+      `;
+      
+      // Add network info to the container
+      const networkContainer = info.querySelector('#network-info-container');
+      if (networkContainer) {
+        addNetworkInfo(networkContainer);
+      }
+      
+      video.play();
+      startStreamInfoUpdate();
+    });
+    
+    window.hls.on(Hls.Events.ERROR, function (event, data) {
+      console.warn('HLS.js warning/error:', data);
+      if (data.fatal) {
+        if (!isRetry && data.details?.toLowerCase().includes("network")) {
+          console.warn("Retrying with CORS proxy...");
+          info.innerHTML = getMessage('retryingHlsProxy');
+          playM3U8(`https://cors-proxy.io/?${url}`, true);
+          return;
+        } else {
+          // Try direct video as fallback for non-network errors
+          console.warn("HLS failed, trying direct video...");
+          playDirect(url);
+          return;
+        }
+      }
+    });
+    
+    window.hls.on(Hls.Events.LEVEL_SWITCHED, function (event, data) {
+      const level = window.hls.levels[data.level];
+      updateHLSQualityInfo(level);
+    });
+    
+    window.hls.on(Hls.Events.FRAG_LOADED, function (event, data) {
+      // Update network info when fragments are loaded
+      updateNetworkInfo();
+    });
+    
+    // Add more event listeners for better HLS handling
+    window.hls.on(Hls.Events.LEVEL_LOADED, function(event, data) {
+      console.log('Level loaded:', data.level, data.details);
+    });
+    
+    window.hls.on(Hls.Events.BUFFER_CREATED, function() {
+      console.log('Buffer created');
+    });
+    
+    window.hls.on(Hls.Events.BUFFER_APPENDED, function() {
+      // Update buffer info
+      updateNetworkInfo();
+    });
+    
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = url;
+    video.play();
+    currentStreamType = 'hls-native';
+    
+    // Clear any existing stream info but preserve DRM messages
+    const drmMessages = info.querySelectorAll('.drm-info');
+    let drmContent = '';
+    drmMessages.forEach(msg => {
+      drmContent += msg.outerHTML;
+    });
+    
+    info.innerHTML = drmContent + `
+      <div class="stream-info">
+        <div class="stream-info-header">${getMessage('hlsStreamInfo')}</div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('streamType')}:</span>
+          <span class="stream-info-value">${getMessage('nativeHls')}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('adaptiveBitrate')}:</span>
+          <span class="stream-info-value"><span class="quality-indicator quality-auto"></span>${getMessage('auto')} (${getMessage('nativeHls')})</span>
+        </div>
+        <div id="network-info-container"></div>
+      </div>
+    `;
+    
+    // Add network info to the container
+    const networkContainer = info.querySelector('#network-info-container');
+    if (networkContainer) {
+      addNetworkInfo(networkContainer);
+    }
+    
+    startStreamInfoUpdate();
+  } else {
+    // If HLS is not supported, try direct playback as fallback
+    console.warn("HLS not supported, trying direct playback");
+    playDirect(url);
+  }
+}
+
+function updateHLSQualityInfo(level) {
+  const info = document.getElementById('info');
+  const isAuto = window.hls.autoLevelEnabled;
+  
+  // Find the existing stream info div
+  const streamInfoDiv = info.querySelector('.stream-info');
+  
+  if (streamInfoDiv) {
+    // Extract the network info container if it exists
+    const networkContainer = streamInfoDiv.querySelector('#network-info-container');
+    let networkContent = '';
+    if (networkContainer) {
+      networkContent = networkContainer.outerHTML;
+    }
+    
+    // Extract any DRM messages
+    const drmMessages = info.querySelectorAll('.drm-info');
+    let drmContent = '';
+    drmMessages.forEach(msg => {
+      drmContent += msg.outerHTML;
+    });
+    
+    // Update the stream info content
+    info.innerHTML = drmContent + `
+      <div class="stream-info">
+        <div class="stream-info-header">${getMessage('hlsStreamInfo')}</div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('qualityLevels')}:</span>
+          <span class="stream-info-value">${window.hls.levels.length}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">Current Level:</span>
+          <span class="stream-info-value">${window.hls.currentLevel >= 0 ? window.hls.currentLevel : getMessage('auto')}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('codec')}:</span>
+          <span class="stream-info-value">${level.codecs || 'N/A'}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('resolution')}:</span>
+          <span class="stream-info-value">${level.width || 'N/A'}x${level.height || 'N/A'}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('bitrate')}:</span>
+          <span class="stream-info-value">${(level.bitrate / 1000).toFixed(1)} kbps</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('adaptiveBitrate')}:</span>
+          <span class="stream-info-value">
+            <span class="quality-indicator ${isAuto ? 'quality-auto' : 'quality-manual'}"></span>
+            ${isAuto ? getMessage('auto') : 'Manual'}
+          </span>
+        </div>
+        ${networkContent}
+      </div>
+    `;
+  }
+}
+
+// Function to check Widevine support specifically
+function checkWidevineSupport() {
+  return new Promise((resolve) => {
+    if (window.navigator.requestMediaKeySystemAccess) {
+      window.navigator.requestMediaKeySystemAccess('com.widevine.alpha', [{
+        initDataTypes: ['cenc'],
+        videoCapabilities: [{
+          contentType: 'video/mp4; codecs="avc1.42E01E"',
+          robustness: 'SW_SECURE_CRYPTO'
+        }]
+      }])
+      .then(() => {
+        resolve(true);
+      })
+      .catch((error) => {
+        console.error('Widevine not supported:', error);
+        resolve(false);
+      });
+    } else {
+      resolve(false);
+    }
+  });
+}
+
+// Updated playMPD function with explicit DRM detection
+async function playMPD(url) {
+  const video = document.getElementById('video');
+  const info = document.getElementById('info');
+  const keyId = document.getElementById('keyId').value.trim();
+  const key = document.getElementById('key').value.trim();
+  const widevineLicenseUrl = document.getElementById('widevineLicenseUrl').value.trim();
+  
+  currentStreamType = 'dash';
+  
+  if (window.player) {
+    await window.player.destroy();
+  }
+  
+  window.player = new shaka.Player(video);
+  info.innerHTML = getMessage('inspectingMpd');
+  
+  try {
+    // Check if user provided DRM credentials
+    const hasWidevine = widevineLicenseUrl !== '';
+    const hasClearKey = keyId !== '' && key !== '';
+    
+    // If user provided DRM credentials, we assume the stream is DRM protected
+    if (hasWidevine || hasClearKey) {
+      const drmConfig = {};
+      let drmMessage = '';
+      
+      if (hasWidevine) {
+        drmConfig.servers = { 'com.widevine.alpha': widevineLicenseUrl };
+        drmMessage = getMessage('widevineProvided');
+        
+        // Check Widevine support only when using Widevine
+        const isWidevineSupported = await checkWidevineSupport();
+        if (isWidevineSupported) {
+          drmMessage += '<div class="drm-info">' + getMessage('widevineSupported') + '</div>';
+        } else {
+          drmMessage += '<div class="drm-info">' + getMessage('widevineNotSupported') + '</div>';
+        }
+      } else if (hasClearKey) {
+        drmConfig.clearKeys = {};
+        drmConfig.clearKeys[keyId.toLowerCase()] = key.toLowerCase();
+        drmMessage = '<div class="drm-info">' + getMessage('clearkeyProvided') + '</div>';
+      }
+      
+      // Configure player with DRM settings
+      window.player.configure({
+        drm: drmConfig,
+        abr: { enabled: true }
+      });
+      
+      // Add event listeners for adaptive streaming
+      setupShakaEventListeners();
+      
+      // Load the stream
+      await window.player.load(url);
+      video.play();
+      
+      // Display DRM message only first, then stream info will be added by event listeners
+      info.innerHTML = drmMessage;
+    } else {
+      // No DRM credentials provided, try without DRM
+      // Fetch the MPD manifest to check for DRM
+      const response = await fetch(url);
+      const mpdText = await response.text();
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(mpdText, 'application/xml');
+      
+      if (xml.querySelector('parsererror')) {
+        throw new Error('Invalid MPD manifest format.');
+      }
+      
+      // Check for DRM protection
+      const contentProtection = xml.querySelector('ContentProtection');
+      if (contentProtection) {
+        info.innerHTML = '<div class="drm-info">' + getMessage('drmDetected') + '</div>';
+        return;
+      } else {
+        const drmMessage = '<div class="drm-info">' + getMessage('noDrmDetected') + '</div>';
+        
+        // Configure player without DRM
+        window.player.configure({
+          abr: { enabled: true }
+        });
+        
+        // Add event listeners for adaptive streaming
+        setupShakaEventListeners();
+        
+        await window.player.load(url);
+        video.play();
+        
+        // Display DRM message only first, then stream info will be added by event listeners
+        info.innerHTML = drmMessage;
+      }
+    }
+    
+    // Start updating stream info
+    startStreamInfoUpdate();
+  } catch (err) {
+    console.error('MPD error:', err);
+    info.innerHTML = '<div class="drm-info">' + getMessage('mpdError', err.message) + '</div>';
+  }
+}
+
+function setupShakaEventListeners() {
+  // Listen for adaptation events
+  window.player.addEventListener('adaptation', () => {
+    // Only update if we're still playing a DASH stream
+    if (currentStreamType === 'dash') {
+      displayStreamInfo();
+    }
+  });
+  
+  // Listen for loading events
+  window.player.addEventListener('loading', () => {
+    // Only update if we're still playing a DASH stream
+    if (currentStreamType === 'dash') {
+      displayStreamInfo();
+    }
+  });
+  
+  // Listen for buffering events
+  window.player.addEventListener('buffering', (event) => {
+    const info = document.getElementById('info');
+    const status = document.getElementById('status');
+    
+    if (event.buffering) {
+      status.textContent = getMessage('buffering');
+    } else {
+      status.textContent = getMessage('playing');
+      // Only update if we're still playing a DASH stream
+      if (currentStreamType === 'dash') {
+        displayStreamInfo();
+      }
+    }
+  });
+  
+  // Listen for errors
+  window.player.addEventListener('error', (event) => {
+    console.error('Player error:', event.detail);
+    const info = document.getElementById('info');
+    info.innerHTML += '<div class="drm-info">' + getMessage('playerError', event.detail.message || 'Unknown error') + '</div>';
+  });
+}
+
+// Helper function to display stream information
+function displayStreamInfo() {
+  const info = document.getElementById('info');
+  const tracks = window.player.getVariantTracks();
+  const activeTrack = tracks.find(track => track.active) || tracks[0];
+  
+  // Check if we're dealing with a DASH stream specifically
+  if (currentStreamType !== 'dash') {
+    console.warn("displayStreamInfo called for non-DASH stream type:", currentStreamType);
+    return;
+  }
+  
+  // Preserve only DRM messages, not previous stream info
+  const drmMessages = info.querySelectorAll('.drm-info');
+  let drmContent = '';
+  drmMessages.forEach(msg => {
+    drmContent += msg.outerHTML;
+  });
+  
+  // Clear any existing stream info that's not DRM-related
+  const existingStreamInfo = info.querySelectorAll('.stream-info');
+  existingStreamInfo.forEach(info => info.remove());
+  
+  if (tracks.length > 0) {
+    const isAuto = window.player.getConfiguration().abr.enabled;
+    
+    // Create the stream info HTML
+    const streamInfoHTML = `
+      <div class="stream-info">
+        <div class="stream-info-header">${getMessage('dashStreamInfo')}</div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('qualityLevels')}:</span>
+          <span class="stream-info-value">${tracks.length}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('videoCodec')}:</span>
+          <span class="stream-info-value">${activeTrack.videoCodec || 'N/A'}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('audioCodec')}:</span>
+          <span class="stream-info-value">${activeTrack.audioCodec || 'N/A'}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('resolution')}:</span>
+          <span class="stream-info-value">${activeTrack.width || 'N/A'}x${activeTrack.height || 'N/A'}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('bitrate')}:</span>
+          <span class="stream-info-value">${(activeTrack.bandwidth / 1000).toFixed(1)} kbps</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('frameRate')}:</span>
+          <span class="stream-info-value">${activeTrack.frameRate || 'N/A'} ${getMessage('fps')}</span>
+        </div>
+        <div class="stream-info-row">
+          <span class="stream-info-label">${getMessage('adaptiveBitrate')}:</span>
+          <span class="stream-info-value">
+            <span class="quality-indicator ${isAuto ? 'quality-auto' : 'quality-manual'}"></span>
+            ${isAuto ? getMessage('auto') : 'Manual'}
+          </span>
+        </div>
+        <div id="network-info-container"></div>
+      </div>
+    `;
+    
+    // Update info div with DRM messages and new stream info section
+    info.innerHTML = drmContent + streamInfoHTML;
+    
+    // Add network info to the new container
+    const networkContainer = document.getElementById('network-info-container');
+    if (networkContainer) {
+      addNetworkInfo(networkContainer);
+    }
+  } else {
+    info.innerHTML = drmContent + '<div class="stream-info">ℹ️ Stream loaded but track info unavailable.</div>';
+  }
+}
+
+// Function to add network information to the stream info
+function addNetworkInfo(container) {
+  if (!container) return;
+  
+  // Clear existing network info if any
+  container.innerHTML = '';
+  
+  // Create network status section
+  const networkSection = document.createElement('div');
+  networkSection.className = 'network-status';
+  
+  networkSection.innerHTML = `
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('network')}:</span>
+      <span class="stream-info-value" id="network-value">${getMessage('calculating')}</span>
+    </div>
+    <div class="network-bar">
+      <div class="network-fill" id="network-fill"></div>
+    </div>
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('buffer')}:</span>
+      <span class="stream-info-value" id="buffer-value">0s</span>
+    </div>
+    <div class="stream-info-row">
+      <span class="stream-info-label">${getMessage('droppedFrames')}:</span>
+      <span class="stream-info-value" id="dropped-frames">0</span>
+    </div>
+  `;
+  
+  container.appendChild(networkSection);
+}
+
+// Function to update network information
+function updateNetworkInfo() {
+  const video = document.getElementById('video');
+  
+  // Update buffer health
+  const bufferValue = document.getElementById('buffer-value');
+  if (bufferValue && video.buffered.length > 0) {
+    const bufferEnd = video.buffered.end(video.buffered.length - 1);
+    const bufferTime = bufferEnd - video.currentTime;
+    bufferValue.textContent = `${bufferTime.toFixed(1)}s`;
+    
+    // Update buffer health percentage (max 30 seconds considered full)
+    const bufferPercent = Math.min(100, (bufferTime / 30) * 100);
+    lastNetworkInfo.bufferHealth = bufferPercent;
+  }
+  
+  // Update dropped frames
+  const droppedFrames = document.getElementById('dropped-frames');
+  if (droppedFrames && video.getVideoPlaybackQuality) {
+    const playbackQuality = video.getVideoPlaybackQuality();
+    const dropped = playbackQuality.droppedVideoFrames;
+    droppedFrames.textContent = dropped;
+    lastNetworkInfo.droppedFrames = dropped;
+  }
+  
+  // Update network bandwidth
+  updateNetworkBandwidth();
+}
+
+// Function to update network bandwidth
+function updateNetworkBandwidth() {
+  const networkValue = document.getElementById('network-value');
+  const networkFill = document.getElementById('network-fill');
+  
+  if (!networkValue || !networkFill) return;
+  
+  let bandwidth = 0;
+  
+  if (currentStreamType === 'hls' && window.hls) {
+    // Get bandwidth from HLS.js
+    bandwidth = window.hls.bandwidthEstimate || 0;
+  } else if (currentStreamType === 'dash' && window.player) {
+    // Get bandwidth from Shaka Player
+    const stats = window.player.getStats();
+    bandwidth = stats.estimatedBandwidth || 0;
+  }
+  
+  if (bandwidth > 0) {
+    // Convert to kbps
+    const bandwidthKbps = bandwidth / 1000;
+    networkValue.textContent = `${bandwidthKbps.toFixed(1)} kbps`;
+    
+    // Update network bar (max 10000 kbps considered full)
+    const networkPercent = Math.min(100, (bandwidthKbps / 10000) * 100);
+    networkFill.style.width = `${networkPercent}%`;
+    
+    lastNetworkInfo.bandwidth = bandwidthKbps;
+  } else {
+    networkValue.textContent = getMessage('unknown');
+    networkFill.style.width = '0%';
+  }
+}
+
+// Function to start updating stream info periodically
+function startStreamInfoUpdate() {
+  // Clear any existing interval
+  if (streamInfoInterval) {
+    clearInterval(streamInfoInterval);
+  }
+  
+  // Update immediately
+  updateNetworkInfo();
+  
+  // Set up interval to update info every second
+  streamInfoInterval = setInterval(() => {
+    updateNetworkInfo();
+    
+    // For direct video streams, update current time
+    if (currentStreamType === 'direct' || currentStreamType === 'hls-native') {
+      const video = document.getElementById('video');
+      const currentTimeElement = document.getElementById('current-time');
+      
+      if (video && currentTimeElement) {
+        currentTimeElement.textContent = formatTime(video.currentTime);
+      }
+    }
+  }, 1000);
+}
+
+// Helper function to format time in MM:SS format
+function formatTime(seconds) {
+  if (isNaN(seconds)) return '00:00';
+  
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  
+  return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+}
+
+// Menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const menuContent = document.getElementById('menuContent');
+menuToggle.addEventListener('click', () => {
+  menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+});
+
+// Close menu if clicked outside
+document.addEventListener('click', (e) => {
+  if (!menuToggle.contains(e.target) && !menuContent.contains(e.target)) {
+    menuContent.style.display = 'none';
+  }
+});
+
+function clearAllInputs() {
+  document.getElementById('m3u8Url').value = '';
+  document.getElementById('keyId').value = '';
+  document.getElementById('key').value = '';
+  document.getElementById('widevineLicenseUrl').value = '';
+  toggleClearButton('m3u8Url');
+  toggleClearButton('keyId');
+  toggleClearButton('key');
+  toggleClearButton('widevineLicenseUrl');
+}
+
+function clearStreamUrl() {
+  document.getElementById('m3u8Url').value = '';
+}
+
+function clearKeysOnly() {
+  document.getElementById('keyId').value = '';
+  document.getElementById('key').value = '';
+  document.getElementById('widevineLicenseUrl').value = '';
+  toggleClearButton('keyId');
+  toggleClearButton('key');
+  toggleClearButton('widevineLicenseUrl');
+}
+</script>
+
+<script>
+function toggleClearButton(id) {
+  const input = document.getElementById(id);
+  const clearBtn = document.getElementById('clear' + id.charAt(0).toUpperCase() + id.slice(1));
+  clearBtn.style.display = input.value ? 'block' : 'none';
+}
+
+function clearInput(id) {
+  const input = document.getElementById(id);
+  input.value = '';
+  toggleClearButton(id);
+}
+</script>
+
+<script>
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', initializeLanguage);
+
+// Disable right-click context menu
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Disable specific key combinations
+document.addEventListener('keydown', function(e) {
+  // F12
+  if (e.keyCode === 123) {
+    e.preventDefault();
+  }
+  // Ctrl+Shift+I
+  if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+    e.preventDefault();
+  }
+  // Ctrl+U
+  if (e.ctrlKey && e.keyCode === 85) {
+    e.preventDefault();
+  }
+  // Ctrl+S
+  if (e.ctrlKey && e.keyCode === 83) {
+    e.preventDefault();
+  }
+  // Ctrl+P
+  if (e.ctrlKey && e.keyCode === 80) {
+    e.preventDefault();
+  }
+});
+</script>
+</body>
+</html>
