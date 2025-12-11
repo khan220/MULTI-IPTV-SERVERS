@@ -2,15 +2,23 @@
 
 
 
-#EXTINF:-1 group-title="🔺 INFO 🔺"  tvg-logo="https://i.postimg.cc/mg921GS6/online-radio-triangle-signs-38400058.png",Обновление:26.02.2025
-http://194.26.229.213/zastavka/index.m3u8
-#EXTINF:-1 group-title="🔺 INFO 🔺" tvg-logo="https://i.postimg.cc/jjkkG8Pc/Imagem-Telegram-Logo-PNG-Preto.png",Android TV + Free TV
-http://194.26.229.213/intro/index.m3u8
+#EXTINF:-1,SkyBlue IPTV
+https://cdn.pixabay.com/video/2025/12/10/321012.mp4?
 
 
 
 
 
+#EXTINF:-1 tvg-id="" tvg-name="" tvg-language="Arabic" tvg-logo="" tvg-country="OM" tvg-url="" group-title="Oman",Radio General Oman 
+https://partwota.cdn.mgmlcdn.com/omanrdoorg/omanrdo.stream_aac/chunklist.m3u8
+#EXTINF:-1 tvg-id="" tvg-name="" tvg-language="Arabic" tvg-logo="" tvg-country="OM" tvg-url="" group-title="Oman",Radio Jeune Oman
+https://partwota.cdn.mgmlcdn.com/shababrdoorg/shababrdo.stream_aac/chunklist.m3u8
+#EXTINF:-1 tvg-id="" tvg-name="" tvg-language="Arabic" tvg-logo="" tvg-country="OM" tvg-url="" group-title="Oman",Radio Quran Oman
+https://partwota.cdn.mgmlcdn.com/quranrdoorg/quranrdo.stream_aac/chunklist.m3u8
+#EXTINF:-1 tvg-id="" tvg-name="" tvg-language="Arabic" tvg-logo="" tvg-country="OM" tvg-url="" group-title="Oman",Radio English Oman
+https://partwota.cdn.mgmlcdn.com/omengrdoorg/omengrdo.stream_aac/chunklist.m3u8
+#EXTINF:-1 tvg-id="" tvg-name="" tvg-language="Arabic" tvg-logo="" tvg-country="OM" tvg-url="" group-title="Oman",Radio Voice Oman
+https://partneta.cdn.mgmlcdn.com/voa/voa.stream_aac/chunklist.m3u8
 
 #EXTINF:-1 group-title="FLAC" tvg-logo="https://add-groups.com/uploads/mini/short/a7/9151_original.jpg",Djam Radio
 https://stream10.xdevel.com/audio15s976748-2280/stream/icecast.audio
