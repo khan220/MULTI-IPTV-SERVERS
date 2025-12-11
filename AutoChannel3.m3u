@@ -1,28 +1,10 @@
 #EXTM3U
 #EXTINF:-1,SkyBlue IPTV
 https://cdn.pixabay.com/video/2025/12/10/321012.mp4?
-#EXTINF:-1,saudi_quran
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=qoran_tv&t=11111111
+
 #EXTINF:-1,sunnah
 https://win.holol.com/live/sunnah/chunklist.m3u8
-#EXTINF:-1,sunnah
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=sunna_tv&t=11111111
-#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/qorantv.jpg?v=7",Al Quran Al Kareem
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=qoran_tv&t=11111111
-#EXTINF:-1 tvg-id="Saudi Sunnah ARB" tvg-name="Saudi Sunnah ARB" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/sunaa.jpg?v=7",Al Sunnah (Medina)
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=sunna_tv&t=11111111
-#EXTINF:-1 tvg-language="" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/saudi/saudi_1.jpg?v=7",Saudi TV 1
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_tv&t=11111111
-#EXTINF:-1 tvg-id="SBC" tvg-name="SBC" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/sbc_saudi.jpg?v=7" ,SBC 
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=sbc_tv&t=11111111
-#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/thikrayat_tv.jpg?v=7" ,Thikrayat TV
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_thikrayat&t=11111111
-#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/saudi/saudi_alekhbariya.jpg?v=7" ,Al Ekhbariya
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_ekhbariya&t=11111111
-#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/saudi/saudisport1.jpg?v=7" ,Ksa Sport 1
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_sport1&t=11111111
-#EXTINF:-1  tvg-logo="https://www.elahmad.com/tv/mobiletv/images/saudi/saudisport2.jpg?v=7" ,Ksa Sport 2
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_sport2&t=11111111
+
 #EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/ahl_alquran.jpg?v=7",Sad TV
 https://ssadtv.ddns.net/live/saad/playlist.m3u8
 #EXTINF:-1 tvg-id="Iqraa" tvg-name="Iqraa" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/iqraa_tv.jpg?v=7" group-title="Religious",Iqraa
@@ -33,25 +15,6 @@ https://playlist.fasttvcdn.com/pl/dlkqw1ftuvuuzkcb4pxdcg/Iqraafasttv2/playlist.m
 https://media2.streambrothers.com:1936/8122/8122/playlist.m3u8
 #EXTINF:-1 tvg-id="Asharq.sa" tvg-name="Asharq" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/asharq_tv.jpg?v=7" group-title="Business",Asharq
 https://svs.itworkscdn.net/bloomberarlive/bloomberg.smil/playlist_dvr.m3u8
-
-#EXTINF:-1 tvg-id="KTV 1 ARB" tvg-name="KTV 1 ARB" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_1.jpg?v=7",KTV 1
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtv1&t=11111111
-#EXTINF:-1 tvg-id="KTV 2 ARB" tvg-name="KTV 2 ARB" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_2.jpg?v=7",KTV 2
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtv2&t=11111111
-#EXTINF:-1 tvg-id="KTVAlMajlis.kw" tvg-name="KTV Al Majlis" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_almjles.jpg?v=7",KTV Al Majlis
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvmajlis&t=11111111
-#EXTINF:-1 tvg-id="KTVAlQurain.kw" tvg-name="KTV Al Qurain" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_plus.jpg?v=7",KTV Al Qurain
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvqurain&t=11111111
-#EXTINF:-1 tvg-id="KTV.kw" tvg-name="KTV" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_arabe.jpg?v=7",KTV Arabe
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvarabi&t=11111111
-#EXTINF:-1 tvg-id="KTVEthraa.kw" tvg-name="KTV Ethraa" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_ethraa.jpg?v=7",KTV Ethraa
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvethraa&t=11111111
-#EXTINF:-1 tvg-id="KTVKhallikBilbait.kw" tvg-name="KTV Khallik Bilbait" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_kids.jpg?v=7",KTV Khallik Bilbait
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvkids&t=11111111
-#EXTINF:-1 tvg-id="KTV Sport ARB" tvg-name="KTV Sport ARB" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_sport.jpg?v=7" group-title="Sport",KTV Sport
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvsports&t=11111111
-#EXTINF:-1 tvg-id="KTVSportPlus.kw" tvg-name="KTV Sport Plus" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_sport_plus.jpg?v=7",KTV Sport Plus
-https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvsportsplus&t=11111111
 #EXTINF:-1 tvg-id="Abu Dhabi Sports 1 ARB" tvg-name="Abu Dhabi Sports ARB" tvg-logo="https://i.imgur.com/lKl2wZH.png" group-title="Sport",Abu Dhabi Sports 1
 https://admn-live-cdn-lb.starzplayarabia.com/out/v1/admn_tv_enc/abudhabi_sports_1/abudhabi_sports_1_hls_nd/index.m3u8
 #EXTINF:-1 tvg-id="Abu Dhabi Sports 2 ARB" tvg-name="Abu Dhabi Sports 2 ARB" tvg-logo="https://i.imgur.com/9q8gFsq.png" group-title="Sport",Abu Dhabi Sports 2
@@ -96,14 +59,7 @@ https://live-hls-web-aja-gcp.thehlive.com/AJA/index.m3u8
 https://live-hls-web-aje-gcp.thehlive.com/AJE/index.m3u8
 #EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/aljazeera_mubasher.jpg?v=7" ,Al Jazeera Mubasher
 https://live-hls-web-ajm-gcp.thehlive.com/AJM/index.m3u8
-#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alkass_1.jpg?v=7" group-title="Sport",Al Kass Sports 1
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=alkass1&t=11111111
-#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alkass_2.jpg?v=7" group-title="Sport",Al Kass Sports 2
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=alkass2&t=11111111
-#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alkass_3.jpg?v=7" group-title="Sport",Al Kass Sports 3
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=alkass3&t=11111111
-#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alkass_4.jpg?v=7" group-title="Sport",Al Kass Sports 4
-https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=alkass4&t=11111111
+
 #EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alrayyan_tv.jpg?v=7",Al Rayyan
 https://alrayyancdn.vidgyor.com/pub-noalrayy3pwz0l/liveabr/playlist_dvr.m3u8
 #EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alrayyan_alqadeem.jpg?v=7",Al Rayyan Al Qadeem
@@ -442,6 +398,8 @@ https://tennischannel-int-samsunguk.amagi.tv/playlist.m3u8
 http://m.live.net.sa:1935/live/sunnah/chunklist.m3u8
 #EXTINF:-1,Al-Istiqama TV
 http://jmc-live.ercdn.net/alistiqama/alistiqama_576p.m3u8
+#EXTINF:-1,SAVOIR
+https://hls.savoir.media/live/stream.m3u8
 #EXTINF:-1,Sharqiya from Kalba TV
 https://svs.itworkscdn.net/kablatvlive/kabtv1.smil/kablatvpublish/kabtv_source/chunks.m3u8
 #EXTINF:-1,Dubai Zaman
@@ -486,9 +444,51 @@ https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvmajlis&t=11111111
 https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvqurain&t=11111111
 #EXTINF:-1,kwtv arabi
 https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvarabi&t=11111111
-#EXTINF:-1,SAVOIR
-https://hls.savoir.media/live/stream.m3u8
 
-
-
+#EXTINF:-1,saudi_quran
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=qoran_tv&t=11111111
+#EXTINF:-1,sunnah
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=sunna_tv&t=11111111
+#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/qorantv.jpg?v=7",Al Quran Al Kareem
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=qoran_tv&t=11111111
+#EXTINF:-1 tvg-id="Saudi Sunnah ARB" tvg-name="Saudi Sunnah ARB" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/sunaa.jpg?v=7",Al Sunnah (Medina)
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=sunna_tv&t=11111111
+#EXTINF:-1 tvg-language="" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/saudi/saudi_1.jpg?v=7",Saudi TV 1
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_tv&t=11111111
+#EXTINF:-1 tvg-id="SBC" tvg-name="SBC" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/sbc_saudi.jpg?v=7" ,SBC 
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=sbc_tv&t=11111111
+#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/thikrayat_tv.jpg?v=7" ,Thikrayat TV
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_thikrayat&t=11111111
+#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/saudi/saudi_alekhbariya.jpg?v=7" ,Al Ekhbariya
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_ekhbariya&t=11111111
+#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/saudi/saudisport1.jpg?v=7" ,Ksa Sport 1
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_sport1&t=11111111
+#EXTINF:-1  tvg-logo="https://www.elahmad.com/tv/mobiletv/images/saudi/saudisport2.jpg?v=7" ,Ksa Sport 2
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=saudi_sport2&t=11111111
+#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alkass_1.jpg?v=7" group-title="Sport",Al Kass Sports 1
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=alkass1&t=11111111
+#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alkass_2.jpg?v=7" group-title="Sport",Al Kass Sports 2
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=alkass2&t=11111111
+#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alkass_3.jpg?v=7" group-title="Sport",Al Kass Sports 3
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=alkass3&t=11111111
+#EXTINF:-1 tvg-logo="https://www.elahmad.com/tv/mobiletv/images/alkass_4.jpg?v=7" group-title="Sport",Al Kass Sports 4
+https://www.elahmad.com/tv/m3u8/online_live_14_tv.m3u8?id=alkass4&t=11111111
+#EXTINF:-1 tvg-id="KTV 1 ARB" tvg-name="KTV 1 ARB" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_1.jpg?v=7",KTV 1
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtv1&t=11111111
+#EXTINF:-1 tvg-id="KTV 2 ARB" tvg-name="KTV 2 ARB" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_2.jpg?v=7",KTV 2
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtv2&t=11111111
+#EXTINF:-1 tvg-id="KTVAlMajlis.kw" tvg-name="KTV Al Majlis" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_almjles.jpg?v=7",KTV Al Majlis
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvmajlis&t=11111111
+#EXTINF:-1 tvg-id="KTVAlQurain.kw" tvg-name="KTV Al Qurain" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_plus.jpg?v=7",KTV Al Qurain
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvqurain&t=11111111
+#EXTINF:-1 tvg-id="KTV.kw" tvg-name="KTV" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_arabe.jpg?v=7",KTV Arabe
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvarabi&t=11111111
+#EXTINF:-1 tvg-id="KTVEthraa.kw" tvg-name="KTV Ethraa" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_ethraa.jpg?v=7",KTV Ethraa
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvethraa&t=11111111
+#EXTINF:-1 tvg-id="KTVKhallikBilbait.kw" tvg-name="KTV Khallik Bilbait" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_kids.jpg?v=7",KTV Khallik Bilbait
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvkids&t=11111111
+#EXTINF:-1 tvg-id="KTV Sport ARB" tvg-name="KTV Sport ARB" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_sport.jpg?v=7" group-title="Sport",KTV Sport
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvsports&t=11111111
+#EXTINF:-1 tvg-id="KTVSportPlus.kw" tvg-name="KTV Sport Plus" tvg-country="KW" tvg-logo="https://www.elahmad.com/tv/mobiletv/images/kwtv_sport_plus.jpg?v=7",KTV Sport Plus
+https://www.elahmad.com/tv/m3u8/kuwait_tv_8.m3u8?id=kwtvsportsplus&t=11111111
 
