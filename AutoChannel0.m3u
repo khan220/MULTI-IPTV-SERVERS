@@ -1,21 +1,16 @@
 #EXTM3U 
 #EXTINF:-1,SkyBlue IPTV
 https://cdn.pixabay.com/video/2025/12/10/321012.mp4?
-
 #EXTINF:-1 tvg-logo="https://graficsea.com/wp-content/uploads/2021/12/Madni-Tv-Channel.jpg", Madani Channel
 https://streaming.madanichannel.tv/static/streaming-playlists/hls/b9790f10-cb0d-4e30-82bf-84a756234e58/2.m3u8
-
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/Whc4D5nH/SAU.png", Saudi Quran Makkah TV HD
-https://cdn24lhr.tamashaweb.com:8087/jazzauth/Saudimakkah(nw)-abr/live/vsat-150H/chunks.m3u8?
-
+https://cdn05khi.tamashaweb.com:8087/jazzauth/Saudimakkah(nw)-abr/live/vsat-150H/chunks.m3u8?nimblesessionid=58307317&wmsAuthSign=c2VydmVyX3RpbWU9MTIvMTEvMjAyNSA0OjUxOjAzIFBNJmhhc2hfdmFsdWU9TmFDL3diZkZmcWY0amlSQlJYaUZVQT09JnZhbGlkbWludXRlcz02MA%3D%3D:8087/jazzauth/Saudimakkah(nw)-abr/playlist.m3u8
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/Whc4D5nH/SAU.png", Saudi Sunnah Madinah TV HD
 https://cdn21lhr.tamashaweb.com:8087/jazzauth/SaudiSunnah(NW)-abr/live/vsat-149H/chunks.m3u8?
-
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/crSB7gGk/1648914078201.jpg", Hyder TV
 https://ml-pull-hwc.myco.io/hydertvcanada/hls/hydertvcanada_H264-720p.m3u8?pkg_media=video&pkg_hm=index.m3u8&pkg_svc=1&pkg_vcodec=avc1
-
 #EXTINF:-1 tvg-logo="https://i.ibb.co/qYDPK8Bm/1761217824039.webp", Geo News
-https://cdn05khi.tamashaweb.com:8087/jazzauth/geoNews-abr/live/137M/chunks.m3u8?
+https://cdn21lhr.tamashaweb.com:8087/jazzauth/geoNews-abr/live/vsat-93H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/nh98g7ry/1750321735602.webp", PTV News
 https://cdn23lhr.tamashaweb.com:8087/jazzauth/PTVNews-abr/live/191H/chunks.m3u8?
@@ -24,10 +19,9 @@ https://cdn23lhr.tamashaweb.com:8087/jazzauth/PTVNews-abr/live/191H/chunks.m3u8?
 https://cdn02khi.tamashaweb.com:8087/jazzauth/SUN-NEWS-abr/live/187H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/Njk8gCKr/1761652087354.webp", BBC
-https://cdn12isb.tamashaweb.com:8087/jazzauth/BBCNEWS-abr/live/204M-H/chunks.m3u8?
-
+https://d1kvlt93j1bc49.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-6vpx7bvwjm7ao/a8bd37e7-0456-4986-be1e-e7fcfdb493a4/5.m3u8
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/V5V2VsXf/1684242189-logo.webp", ARY News
-https://cdn21lhr.tamashaweb.com:8087/jazzauth/ARYnews-abr/live/vsat-arynews-H/chunks.m3u8?
+https://cdn22lhr.tamashaweb.com:8087/jazzauth/ARYnews-abr/live/vsat-arynews-M/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/2b9G5wYb/dawn-news-live.webp", Dawn News
 https://cdn23lhr.tamashaweb.com:8087/jazzauth/DawnNews-abr/live/vsat-130H/chunks.m3u8?
@@ -45,7 +39,10 @@ https://cdn02khi.tamashaweb.com:8087/jazzauth/AL-Jazeera-abr/live/148M/chunks.m3
 https://cdn23lhr.tamashaweb.com:8087/jazzauth/AajNews-abr/live/vsat-96H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://images.seeklogo.com/logo-png/3/1/cnn-international-logo-png_seeklogo-32708.png", CNN
-https://cdn23lhr.tamashaweb.com:8087/jazzauth/Livecnn-abr/live/86H/chunks.m3u8?
+https://d3bp6dwmpbdajl.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ury0meh5m4nzm/a4a9da76-8e25-423f-a122-35e7b70aa69a/0.m3u8
+
+#EXTINF:-1 tvg-logo="https://images.seeklogo.com/logo-png/3/1/cnn-international-logo-png_seeklogo-32708.png", CNN
+https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_3_1464000.m3u8
 
 #EXTINF:-1 tvg-logo="https://canvas.tamashaweb.com/jazzlive/uploads/channels/logo/gnn-live.webp?id=24", GNN
 https://cdn02khi.tamashaweb.com:8087/jazzauth/GNN-abr/live/vsat-gnn-H/chunks.m3u8?
@@ -54,16 +51,19 @@ https://cdn02khi.tamashaweb.com:8087/jazzauth/GNN-abr/live/vsat-gnn-H/chunks.m3u
 https://cdn22lhr.tamashaweb.com:8087/jazzauth/NeoNews-abr/live/vsat-110H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/hhwgcDWv/png-transparent-pakistan-bol-network-television-channel-ary-news-news-live-television-text-rectangle.png", BOL News
-https://cdn24lhr.tamashaweb.com:8087/jazzauth/BolNews-abr/live/vsat-145H/chunks.m3u8?
+https://cdn24lhr.tamashaweb.com:8087/jazzauth/BolNews-abr/live/vsat-145M/chunks.m3u8?
+
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/YhHxZFnZ/gtv-new-logo.webp", GTV News
 https://cdn02khi.tamashaweb.com:8087/jazzauth/GTVNews-abr/live/vsat-129H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/zyNPC6YC/Suno-News.webp", Suno News
-https://cdn23lhr.tamashaweb.com:8087/jazzauth/Suno_News-abr/live/167M/chunks.m3u8?
+https://cdn21lhr.tamashaweb.com:8087/jazzauth/Suno_News-abr/live/vsat-89H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/210zZ4L5/1686912075-logo.webp", ABN News
 https://cdn12isb.tamashaweb.com:8087/jazzauth/ABNnews-abr/live/vsat-aurlife-H/chunks.m3u8?
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/210zZ4L5/1686912075-logo.webp", ABN News
+https://cdn22lhr.tamashaweb.com:8087/jazzauth/ABNnews-abr/live/vsat-aurlife-M/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.imgur.com/bQfQeEA.jpeg", Lahore News
 https://vcdn.dunyanews.tv/lahorelive/ngrp:lnews_1_all/playlist.m3u8
@@ -101,25 +101,33 @@ https://cdn21lhr.tamashaweb.com:8087/jazzauth/ARYzindagi-abr/live/vsat-aryzindag
 https://cdn22lhr.tamashaweb.com:8087/jazzauth/KashishTV-abr/live/vsat-115H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://www.city42.tv/uploads/theme/logo-1553667665.png",City 21 News
+https://cdn05khi.tamashaweb.com:8087/jazzauth/city21-abr/live/168M/chunks.m3u8?
+
 https://cdn24lhr.tamashaweb.com:8087/jazzauth/city21-abr/live/168M/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/G44Svmd1/365-news-pk.png",365 TV
 https://cdn22lhr.tamashaweb.com:8087/jazzauth/365News-abr/live/vsat-abnnews-H/chunks.m3u8?
 
+
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/NyyHBLms/Nice-Png-tv-channel-logo-png-4725557.png",KTN News
 https://cdn22lhr.tamashaweb.com:8087/jazzauth/ktnNews-abr/live/vsat-132H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/9/93/24_News_HD_Logo.png",24 NEWS
-https://cdn22lhr.tamashaweb.com:8087/jazzauth/24News-abr/live/146M/chunks.m3u8?
+https://cdn23lhr.tamashaweb.com:8087/jazzauth/24News-abr/live/vsat-92H/chunks.m3u8?
 
-#EXTINF:-1 tvg-logo="https://i.postimg.cc/N9BpdWKc/such-tv-logo.jpg",Such TV
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/N9BpdWKc/such-tv-logo.jpg",Such TV HD
 https://cdn12isb.tamashaweb.com:8087/jazzauth/SachTV/live/vsat-suchnews-H/chunks.m3u8?
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/N9BpdWKc/such-tv-logo.jpg",Such TV
+https://cdn23lhr.tamashaweb.com:8087/jazzauth/SachTV/live/vsat-suchnews-M/chunks.m3u8?
+
+
 
 #EXTINF:-1 tvg-logo="https://www.lyngsat.com/logo/tv/rr/roze-news-pk.gif",Roze News
 https://cdn05khi.tamashaweb.com:8087/jazzauth/RozNews-abr/live/vsat-126H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://ev-img-cdn-lb.shoq.com.pk/474w/livechannels/LAHORERANGLIVEY2015MUR/LAHORERANGLIVEY2015MUR-474x677-PST.jpg",Lahore Rang
-https://cdn02khi.tamashaweb.com:8087/jazzauth/LahoreRung-abr/live/179M/chunks.m3u8?
+https://cdn22lhr.tamashaweb.com:8087/jazzauth/LahoreRung-abr/live/vsat-86H/chunks.m3u8?
+
 
 #EXTINF:-1 tvg-logo="https://canvas.tamashaweb.com/jazzlive/uploads/channels/logo/news-one-live.webp?id=89",News One
 https://cdn21lhr.tamashaweb.com:8087/jazzauth/NewsOne-abr/live/vsat-100H/chunks.m3u8?
@@ -139,7 +147,8 @@ https://cdn02khi.tamashaweb.com:8087/jazzauth/city42(vnw)-abr/live/vsat-111H/chu
 #EXTINF:-1 tvg-logo="https://www.lyngsat.com/logo/tv/mm/metro1_news_pk.png",Metro 1 News
 https://cdn12isb.tamashaweb.com:8087/jazzauth/Metro1News-abr/live/vsat-147H/chunks.m3u8?
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/d7rdChCZ/RE.jpg",Sindh TV News
-https://cdn12isb.tamashaweb.com:8087/jazzauth/SindhNews-abr/live/136-2L/chunks.m3u8?
+https://cdn23lhr.tamashaweb.com:8087/jazzauth/SindhNews-abr/live/vsat-80H/chunks.m3u8?
+
 
 #EXTINF:-1 tvg-logo="https://www.lyngsat.com/logo/tv/tt/time-news-pk.png",Time News
 https://cdn12isb.tamashaweb.com:8087/jazzauth/TimeNews-abr/live/vsat-125H/chunks.m3u8?
@@ -154,19 +163,25 @@ https://cdn23lhr.tamashaweb.com:8087/jazzauth/city41News-abr/live/vsat-121H/chun
 https://cdn12isb.tamashaweb.com:8087/jazzauth/mashriqtv-abr/live/vsat-109H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://www.lyngsat.com/logo/tv/kk/kohenoor-news-pk.png",Kohenoor TV
-https://cdn22lhr.tamashaweb.com:8087/jazzauth/KohinoorTV-abr/live/157-2M/chunks.m3u8?
+https://cdn21lhr.tamashaweb.com:8087/jazzauth/KohinoorTV-abr/live/vsat-87H/chunks.m3u8?
 
-#EXTINF:-1 tvg-logo="https://i.postimg.cc/HVh0qcCk/ABT.jpg",Abb Takk News
+
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/HVh0qcCk/ABT.jpg",Abb Takk News HD
 https://cdn22lhr.tamashaweb.com:8087/jazzauth/abbtak-abr/live/133H/chunks.m3u8?
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/HVh0qcCk/ABT.jpg",Abb Takk News
+https://cdn21lhr.tamashaweb.com:8087/jazzauth/abbtak-abr/live/vsat-82M/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/XXrWkmLR/5CH.jpg",Channel 5 News HD
 https://ml-pull-dvc-myco.io:2096/CHANNEL_5_NEWS/tracks-v1a1/mono.ts.m3u8
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/XXrWkmLR/5CH.jpg",Channel 5 News
+https://cdn24lhr.tamashaweb.com:8087/jazzauth/Channel5-abr/live/vsat-channel5-M/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://www.lyngsat.com/logo/tv/cc/capital_tv_pk.png",Capital TV
 https://ml-pull-dvc-myco.io:2096/CAPITAL_NEWS/tracks-v1a1/mono.ts.m3u8
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/rzWvFrJm/TRT-World.png",TRT World
 https://tv-trtworld.medya.trt.com.tr/master_1080.m3u8?
+
 
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/e/e7/Hum_Sitaray_Logo.png",Hum Sitaray
 https://cdn24lhr.tamashaweb.com:8087/jazzauth/HumSitaray-abr/live/vsat-107H/chunks.m3u8?
