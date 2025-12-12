@@ -96,7 +96,10 @@ https://cdn22lhr.tamashaweb.com:8087/jazzauth/NeoNews-abr/live/vsat-110H/chunks.
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/hhwgcDWv/png-transparent-pakistan-bol-network-television-channel-ary-news-news-live-television-text-rectangle.png", BOL News
 https://cdn24lhr.tamashaweb.com:8087/jazzauth/BolNews-abr/live/vsat-145M/chunks.m3u8?
-
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/BPsMPyKR/1755087012153.webp",TV ONE
+https://cdn5.mjunoon.tv:8087/web/TV1-129/live/129M/chunks.m3u8?
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/BPsMPyKR/1755087012153.webp",TV ONE HD
+https://cdn5.mjunoon.tv:8087/web/TV1-129/live/129H/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/YhHxZFnZ/gtv-new-logo.webp", GTV News
 https://cdn02khi.tamashaweb.com:8087/jazzauth/GTVNews-abr/live/vsat-129H/chunks.m3u8?
