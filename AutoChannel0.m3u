@@ -9,8 +9,11 @@ https://cdn05khi.tamashaweb.com:8087/jazzauth/Saudimakkah(nw)-abr/live/vsat-150H
 https://cdn21lhr.tamashaweb.com:8087/jazzauth/SaudiSunnah(NW)-abr/live/vsat-149H/chunks.m3u8?
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/crSB7gGk/1648914078201.jpg", Hyder TV
 https://ml-pull-hwc.myco.io/hydertvcanada/hls/hydertvcanada_H264-720p.m3u8?pkg_media=video&pkg_hm=index.m3u8&pkg_svc=1&pkg_vcodec=avc1
-#EXTINF:-1 tvg-logo="https://i.ibb.co/qYDPK8Bm/1761217824039.webp", Geo News
+#EXTINF:-1 tvg-logo="https://i.ibb.co/qYDPK8Bm/1761217824039.webp", Geo News HD
 https://cdn21lhr.tamashaweb.com:8087/jazzauth/geoNews-abr/live/vsat-93H/chunks.m3u8?
+
+#EXTINF:-1 tvg-logo="https://i.ibb.co/qYDPK8Bm/1761217824039.webp", Geo News
+https://cdn21lhr.tamashaweb.com:8087/jazzauth/geoNews-abr/live/vsat-93M/chunks.m3u8?
 
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/nh98g7ry/1750321735602.webp", PTV News
 https://cdn23lhr.tamashaweb.com:8087/jazzauth/PTVNews-abr/live/191H/chunks.m3u8?
