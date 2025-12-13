@@ -1,6 +1,285 @@
 #EXTM3U 
-#EXTINF:-1,Coming Soon
-https://cdn.pixabay.com/video/2025/12/10/321008.mp4?
-
 #EXTINF:-1,SkyBlue IPTV
 https://cdn.pixabay.com/video/2025/12/10/321012.mp4?
+#EXTINF:-1,4seven
+http://176.65.146.224:4002/play/a06x/index.m3u8
+#EXTINF:-1,BBC ALBA HD
+http://176.65.146.224:4002/play/a06j/index.m3u8
+#EXTINF:-1,BBC NEWS HD
+http://176.65.146.224:4002/play/a06i/index.m3u8
+#EXTINF:-1,BBC One ScotHD
+http://176.65.146.224:4002/play/a06g/index.m3u8
+#EXTINF:-1,BBC One WM HD
+http://176.65.146.224:4002/play/a06k/index.m3u8
+#EXTINF:-1,BBC One Wal HD
+http://176.65.146.224:4002/play/a06h/index.m3u8
+#EXTINF:-1,Channel 4+1
+http://176.65.146.224:4002/play/a06u/index.m3u8
+#EXTINF:-1,DMAX
+http://176.65.146.224:4002/play/a070/index.m3u8
+#EXTINF:-1,E4 Extra
+http://176.65.146.224:4002/play/a06w/index.m3u8
+#EXTINF:-1,E4+1
+http://176.65.146.224:4002/play/a06t/index.m3u8
+#EXTINF:-1,E4+1
+http://176.65.146.224:4002/play/a06b/index.m3u8
+#EXTINF:-1,Faith UK
+http://176.65.146.224:4002/play/a073/index.m3u8
+#EXTINF:-1,Film4+1
+http://176.65.146.224:4002/play/a06y/index.m3u8
+#EXTINF:-1,GEO News
+http://176.65.146.224:4002/play/a076/index.m3u8
+#EXTINF:-1,GEO TV
+http://176.65.146.224:4002/play/a075/index.m3u8
+#EXTINF:-1,HGTV
+http://176.65.146.224:4002/play/a06z/index.m3u8
+#EXTINF:-1,More4+1
+http://176.65.146.224:4002/play/a06v/index.m3u8
+#EXTINF:-1,Quest Red
+http://176.65.146.224:4002/play/a071/index.m3u8
+#EXTINF:-1,BBC One CI HD
+http://176.65.146.224:4008/play/a06f/index.m3u8
+#EXTINF:-1,BBC One SW HD
+http://176.65.146.224:4008/play/a06j/index.m3u8
+#EXTINF:-1,BBC One Wst HD
+http://176.65.146.224:4008/play/a06h/index.m3u8
+#EXTINF:-1,BBC RB 1 HD
+http://176.65.146.224:4008/play/a06g/index.m3u8
+#EXTINF:-1,BBCScotlandHD
+http://176.65.146.224:4008/play/a06i/index.m3u8
+#EXTINF:-1,5 USA
+http://176.65.146.224:4003/play/a06h/index.m3u8
+#EXTINF:-1,5ACTION
+http://176.65.146.224:4003/play/a06n/index.m3u8
+#EXTINF:-1,5SELECT
+http://176.65.146.224:4003/play/a06k/index.m3u8
+#EXTINF:-1,5STAR
+http://176.65.146.224:4003/play/a06j/index.m3u8
+#EXTINF:-1,5USA+1
+http://176.65.146.224:4003/play/a06i/index.m3u8
+#EXTINF:-1,Akaal Channel
+http://176.65.146.224:4003/play/a06t/index.m3u8
+#EXTINF:-1,Arirang TV HD
+http://176.65.146.224:4003/play/a06e/index.m3u8
+#EXTINF:-1,Channel 5
+http://176.65.146.224:4003/play/a06g/index.m3u8
+#EXTINF:-1,Channel 5 HD
+http://176.65.146.224:4003/play/a06m/index.m3u8
+#EXTINF:-1,Channel 5+1
+http://176.65.146.224:4003/play/a06l/index.m3u8
+#EXTINF:-1,Dunamis TV
+http://176.65.146.224:4003/play/a06q/index.m3u8
+#EXTINF:-1,EWTN Catholic
+http://176.65.146.224:4003/play/a06s/index.m3u8
+#EXTINF:-1,GREAT! romance
+http://176.65.146.224:4003/play/a06d/index.m3u8
+#EXTINF:-1,IQRA Bangla
+http://176.65.146.224:4003/play/a06v/index.m3u8
+#EXTINF:-1,IQRA TV
+http://176.65.146.224:4003/play/a06u/index.m3u8
+#EXTINF:-1,Islam Ch Urdu
+http://176.65.146.224:4003/play/a06r/index.m3u8
+#EXTINF:-1,Islam Channel
+http://176.65.146.224:4003/play/a06o/index.m3u8
+#EXTINF:-1,Islam TV
+http://176.65.146.224:4003/play/a06w/index.m3u8
+#EXTINF:-1,MTA1 World HD
+http://176.65.146.224:4003/play/a06f/index.m3u8
+#EXTINF:-1,NHK World HD
+http://176.65.146.224:4003/play/a06c/index.m3u8
+#EXTINF:-1,TBN UK
+http://176.65.146.224:4003/play/a06p/index.m3u8
+
+#EXTINF:-1,G! romance+1
+http://176.65.146.224:4004/play/a06f/index.m3u8
+#EXTINF:-1,GREAT! action
+http://176.65.146.224:4004/play/a06d/index.m3u8
+#EXTINF:-1,GREAT! movies
+http://176.65.146.224:4004/play/a06b/index.m3u8
+#EXTINF:-1,GREAT! movies+1
+http://176.65.146.224:4004/play/a06h/index.m3u8
+#EXTINF:-1,GREAT! real
+http://176.65.146.224:4004/play/a06g/index.m3u8
+#EXTINF:-1,GREAT! real+1
+http://176.65.146.224:4004/play/a06n/index.m3u8
+#EXTINF:-1,GREAT! romance 
+http://176.65.146.224:4004/play/a06e/index.m3u8
+#EXTINF:-1,GREAT! tv
+http://176.65.146.224:4004/play/a06l/index.m3u8
+#EXTINF:-1,GREAT! tv
+http://176.65.146.224:4004/play/a06c/index.m3u8
+#EXTINF:-1,GREAT! tv+1
+http://176.65.146.224:4004/play/a06m/index.m3u8
+#EXTINF:-1,GREAT!action+1
+http://176.65.146.224:4004/play/a06j/index.m3u8
+#EXTINF:-1,ITV1 HD
+http://176.65.146.224:4004/play/a07n/index.m3u8
+#EXTINF:-1,ITV1 HD
+http://176.65.146.224:4004/play/a07k/index.m3u8
+#EXTINF:-1,ITV1 Wales HD
+http://176.65.146.224:4004/play/a07m/index.m3u8
+#EXTINF:-1,ITV1+1
+http://176.65.146.224:4004/play/a07g/index.m3u8
+#EXTINF:-1,ITV2 HD
+http://176.65.146.224:4004/play/a07l/index.m3u8
+#EXTINF:-1,ITV2+1
+http://176.65.146.224:4004/play/a07h/index.m3u8
+#EXTINF:-1,ITV3 HD
+http://176.65.146.224:4004/play/a07o/index.m3u8
+#EXTINF:-1,ITV3+1
+http://176.65.146.224:4004/play/a07i/index.m3u8
+#EXTINF:-1,ITV4+1
+http://176.65.146.224:4004/play/a07j/index.m3u8
+#EXTINF:-1,LEGEND
+http://176.65.146.224:4004/play/a078/index.m3u8
+#EXTINF:-1,LEGEND
+http://176.65.146.224:4004/play/a06w/index.m3u8
+#EXTINF:-1,LEGEND XTRA
+http://176.65.146.224:4004/play/a076/index.m3u8
+#EXTINF:-1,LEGEND XTRA
+http://176.65.146.224:4004/play/a06u/index.m3u8
+#EXTINF:-1,LEGEND XTRA+1
+http://176.65.146.224:4004/play/a07c/index.m3u8
+#EXTINF:-1,LEGEND XTRA+1
+http://176.65.146.224:4004/play/a070/index.m3u8
+#EXTINF:-1,PBS America
+http://176.65.146.224:4004/play/a079/index.m3u8
+#EXTINF:-1,PBS America
+http://176.65.146.224:4004/play/a06x/index.m3u8
+#EXTINF:-1,POP+1
+http://176.65.146.224:4004/play/a06k/index.m3u8
+#EXTINF:-1,S4C HD
+http://176.65.146.224:4004/play/a072/index.m3u8
+#EXTINF:-1,STV
+http://176.65.146.224:4004/play/a07f/index.m3u8
+#EXTINF:-1,TJC HD
+http://176.65.146.224:4004/play/a073/index.m3u8
+#EXTINF:-1,TRUE CRIME
+http://176.65.146.224:4004/play/a07a/index.m3u8
+#EXTINF:-1,TRUE CRIME
+http://176.65.146.224:4004/play/a06y/index.m3u8
+#EXTINF:-1,TRUE CRIME X
+http://176.65.146.224:4004/play/a077/index.m3u8
+#EXTINF:-1,TRUE CRIME X
+http://176.65.146.224:4004/play/a06v/index.m3u8
+#EXTINF:-1,TRUE CRIME+1
+http://176.65.146.224:4004/play/a07b/index.m3u8
+#EXTINF:-1,TRUE CRIME+1
+http://176.65.146.224:4004/play/a06z/index.m3u8
+#EXTINF:-1,That's TV
+http://176.65.146.224:4004/play/a07d/index.m3u8
+#EXTINF:-1,That's TV 2
+http://176.65.146.224:4004/play/a075/index.m3u8
+#EXTINF:-1,That's TV 2
+http://176.65.146.224:4004/play/a06t/index.m3u8
+#EXTINF:-1,That's TV 3
+http://176.65.146.224:4004/play/a07e/index.m3u8
+#EXTINF:-1,Channels 24
+http://176.65.146.224:4005/play/a06e/index.m3u8
+#EXTINF:-1,QVC Beauty
+http://176.65.146.224:4005/play/a06b/index.m3u8
+#EXTINF:-1,QVC Extra
+http://176.65.146.224:4005/play/a06a/index.m3u8
+#EXTINF:-1,QVC HD
+http://176.65.146.224:4005/play/a06c/index.m3u8
+#EXTINF:-1,QVC Style HD
+http://176.65.146.224:4005/play/a06d/index.m3u8
+#EXTINF:-1,Travelxp
+http://176.65.146.224:4005/play/a06g/index.m3u8
+#EXTINF:-1,BBC One EMidHD
+http://176.65.146.224:4001/play/a08i/index.m3u8
+#EXTINF:-1,BBC One EastHD
+http://176.65.146.224:4001/play/a08h/index.m3u8
+#EXTINF:-1,BBC One Lon HD
+http://176.65.146.224:4001/play/a08e/index.m3u8
+#EXTINF:-1,BBC Two Wal HD
+http://176.65.146.224:4001/play/a08f/index.m3u8
+#EXTINF:-1,CBeebies HD
+http://176.65.146.224:4001/play/a08g/index.m3u8
+#EXTINF:-1,Bloomberg HD
+http://176.65.146.224:4006/play/a06c/index.m3u8
+#EXTINF:-1,CNN HD
+http://176.65.146.224:4006/play/a06d/index.m3u8
+#EXTINF:-1,GB News HD
+http://176.65.146.224:4006/play/a06a/index.m3u8
+#EXTINF:-1,LoveWorld HD
+http://176.65.146.224:4006/play/a06b/index.m3u8
+
+#EXTINF:-1,BBC One Sth HD
+http://176.65.146.224:4007/play/a070/index.m3u8
+#EXTINF:-1,CNBC HD
+http://176.65.146.224:4007/play/a072/index.m3u8
+#EXTINF:-1,Channel 4 HD
+http://176.65.146.224:4007/play/a074/index.m3u8
+#EXTINF:-1,DMAX
+http://176.65.146.224:4007/play/a06r/index.m3u8
+#EXTINF:-1,DMAX+1
+http://176.65.146.224:4007/play/a06o/index.m3u8
+#EXTINF:-1,Dave
+http://176.65.146.224:4007/play/a06j/index.m3u8
+#EXTINF:-1,Dave ja vu
+http://176.65.146.224:4007/play/a06l/index.m3u8
+#EXTINF:-1,Drama
+http://176.65.146.224:4007/play/a06h/index.m3u8
+#EXTINF:-1,Drama+1
+http://176.65.146.224:4007/play/a06k/index.m3u8
+#EXTINF:-1,Food Network
+http://176.65.146.224:4007/play/a06y/index.m3u8
+#EXTINF:-1,Food Netwrk+1
+http://176.65.146.224:4007/play/a06z/index.m3u8
+#EXTINF:-1,Food Netwrk+1
+http://176.65.146.224:4007/play/a06q/index.m3u8
+#EXTINF:-1,HGTV
+http://176.65.146.224:4007/play/a06s/index.m3u8
+#EXTINF:-1,QUEST
+http://176.65.146.224:4007/play/a06v/index.m3u8
+#EXTINF:-1,QUEST+1
+http://176.65.146.224:4007/play/a06x/index.m3u8
+#EXTINF:-1,Quest Red
+http://176.65.146.224:4007/play/a06w/index.m3u8
+#EXTINF:-1,Quest Red+1
+http://176.65.146.224:4007/play/a06u/index.m3u8
+#EXTINF:-1,Really
+http://176.65.146.224:4007/play/a06n/index.m3u8
+#EXTINF:-1,STV HD
+http://176.65.146.224:4007/play/a073/index.m3u8
+#EXTINF:-1,Sky Mix HD
+http://176.65.146.224:4007/play/a071/index.m3u8
+#EXTINF:-1,U&Dave
+http://176.65.146.224:4007/play/a077/index.m3u8
+#EXTINF:-1,U&DaveJaVu
+http://176.65.146.224:4007/play/a07c/index.m3u8
+#EXTINF:-1,U&Drama
+http://176.65.146.224:4007/play/a079/index.m3u8
+#EXTINF:-1,U&Drama+1
+http://176.65.146.224:4007/play/a07b/index.m3u8
+#EXTINF:-1,U&Eden
+http://176.65.146.224:4007/play/a075/index.m3u8
+#EXTINF:-1,U&W
+http://176.65.146.224:4007/play/a078/index.m3u8
+#EXTINF:-1,U&W+1
+http://176.65.146.224:4007/play/a07a/index.m3u8
+#EXTINF:-1,U&Yesterday
+http://176.65.146.224:4007/play/a076/index.m3u8
+#EXTINF:-1,U&Yesterday+1
+http://176.65.146.224:4007/play/a07d/index.m3u8
+#EXTINF:-1,W
+http://176.65.146.224:4007/play/a06g/index.m3u8
+#EXTINF:-1,W+1
+http://176.65.146.224:4007/play/a06i/index.m3u8
+#EXTINF:-1,YESTERDAY
+http://176.65.146.224:4007/play/a06e/index.m3u8
+#EXTINF:-1,YESTERDAY+1
+http://176.65.146.224:4007/play/a06m/index.m3u8
+#EXTINF:-1,BBC One CI HD
+http://176.65.146.224:4008/play/a06f/index.m3u8
+#EXTINF:-1,BBC One SW HD
+http://176.65.146.224:4008/play/a06j/index.m3u8
+#EXTINF:-1,BBC One Wst HD
+http://176.65.146.224:4008/play/a06h/index.m3u8
+#EXTINF:-1,BBC RB 1 HD
+http://176.65.146.224:4008/play/a06g/index.m3u8
+#EXTINF:-1,BBCScotlandHD
+http://176.65.146.224:4008/play/a06i/index.m3u8
+
+
