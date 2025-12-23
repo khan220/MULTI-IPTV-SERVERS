@@ -1,16 +1,3 @@
-// -------------------------
-// UI bindings
-// -------------------------
-document.getElementById('next-btn').onclick = ()=>{ let f=getFilteredChannels(); if(!f.length) return; currentChannelIndex=(currentChannelIndex+1)%f.length; selectChannel(currentChannelIndex); };
-document.getElementById('prev-btn').onclick = ()=>{ let f=getFilteredChannels(); if(!f.length) return; currentChannelIndex--; if(currentChannelIndex<0) currentChannelIndex=f.length-1; selectChannel(currentChannelIndex); };
-
-categoryBtns.forEach(btn=>{
-  btn.onclick = async ()=>{
-    let cat = btn.dataset.cat;
-    if(secureDB[cat] && !unlocked[cat]){ adultModal.style.display="flex"; adultPasswordInput.value=""; activeLock=cat; return; }
-    categoryBtns.forEach(b=>b.classList.remove('category-active')); btn.classList.add('category-active');
-    activeCategory = cat; currentChannelIndex = 0;
-
     if(cat==="AutoChannel0" && AutoChannel0.length===0) AutoChannel0=await loadAuto("https://raw.githubusercontent.com/khan220/SKYBLUE-IPTV/refs/heads/main/AutoChannel0.m3u","AutoChannel0");
     if(cat==="AutoChannel1" && AutoChannel1.length===0) AutoChannel1=await loadAuto("https://raw.githubusercontent.com/khan220/SKYBLUE-IPTV/refs/heads/main/AutoChannel1.m3u","AutoChannel1");
     if(cat==="AutoChannel2" && AutoChannel2.length===0) AutoChannel2=await loadAuto("https://raw.githubusercontent.com/khan220/SKYBLUE-IPTV/refs/heads/main/AutoChannel2.m3u","AutoChannel2");
@@ -29,8 +16,3 @@ categoryBtns.forEach(btn=>{
     if(cat==="LockChannel5" && LockChannel5.length===0) LockChannel5=await loadAuto("https://raw.githubusercontent.com/khan220/MULTI-IPTV-SERVERS/refs/heads/main/LockChannel5.m3u","LockChannel5");
     if(cat==="LockChannel6" && LockChannel6.length===0) LockChannel6=await loadAuto("https://raw.githubusercontent.com/khan220/MULTI-IPTV-SERVERS/refs/heads/main/LockChannel6.m3u","LockChannel6");
     if(cat==="Adult" && AdultChannels.length===0) AdultChannels=await loadAuto("https://raw.githubusercontent.com/khan220/MULTI-IPTV-SERVERS/refs/heads/main/Lock Adult12.m3u","Adult");
-
-    buildDropdown(searchInput.value);
-    selectChannel(currentChannelIndex);
-  };
-});
