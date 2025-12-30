@@ -1,0 +1,942 @@
+[
+  {
+    "name": "Player",
+    "url": "https://cdn.pixabay.com/video/2025/12/12/321502.mp4",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "SkyBlue IPTV",
+    "url": "https://cdn.pixabay.com/video/2025/12/10/321012.mp4?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Madani Channel",
+    "url": "https://streaming.madanichannel.tv/static/streaming-playlists/hls/b9790f10-cb0d-4e30-82bf-84a756234e58/2.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Madani Channel",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/Madni-abr/live/vsat-94H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Saudi Quran Makkah TV",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/Saudimakkah(nw)-abr/live/vsat-150M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Saudi Quran Makkah TV HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/Saudimakkah(nw)-abr/live/vsat-150H/chunks.m3u8?nimblesessionid=58307317&wmsAuthSign=c2VydmVyX3RpbWU9MTIvMTEvMjAyNSA0OjUxOjAzIFBNJmhhc2hfdmFsdWU9TmFDL3diZkZmcWY0amlSQlJYaUZVQT09JnZhbGlkbWludXRlcz02MA%3D%3D:8087/jazzauth/Saudimakkah(nw)-abr/playlist.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Saudi Sunnah Madinah TV",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/SaudiSunnah(NW)-abr/live/vsat-149M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Saudi Sunnah Madinah TV HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/SaudiSunnah(NW)-abr/live/vsat-149H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Saudi Sunnah Madinah TV HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/SaudiSunnah(NW)-abr/live/vsat-149H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Hyder TV",
+    "url": "https://ml-pull-hwc.myco.io/hydertvcanada/hls/hydertvcanada_H264-720p.m3u8?pkg_media=video&pkg_hm=index.m3u8&pkg_svc=1&pkg_vcodec=avc1",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Geo News",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/geoNews-abr/live/vsat-93M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Geo News  HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/geoNews-abr/live/vsat-93H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " PTV News",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/PTVNews-abr/live/191M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " PTV News HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/PTVNews-abr/live/191H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " SUN NEWS",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/SUN-NEWS-abr/live/187M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " SUN NEWS HD",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/SUN-NEWS-abr/live/187H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " BBC",
+    "url": "https://d1kvlt93j1bc49.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-6vpx7bvwjm7ao/a8bd37e7-0456-4986-be1e-e7fcfdb493a4/5.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " ARY News",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/ARYnews-abr/live/vsat-arynews-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Dawn News",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/DawnNews-abr/live/vsat-130M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Dawn News HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/DawnNews-abr/live/vsat-130H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Samaa TV",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/samaaTV-abr/live/vsat-123M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Samaa TV HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/samaaTV-abr/live/vsat-123H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " CGTN",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/CgtnHD-abr/live/145M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " CGTN HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/CgtnHD-abr/live/145H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Al Jazeera",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/AL-Jazeera-abr/live/148M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " AAJ News",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/AajNews-abr/live/vsat-96M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " AAJ News HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/AajNews-abr/live/vsat-96H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "AIK NEWS",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/PNN-abr/live/vsat-84M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "AIK NEWS HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/PNN-abr/live/vsat-84H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " CNN",
+    "url": "https://d3bp6dwmpbdajl.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ury0meh5m4nzm/a4a9da76-8e25-423f-a122-35e7b70aa69a/0.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Euro sport",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/Eurosport-abr/live/182M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Euro sport HD",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/Eurosport-abr/live/182H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " CNN",
+    "url": "https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_3_1464000.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " GNN",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/GNN-abr/live/vsat-gnn-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " GNN HD",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/GNN-abr/live/vsat-gnn-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " NEO News",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/NeoNews-abr/live/vsat-110M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " NEO News HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/NeoNews-abr/live/vsat-110H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " BOL News",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/BolNews-abr/live/vsat-145M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "TV ONE",
+    "url": "https://cdn5.mjunoon.tv:8087/web/TV1-129/live/129M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "TV ONE HD",
+    "url": "https://cdn5.mjunoon.tv:8087/web/TV1-129/live/129H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " GTV News",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/GTVNews-abr/live/vsat-129H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Suno News",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/Suno_News-abr/live/vsat-89M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Suno News HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/Suno_News-abr/live/vsat-89H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " ABN News",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/ABNnews-abr/live/vsat-aurlife-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " ABN News",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/ABNnews-abr/live/vsat-aurlife-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Lahore News",
+    "url": "https://vcdn.dunyanews.tv/lahorelive/ngrp:lnews_1_all/playlist.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Rohi",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/RohiTV-abr/live/vsat-114M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Rohi HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/RohiTV-abr/live/vsat-114H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " ARY Digital",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/ARYdigital-abr/live/vsat-ary-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " ARY Digital HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/ARYdigital-abr/live/vsat-ary-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Geo TV",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/GeoEntertainment-abr/live/vsat-geotv-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Geo TV HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/GeoEntertainment-abr/live/vsat-geotv-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " PTV Home",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/PTVHome-abr/live/190H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Digital Pak",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/Digital-pak-abr/live/DP-AI_720p/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " aurLife HD",
+    "url": "http://124.109.47.101/hls/stream1.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " aurLife",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/AurLife-abr/live/vsat-365TV-L/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " aurLife HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/AurLife-abr/live/vsat-365TV-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Green Entertainment HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/Green_Entertainment-abr/live/vsat-green-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " Green Entertainment",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/Green_Entertainment-abr/live/vsat-green-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " HUM TV",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/humTV-abr/live/vsat-humtv-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " HUM TV HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/humTV-abr/live/vsat-humtv-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " HUM Sitaray",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/HumSitaray-abr/live/vsat-107M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " HUM Sitaray HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/HumSitaray-abr/live/vsat-107H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "HUM Masala",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/hummasala-abr/live/vsat-118M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "HUM Masala HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/hummasala-abr/live/vsat-118H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " PTV National",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/PTVNational-abr/live/193H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " ARY Zindagi HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/ARYzindagi-abr/live/vsat-aryzindagi-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": " ARY Zindagi",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/ARYzindagi-abr/live/vsat-aryzindagi-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Kashish HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/KashishTV-abr/live/vsat-115H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Kashish",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/KashishTV-abr/live/vsat-115M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "City 21 News",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/city21-abr/live/168M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "365 TV HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/365News-abr/live/vsat-abnnews-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "365 TV",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/365News-abr/live/vsat-abnnews-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "KTN News HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/ktnNews-abr/live/vsat-132H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "KTN News",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/ktnNews-abr/live/vsat-132M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "24 NEWS HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/24News-abr/live/vsat-92H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "24 NEWS",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/24News-abr/live/vsat-92M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Such TV HD",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/SachTV/live/vsat-suchnews-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Such TV",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/SachTV/live/vsat-suchnews-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Roze News HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/RozNews-abr/live/vsat-126H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Roze News",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/RozNews-abr/live/vsat-126M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Lahore Rang HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/LahoreRung-abr/live/vsat-86H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Lahore Rang",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/LahoreRung-abr/live/vsat-86MH/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "News One HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/NewsOne-abr/live/vsat-100H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "News One",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/NewsOne-abr/live/vsat-100M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Mehran TV HD",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/MehranTV-abr/live/vsat-106H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Mehran TV",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/MehranTV-abr/live/vsat-106M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Public News",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/PublicTV-abr/live/vsat-120M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Public News HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/PublicTV-abr/live/vsat-120H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Channel 5",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/Channel5-abr/live/vsat-channel5-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Channel 5 HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/Channel5-abr/live/vsat-channel5-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "CITY 42",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/city42(vnw)-abr/live/vsat-111M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "CITY 42 HD",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/city42(vnw)-abr/live/vsat-111H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Metro 1 News",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/Metro1News-abr/live/vsat-147M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Metro 1 News HD",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/Metro1News-abr/live/vsat-147H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Sindh TV News",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/SindhNews-abr/live/vsat-80M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Sindh TV News HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/SindhNews-abr/live/vsat-80H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Time News",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/TimeNews-abr/live/vsat-125M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Time News HD",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/TimeNews-abr/live/vsat-125H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Khyber News",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/KhyberNews-abr/live/vsat-98M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Khyber News HD",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/KhyberNews-abr/live/vsat-98H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "City 41",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/city41News-abr/live/vsat-121M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "City 41 HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/city41News-abr/live/vsat-121H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Mashriq TV",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/mashriqtv-abr/live/vsat-109M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Mashriq TV HD",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/mashriqtv-abr/live/vsat-109H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Kohenoor TV",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/KohinoorTV-abr/live/vsat-87M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Kohenoor TV HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/KohinoorTV-abr/live/vsat-87H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Abb Takk News",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/abbtak-abr/live/133M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Abb Takk News HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/abbtak-abr/live/133H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Abb Takk News",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/abbtak-abr/live/vsat-82M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Channel 5 News HD",
+    "url": "https://ml-pull-dvc-myco.io:2096/CHANNEL_5_NEWS/tracks-v1a1/mono.ts.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Channel 5 News",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/Channel5-abr/live/vsat-channel5-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Channel 5 News HD",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/Channel5-abr/live/vsat-channel5-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Capital TV",
+    "url": "https://ml-pull-dvc-myco.io:2096/CAPITAL_NEWS/tracks-v1a1/mono.ts.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "TRT World",
+    "url": "https://tv-trtworld.medya.trt.com.tr/master_1080.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "SET ENTERAINMENT HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/SetEntertainment-abr/live/vsat-setent-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "SET ENTERAINMENT",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/SetEntertainment-abr/live/vsat-setent-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Hum Sitaray",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/HumSitaray-abr/live/vsat-107M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Hum Sitaray HD",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/HumSitaray-abr/live/vsat-107H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Express Entertainment",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/ExpressEntertainment-abr/live/159-1M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Express Entertainment HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/ExpressEntertainment-abr/live/159-1H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Aan TV",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/AAN-TV-abr/live/vsat-aantv-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Aan TV HD",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/AAN-TV-abr/live/vsat-aantv-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "TV One",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/TVOne-abr/live/vsat-99M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "TV One HD",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/TVOne-abr/live/vsat-99H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Sab TV",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/SabTV-abr/live/vsat-146M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Sab TV HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/SabTV-abr/live/vsat-146H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "PTV Bolan",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/PTVBolan-abr/live/194M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "PTV Bolan HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/PTVBolan-abr/live/194H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Sindh TV",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/sindhTV-abr/live/136-1M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Sindh TV HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/sindhTV-abr/live/136-1H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Aur Life",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/AurLife-abr/live/vsat-365TV-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Aur Life HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/AurLife-abr/live/vsat-365TV-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "A Plus TV HD",
+    "url": "https://tapmadlive.akamaized.net/tapmadold/aplus.smil/chunklist_w1583852209_b748000_slEng.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "A Plus TV",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/Aplus-abr/live/vsat-112M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "A Plus TV HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/Aplus-abr/live/vsat-112H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "LTN Family",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/LTNFamily-abr/live/vsat-ltntv-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "LTN Family HD",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/LTNFamily-abr/live/vsat-ltntv-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "AVT Khyber TV",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/AVTkhyberTV-abr/live/vsat-97M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "AVT Khyber TV HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/AVTkhyberTV-abr/live/vsat-97H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "AAJ Entertainment",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/AajEntertainment-abr/live/vsat-117M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "AAJ Entertainment HD",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/AajEntertainment-abr/live/vsat-117H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "AAJ Entertainment HD",
+    "url": "https://ml-pull-dvc-myco.io:2096/AAJ_ENTERTAINMENT/tracks-v1a1/mono.ts.m3u8",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "SEE TV",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/seeTV-abr/live/vsat-136M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "SEE TV HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/seeTV-abr/live/vsat-136H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "MUN TV",
+    "url": "https://ml-pull-dvc-myco.io:2096/MUN_TV/tracks-v1a1/mono.ts.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Kay2 TV",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/Kay2-abr/live/vsat-116M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Kay2 TV HD",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/Kay2-abr/live/vsat-116H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "KTN Entertainment",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/ktnEntertainment-abr/live/vsat-105M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "KTN Entertainment HD",
+    "url": "https://cdn02khi.tamashaweb.com:8087/jazzauth/ktnEntertainment-abr/live/vsat-105H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Waseb",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/waseeb-abr/live/vsat-waseb-M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Waseb HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/waseeb-abr/live/vsat-waseb-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Minimax",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/Minimax-abr/live/vsat-88M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Minimax",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/Minimax-abr/live/vsat-88H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "A1TV",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/A1TV-abr/live/184M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Inplus",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/Inplus-abr/live/vsat-151H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "FILMAX",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/Filmax-abr/live/vsat-filmax-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Movie One",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/MovieOne-abr/live/176H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "LTN Family",
+    "url": "https://cdn22lhr.tamashaweb.com:8087/jazzauth/LTNFamily-abr/live/vsat-ltntv-H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Mix TV",
+    "url": "https://ml-pull-hwc.myco.io/MixTV/hls/MixTV_H264-1080p.m3u8?pkg_media=video&pkg_hm=index.m3u8&pkg_svc=1&pkg_vcodec=avc1",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Mix ONE",
+    "url": "https://ml-pull-hwc.myco.io/MixONE/hls/MixONE_H264-720p.m3u8?pkg_media=video&pkg_hm=index.m3u8&pkg_svc=1&pkg_vcodec=avc1",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Mix Bel Araby",
+    "url": "https://ml-pull-hwc.myco.io/MixBelAraby/hls/MixBelAraby_H264-1080p.m3u8?pkg_media=video&pkg_hm=index.m3u8&pkg_svc=1&pkg_vcodec=avc1",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Digital pak HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/Digital-pak-abr/live/DP-AI_720p/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Digital pak",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/Digital-pak-abr/live/DP-AI_480p/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Discovery",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/DiscoveryHD-abr/live/178M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Discovery HD",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/DiscoveryHD-abr/live/178H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Apna Channel HD",
+    "url": "https://cdn5.mjunoon.tv:8087/web/ApnaChannel-134/live/134H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Apna Channel",
+    "url": "https://cdn5.mjunoon.tv:8087/web/ApnaChannel-134/live/134M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "cartoon HD",
+    "url": "https://cdn5.mjunoon.tv:8087/web/cartoon-network-87/live/87H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "cartoon",
+    "url": "https://cdn5.mjunoon.tv:8087/web/cartoon-network-87/live/87M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Cgtn Documentary",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/CgtnDocumentary-abr/live/171M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Cgtn Documentary HD",
+    "url": "https://cdn05khi.tamashaweb.com:8087/jazzauth/CgtnDocumentary-abr/live/171H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Discover Pakistan",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/DiscoveryPakistan-abr/live/vsat-108M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Discover Pakistan HD",
+    "url": "https://cdn21lhr.tamashaweb.com:8087/jazzauth/DiscoveryPakistan-abr/live/vsat-108H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Animal Planet",
+    "url": "https://cdn12isb.tamashaweb.com:8087/jazzauth/AnimalPlanet-abr/live/158-3M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "4K Travel TV",
+    "url": "https://streams2.sofast.tv/sofastplayout/33c31ac4-51fa-46ae-afd0-0d1fe5e60a80_0_HLS/master.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Jalwa TV",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/jalwa-abr/live/vsat-81M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Jalwa TV HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/jalwa-abr/live/vsat-81H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "8XM",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/8xm-abr/live/vsat-128M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "8XM HD",
+    "url": "https://cdn24lhr.tamashaweb.com:8087/jazzauth/8xm-abr/live/vsat-128H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "9X Jalwa",
+    "url": "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/9x-jalwa/master.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "iTV Indian Music",
+    "url": "https://ca1.buximedia.com/itv/indian/tracks-v1a1/mono.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Zarin TV",
+    "url": "https://fl1002.bozztv.com/gf-zarintv/index.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "JooMusic",
+    "url": "https://livecdn.live247stream.com/joomusic/tv/joomusic/stream/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "9XM",
+    "url": "https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/9xm/23886666-8fc5-470f-aab1-bd637ed607b1/3.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Baby TV",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/BabyTV-abr/live/188M/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "Baby TV HD",
+    "url": "https://cdn23lhr.tamashaweb.com:8087/jazzauth/BabyTV-abr/live/188H/chunks.m3u8?",
+    "cat": "lock channel 2"
+  },
+  {
+    "name": "BabyFirst Spanish",
+    "url": "https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/be6f9eac-280e-4748-b866-2eb2463c1844/manifest.m3u8?",
+    "cat": "lock channel 2"
+  }
+]
